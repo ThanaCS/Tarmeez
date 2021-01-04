@@ -3,16 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/sectionsFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.thanaa.tarmeezapp.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_sectionsFragment"
+            app:destination="@id/sectionsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.thanaa.tarmeezapp.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/sectionsFragment"
+        android:name="com.thanaa.tarmeezapp.SectionsFragment"
+        android:label="fragment_sections"
+        tools:layout="@layout/fragment_sections" />
 </navigation>

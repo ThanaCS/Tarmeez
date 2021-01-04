@@ -18,6 +18,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -36,6 +37,7 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -81,6 +83,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha06'
     // Anko
     implementation "org.jetbrains.anko:anko:0.10.8"
-    //weather animation
+    // weather animation
     implementation 'com.github.MatteoBattilana:WeatherView:3.0.0'
+    // Circle Image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // Multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
