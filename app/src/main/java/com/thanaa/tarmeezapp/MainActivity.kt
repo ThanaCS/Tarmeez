@@ -30,4 +30,5 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
         findNavController(R.id.fragment_container)
     }
+    
 }
