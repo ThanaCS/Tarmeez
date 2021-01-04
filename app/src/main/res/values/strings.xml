@@ -2,5 +2,9 @@
     <string name="app_name">Tarmeez App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_email">أدخل بريدك الإلكتروني</string>
+    <string name="enter_password">أدخل كلمة المرور</string>
+    <string name="forget_password">هل نسيت كلمة المرور؟</string>
+    <string name="login">تسجيل الدخول</string>
 
 </resources>

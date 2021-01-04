@@ -16,7 +16,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -83,4 +83,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko:0.10.8"
     //weather animation
     implementation 'com.github.MatteoBattilana:WeatherView:3.0.0'
+    //
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
