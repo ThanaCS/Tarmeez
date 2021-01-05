@@ -50,7 +50,7 @@ class LoginFragment : Fragment() {
                     override fun onComplete(task: Task<AuthResult>) {
                         if(task.isSuccessful){
                             progressDialog.dismiss()
-                            Navigation.findNavController(binding.root).navigate(R.id.LoginFragmentToHomeFragment)
+                            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_homeFragment)
                         }else{
                             progressDialog.dismiss()
                             alertDialog.show()
