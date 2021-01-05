@@ -8,4 +8,13 @@
     <string name="login">تسجيل الدخول</string>
     <string name="error_message">خطاء في البيانات المدخلة</string>
     <string name="new_account">إنشاء حسا ب جديد</string>
+    <string name="password_confirmation">أدخل تأكيد كلمة المرور</string>
+    <string name="has_account">لديك حساب بالفعل؟</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="already_exist">الحساب موجود بالفعل</string>
+    <string name="enter_your_email">فضلاً أدخل البريد الإلكتروني"</string>
+    <string name="enter_your_password">فضلاً أدخل كلمة المرور"</string>
+    <string name="un_matched_password">كلمة المرور غير متطابقة</string>
+    <string name="password_more_than_six">كلمة المرور يجب أن لا تقل عن 6 أحرف</string>
+    <string name="invalid_email">البريد الالكتروني غير صالح</string>
 </resources>
