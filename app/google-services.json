@@ -4,11 +4,15 @@
     "firebase_url": "https://tarmeez-app-default-rtdb.firebaseio.com",
     "project_id": "tarmeez-app",
     "storage_bucket": "tarmeez-app.appspot.com"
+    "project_number": "280186758639",
+    "project_id": "finalcapstone-744ab",
+    "storage_bucket": "finalcapstone-744ab.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:136198786153:android:7512f396a72fbe5d22a6f8",
+        "mobilesdk_app_id": "1:280186758639:android:cfabf617d4dfdfb771c21a",
         "android_client_info": {
           "package_name": "com.thanaa.tarmeezapp"
         }
@@ -16,12 +20,14 @@
       "oauth_client": [
         {
           "client_id": "136198786153-lmq8fqa5l0cedeuvq6mkbv23ef35ef33.apps.googleusercontent.com",
+          "client_id": "280186758639-8440qas5ujcr027i619nco4kqoopddf7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
           "current_key": "AIzaSyBVEqPDQ7kCuRR1tGQvK_SPN-hw6S0-ya8"
+          "current_key": "AIzaSyDFex_Eh4X-GrcsoKRzEOxTEdhl7c-Q32w"
         }
       ],
       "services": {
@@ -29,6 +35,7 @@
           "other_platform_oauth_client": [
             {
               "client_id": "136198786153-lmq8fqa5l0cedeuvq6mkbv23ef35ef33.apps.googleusercontent.com",
+              "client_id": "280186758639-8440qas5ujcr027i619nco4kqoopddf7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
