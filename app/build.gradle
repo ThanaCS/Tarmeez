@@ -19,6 +19,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -37,6 +38,7 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -83,8 +85,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha06'
     // Anko
     implementation "org.jetbrains.anko:anko:0.10.8"
-    //weather animation
+    // weather animation
     implementation 'com.github.MatteoBattilana:WeatherView:3.0.0'
+    // Circle Image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // Multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
     //multidex
     implementation 'androidx.multidex:multidex:2.0.1'
 
@@ -95,5 +101,4 @@ dependencies {
     // Add the dependency for the Firebase SDK for Google Analytics
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics'
-
 }
