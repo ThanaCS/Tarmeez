@@ -1,6 +1,6 @@
 package com.thanaa.tarmeezapp.data
 
-data class Content(val contentId: Int,
-                   val contentTitle: String,
+data class Content(val contentTitle: String,
                    val contentDescription: String,
-                   val flag: Int)
+                   val flag: Int,
+                   val quiz: List<Quiz>)
