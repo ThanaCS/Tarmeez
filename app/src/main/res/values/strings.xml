@@ -17,5 +17,4 @@
     <string name="un_matched_password">كلمة المرور غير متطابقة</string>
     <string name="password_more_than_six">كلمة المرور يجب أن لا تقل عن 6 أحرف</string>
     <string name="invalid_email">البريد الالكتروني غير صالح</string>
-
 </resources>
