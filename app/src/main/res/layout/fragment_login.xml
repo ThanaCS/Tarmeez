@@ -46,17 +46,6 @@
         android:drawableEnd="@drawable/ic_baseline_lock_24"
         tools:ignore="RtlHardcoded" />
 
-    <TextView
-        android:id="@+id/error_message"
-        android:textColor="@color/red"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:textSize="11sp"
-        android:layout_marginTop="160dp"
-        android:text="@string/forget_password"
-        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/login"
