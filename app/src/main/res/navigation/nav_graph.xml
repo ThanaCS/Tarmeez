@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/sectionsFragment">
+    app:startDestination="@id/loginFragment">
+
 
     <fragment
         android:id="@+id/homeFragment"
@@ -24,4 +26,9 @@
         android:name="com.thanaa.tarmeezapp.SectionsFragment"
         android:label="fragment_sections"
         tools:layout="@layout/fragment_sections" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/LoginFragmentToHomeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
