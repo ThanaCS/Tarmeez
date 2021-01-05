@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "280186758639",
+    "project_id": "finalcapstone-744ab",
+    "storage_bucket": "finalcapstone-744ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280186758639:android:cfabf617d4dfdfb771c21a",
+        "android_client_info": {
+          "package_name": "com.thanaa.tarmeezapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280186758639-8440qas5ujcr027i619nco4kqoopddf7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFex_Eh4X-GrcsoKRzEOxTEdhl7c-Q32w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280186758639-8440qas5ujcr027i619nco4kqoopddf7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

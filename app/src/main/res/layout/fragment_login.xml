@@ -27,6 +27,8 @@
         android:background="@drawable/edittext_style"
         android:inputType="textEmailAddress"
         android:hint="@string/enter_email"
+        android:singleLine="true"
+        android:nextFocusDown="@id/user_password"
         android:drawableEnd="@drawable/ic_baseline_email_24" />
     <EditText
         android:id="@+id/user_password"
@@ -45,6 +47,11 @@
         tools:ignore="RtlHardcoded" />
     <TextView
         android:textColor="@color/pink"
+        android:singleLine="true"
+        tools:ignore="RtlHardcoded" />
+    <TextView
+        android:id="@+id/error_message"
+        android:textColor="@color/red"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -63,5 +70,39 @@
         android:textColor="@color/white"
         android:background="@drawable/button_style"
         android:text="@string/login"/>
-
+        android:textSize="13sp"
+        android:layout_marginTop="160dp"
+        android:visibility="gone"
+        android:text="@string/error_message"
+        tools:ignore="SmallSp" />
+    <Button
+        android:id="@+id/login"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="195dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_style"
+        android:text="@string/login"/>
+    <TextView
+        android:textColor="@color/pink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:textSize="11sp"
+        android:layout_marginTop="235dp"
+        android:text="@string/forget_password"
+        tools:ignore="SmallSp" />
+    <TextView
+        android:id="@+id/new_account"
+        android:textColor="@color/pink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:textSize="11sp"
+        android:layout_marginTop="255dp"
+        android:text="@string/new_account"
+        tools:ignore="SmallSp" />
 </FrameLayout>
