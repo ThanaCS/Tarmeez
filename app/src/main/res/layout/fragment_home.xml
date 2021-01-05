@@ -8,7 +8,7 @@
     tools:context=".HomeFragment">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/earth"
+        android:id="@+id/variables_earth"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="32dp"
