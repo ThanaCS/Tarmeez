@@ -23,6 +23,22 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/LoginFragmentToRegisterFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.thanaa.tarmeezapp.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/RegisterFragmentToLoginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/RegisterFragmentToHomeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
