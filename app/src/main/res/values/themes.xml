@@ -14,4 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Base.Widget.AppCompat.Button.MyButton">
+        <item name="background">@drawable/button_style</item>
+    </style>
 </resources>
