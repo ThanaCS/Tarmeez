@@ -30,8 +30,5 @@
         android:name="com.thanaa.tarmeezapp.SectionsFragment"
         android:label="fragment_sections"
         tools:layout="@layout/fragment_sections" />
-        <action
-            android:id="@+id/LoginFragmentToHomeFragment"
-            app:destination="@id/homeFragment" />
 
 </navigation>
