@@ -14,5 +14,9 @@
         android:id="@+id/loginFragment"
         android:name="com.thanaa.tarmeezapp.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/LoginFragmentToHomeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

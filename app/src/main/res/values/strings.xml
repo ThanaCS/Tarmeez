@@ -6,5 +6,7 @@
     <string name="enter_password">أدخل كلمة المرور</string>
     <string name="forget_password">هل نسيت كلمة المرور؟</string>
     <string name="login">تسجيل الدخول</string>
+    <string name="error_message">خطاء في البيانات المدخلة</string>
+    <string name="new_account">إنشاء حسا ب جديد</string>
 
 </resources>
