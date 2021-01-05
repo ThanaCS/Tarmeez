@@ -44,8 +44,8 @@
         android:gravity="right"
         android:hint="@string/enter_password"
         android:drawableEnd="@drawable/ic_baseline_lock_24"
-        android:singleLine="true"
         tools:ignore="RtlHardcoded" />
+
     <TextView
         android:id="@+id/error_message"
         android:textColor="@color/red"
@@ -53,10 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="13sp"
+        android:textSize="11sp"
         android:layout_marginTop="160dp"
-        android:visibility="gone"
-        android:text="@string/error_message"
+        android:text="@string/forget_password"
         tools:ignore="SmallSp" />
 
     <Button
@@ -64,10 +63,11 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="195dp"
+        android:layout_marginTop="210dp"
         android:textColor="@color/white"
         android:background="@drawable/button_style"
         android:text="@string/login"/>
+
     <TextView
         android:textColor="@color/pink"
         android:layout_width="wrap_content"
@@ -78,6 +78,7 @@
         android:layout_marginTop="235dp"
         android:text="@string/forget_password"
         tools:ignore="SmallSp" />
+
     <TextView
         android:id="@+id/new_account"
         android:textColor="@color/pink"

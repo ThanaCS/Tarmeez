@@ -6,12 +6,32 @@
     android:layout_height="match_parent"
     android:background="@drawable/background01"
     tools:context=".HomeFragment">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:src="@drawable/profile_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="سارة .."
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/profileImage"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/earth"
+        android:id="@+id/variables_earth"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="32dp"
@@ -20,7 +40,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="earth.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        android:layout_marginLeft="32dp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/neptune"
@@ -32,7 +53,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="neptune.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        android:layout_marginLeft="4dp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/mars"
@@ -46,7 +68,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="Mars.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        android:layout_marginRight="2dp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/saturn"
@@ -58,7 +81,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="moon.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:id="@+id/variables"
@@ -71,8 +95,9 @@
         android:text="المتغيرات"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/earth"
-        app:layout_constraintTop_toTopOf="parent" />
-            <com.github.matteobattilana.weather.WeatherView
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="60dp" />
+     <com.github.matteobattilana.weather.WeatherView
         android:id="@+id/weatherAnimation"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

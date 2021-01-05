@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-
 import androidx.navigation.Navigation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -39,9 +38,11 @@ class LoginFragment : Fragment() {
         progressDialog = CustomProgressDialog(requireContext())
         alertDialog = AlertDialog.Builder(requireContext()).create()
         alertDialog.setMessage(getString(R.string.error_message))
+
         newAccountTextView.setOnClickListener {
             Navigation.findNavController(_binding!!.root).navigate(R.id.LoginFragmentToRegisterFragment)
         }
+
         binding.login.setOnClickListener {
             if (validation()){
                 progressDialog.show()
@@ -52,7 +53,7 @@ class LoginFragment : Fragment() {
                     override fun onComplete(task: Task<AuthResult>) {
                         if(task.isSuccessful){
                             progressDialog.dismiss()
-                            Navigation.findNavController(binding.root).navigate(R.id.LoginFragmentToHomeFragment)
+                            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_homeFragment)
                         }else{
 
                             progressDialog.dismiss()
@@ -73,7 +74,6 @@ class LoginFragment : Fragment() {
         bottomAppBar.visibility = View.GONE
         fab.visibility = View.GONE
     }
-
     private fun validation():Boolean{
         var result = true
         if(emailEditText.text.isBlank()){
