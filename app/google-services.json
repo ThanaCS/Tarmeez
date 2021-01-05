@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "136198786153",
+    "firebase_url": "https://tarmeez-app-default-rtdb.firebaseio.com",
     "project_id": "tarmeez-app",
     "storage_bucket": "tarmeez-app.appspot.com"
   },
