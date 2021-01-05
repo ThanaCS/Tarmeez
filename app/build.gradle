@@ -19,7 +19,6 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
     }
 
     buildTypes {
@@ -38,7 +37,6 @@ android {
     buildFeatures{
         viewBinding = true
     }
-
 }
 
 dependencies {
