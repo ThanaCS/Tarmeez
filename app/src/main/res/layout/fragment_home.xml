@@ -7,9 +7,6 @@
     android:background="@drawable/background01"
     tools:context=".HomeFragment">
 
-
-
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/earth"
         android:layout_width="140dp"
