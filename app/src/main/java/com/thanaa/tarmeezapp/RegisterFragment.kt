@@ -3,58 +3,60 @@ package com.thanaa.tarmeezapp
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.thanaa.tarmeezapp.databinding.FragmentLoginBinding
+import com.thanaa.tarmeezapp.databinding.FragmentRegisterBinding
 
-class LoginFragment : Fragment() {
-    private var _binding: FragmentLoginBinding? = null
+class RegisterFragment : Fragment() {
+    private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    private lateinit var aAuth:FirebaseAuth
+    private lateinit var aAuth: FirebaseAuth
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
-    private lateinit var newAccountTextView: TextView
+    private lateinit var passwordConfirmEditText: EditText
+    private lateinit var loginTextView: TextView
+    private lateinit var registerButton: Button
     private lateinit var progressDialog:CustomProgressDialog
     private lateinit var alertDialog: AlertDialog
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
-        hideNavigation()
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+    ): View? {
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         emailEditText = binding.userEmail
         passwordEditText = binding.userPassword
-        newAccountTextView = binding.newAccount
+        passwordConfirmEditText = binding.passwordConfirmation
+        registerButton = binding.register
+        loginTextView = binding.hasAccount
         progressDialog = CustomProgressDialog(requireContext())
         alertDialog = AlertDialog.Builder(requireContext()).create()
-        alertDialog.setMessage(getString(R.string.error_message))
-        newAccountTextView.setOnClickListener {
-            Navigation.findNavController(_binding!!.root).navigate(R.id.LoginFragmentToRegisterFragment)
-        }
-        binding.login.setOnClickListener {
-            if (validation()){
+        alertDialog.setMessage(getString(R.string.already_exist))
+
+        registerButton.setOnClickListener {
+            if(validation()){
                 progressDialog.show()
                 aAuth = FirebaseAuth.getInstance()
-                aAuth.signInWithEmailAndPassword(emailEditText.text.toString(),
-                    passwordEditText.text.toString()).
-                addOnCompleteListener(object :OnCompleteListener<AuthResult>{
+                aAuth.createUserWithEmailAndPassword(
+                    emailEditText.text.toString(),
+                    passwordEditText.text.toString()
+                ).
+                addOnCompleteListener(object : OnCompleteListener<AuthResult> {
                     override fun onComplete(task: Task<AuthResult>) {
-                        if(task.isSuccessful){
+                        if (task.isSuccessful) {
                             progressDialog.dismiss()
-                            Navigation.findNavController(binding.root).navigate(R.id.LoginFragmentToHomeFragment)
-                        }else{
-
+                            Navigation.findNavController(binding.root)
+                                .navigate(R.id.RegisterFragmentToHomeFragment)
+                        } else {
                             progressDialog.dismiss()
                             alertDialog.show()
                         }
@@ -62,16 +64,11 @@ class LoginFragment : Fragment() {
                 })
             }
         }
+
+        loginTextView.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.RegisterFragmentToLoginFragment)
+        }
         return binding.root
-    }
-    //hide navigation button
-    private fun hideNavigation() {
-        val bottomNavigationView = (activity as MainActivity).bottomNavigationView
-        val fab = (activity as MainActivity).fab
-        val bottomAppBar = (activity as MainActivity).bottomAppBar
-        bottomNavigationView.visibility = View.GONE
-        bottomAppBar.visibility = View.GONE
-        fab.visibility = View.GONE
     }
 
     private fun validation():Boolean{
@@ -80,20 +77,28 @@ class LoginFragment : Fragment() {
             emailEditText.error = getString(R.string.enter_your_email)
             result = false
         }
-        if(passwordEditText.text.toString().isBlank()){
-            passwordEditText.error = getString(R.string.enter_your_password)
-            result = false
-        }
         if(!isEmailValid(emailEditText.text.toString())){
             emailEditText.error = getString(R.string.invalid_email)
+        }
+        if(passwordEditText.text.isBlank()){
+            passwordEditText.error = getString(R.string.enter_your_password)
+            result = false
         }
         if(emailEditText.text.isBlank() && passwordEditText.text.isBlank() ){
             emailEditText.error = getString(R.string.enter_your_email)
             passwordEditText.error = getString(R.string.enter_your_password)
             result = false
         }
+        if(passwordEditText.text.toString() != passwordConfirmEditText.text.toString()){
+            passwordConfirmEditText.error = getString(R.string.un_matched_password)
+            result = false
+        }else if(passwordEditText.text.toString().length<6){
+            passwordConfirmEditText.error = getString(R.string.password_more_than_six)
+            result = false
+        }
         return result
     }
+
     private fun isEmailValid(email: CharSequence?): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
