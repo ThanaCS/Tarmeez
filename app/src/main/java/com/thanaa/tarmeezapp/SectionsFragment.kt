@@ -36,6 +36,9 @@ class SectionsFragment : Fragment() {
     ): View? {
         _binding = FragmentSectionsBinding.inflate(inflater, container, false)
 
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         FirebaseDatabase.getInstance().reference
             .child("Planet")
             .child(args.planetId.toString())
@@ -60,8 +63,7 @@ class SectionsFragment : Fragment() {
 
             })
 
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
 
         return binding.root
     }
@@ -83,6 +85,7 @@ class SectionsFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val binding : ItemRowBinding = ItemRowBinding.inflate(layoutInflater, parent, false)
+
             return ViewHolder(binding)
         }
 
