@@ -58,7 +58,14 @@
         android:label="fragment_content"
         tools:layout="@layout/fragment_content" >
         <argument
+            android:name="sectionIndex"
+            app:argType="integer" />
+        <argument
             android:name="contentTitle"
             app:argType="string" />
+        <argument
+            android:name="planetId"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

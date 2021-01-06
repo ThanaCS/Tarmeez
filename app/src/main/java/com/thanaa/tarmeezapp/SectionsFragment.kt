@@ -35,6 +35,7 @@ class SectionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSectionsBinding.inflate(inflater, container, false)
+        sectionsList.clear()
 
         FirebaseDatabase.getInstance().reference
             .child("Planet")
@@ -47,7 +48,6 @@ class SectionsFragment : Fragment() {
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val a = snapshot.children
                     snapshot.children.forEach{
                         val title = it.child("sectionTitle").value.toString()
                         val section = Section(title,"")
@@ -93,7 +93,7 @@ class SectionsFragment : Fragment() {
             holder.bind(sectionItem)
 
             holder.itemView.setOnClickListener {
-                val action = SectionsFragmentDirections.actionSectionsFragmentToContentFragment(sectionItem.sectionTitle)
+                val action = SectionsFragmentDirections.actionSectionsFragmentToContentFragment(position,sectionItem.sectionTitle,args.planetId)
                 findNavController().navigate(action)
             }
 
