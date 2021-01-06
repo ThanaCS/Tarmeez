@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,6 +18,9 @@ import com.thanaa.tarmeezapp.databinding.FragmentContentBinding
 class ContentFragment : Fragment() {
 
     val args by navArgs<ContentFragmentArgs>()
+    lateinit var question : String
+    lateinit var answer : String
+    lateinit var type : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,11 +51,28 @@ class ContentFragment : Fragment() {
 
                         println("########################################################################### ${it}")
                         print("")
+
+                        if(it.hasChild("quiz")){
+                            it.child("quiz").children.forEach {data ->
+                                answer = data.child("answer").value.toString()
+                                question = data.child("question").value.toString()
+                                type = data.child("quizType").value.toString()
+                                println("###########################################################################type type ${type}")
+
+
+                            }
+                        }
                     }
                 }
 
             })
 
+        binding.nextButton.setOnClickListener {
+            if(type == "DragAndDrop"){
+                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment(question,answer)
+                findNavController().navigate(action)
+            }
+        }
 
         return binding.root
     }
