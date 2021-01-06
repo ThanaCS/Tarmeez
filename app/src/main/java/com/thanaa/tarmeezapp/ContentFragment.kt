@@ -19,6 +19,7 @@ class ContentFragment : Fragment() {
 
     val args by navArgs<ContentFragmentArgs>()
     lateinit var question : String
+    lateinit var options : String
     lateinit var answer : String
     lateinit var type : String
 
@@ -56,6 +57,7 @@ class ContentFragment : Fragment() {
                             it.child("quiz").children.forEach {data ->
                                 answer = data.child("answer").value.toString()
                                 question = data.child("question").value.toString()
+                                options = data.child("options").value.toString()
                                 type = data.child("quizType").value.toString()
                                 println("###########################################################################type type ${type}")
 
@@ -69,7 +71,7 @@ class ContentFragment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             if(type == "DragAndDrop"){
-                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment(question,answer)
+                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment(question,answer,options)
                 findNavController().navigate(action)
             }
         }

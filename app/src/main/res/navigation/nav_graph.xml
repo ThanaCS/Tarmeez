@@ -82,5 +82,8 @@
         <argument
             android:name="answer"
             app:argType="string" />
+        <argument
+            android:name="options"
+            app:argType="string" />
     </fragment>
 </navigation>
