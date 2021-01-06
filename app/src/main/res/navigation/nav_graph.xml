@@ -67,5 +67,20 @@
             android:name="planetId"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_contentFragment_to_dragAndDropQuizFragment"
+            app:destination="@id/dragAndDropQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dragAndDropQuizFragment"
+        android:name="com.thanaa.tarmeezapp.DragAndDropQuizFragment"
+        android:label="fragment_drag_and_drop_quiz"
+        tools:layout="@layout/fragment_drag_and_drop_quiz" >
+        <argument
+            android:name="question"
+            app:argType="string" />
+        <argument
+            android:name="answer"
+            app:argType="string" />
     </fragment>
 </navigation>
