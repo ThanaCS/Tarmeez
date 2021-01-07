@@ -68,6 +68,20 @@
             app:argType="string"
             app:nullable="true" />
         <action
+            android:id="@+id/ContentFragmentToMultiOptionQuestion"
+            app:destination="@id/multiOptionQuestion" />
+    </fragment>
+    <fragment
+        android:id="@+id/multiOptionQuestion"
+        android:name="com.thanaa.tarmeezapp.MultiOptionQuestion"
+        android:label="fragment_multi_option_question"
+        tools:layout="@layout/fragment_multi_option_question" >
+        <argument
+            android:name="section_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="planetId"
             android:id="@+id/action_contentFragment_to_dragAndDropQuizFragment"
             app:destination="@id/dragAndDropQuizFragment" />
     </fragment>
