@@ -22,7 +22,6 @@
         android:layout_gravity="center"
         android:padding="10dp"
         android:layout_marginTop="50dp"
-        android:drawableRight="@drawable/ic_baseline_email_24"
         android:textSize="14sp"
         android:background="@drawable/edittext_style"
         android:inputType="textEmailAddress"
@@ -44,6 +43,7 @@
         android:gravity="right"
         android:hint="@string/enter_password"
         android:drawableEnd="@drawable/ic_baseline_lock_24"
+        android:nextFocusDown="@id/password_confirmation"
         android:singleLine="true"
         tools:ignore="RtlHardcoded" />
     <EditText
@@ -95,5 +95,4 @@
         android:layout_marginTop="235dp"
         android:text="@string/has_account"
         tools:ignore="SmallSp" />
-
 </FrameLayout>
