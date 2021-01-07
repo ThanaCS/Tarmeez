@@ -83,4 +83,9 @@
             android:name="answer"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/wordsQuizFragment"
+        android:name="com.thanaa.tarmeezapp.WordsQuizFragment"
+        android:label="fragment_words_quiz"
+        tools:layout="@layout/fragment_words_quiz" />
 </navigation>

@@ -49,18 +49,15 @@ class ContentFragment : Fragment() {
                         binding.contentTitleTextView.text =title
                         binding.contentDescriptionTextView.text = Html.fromHtml(description)
 
-                        println("########################################################################### ${it}")
-                        print("")
-
                         if(it.hasChild("quiz")){
+                            binding.nextButton.visibility = View.VISIBLE
                             it.child("quiz").children.forEach {data ->
                                 answer = data.child("answer").value.toString()
                                 question = data.child("question").value.toString()
                                 type = data.child("quizType").value.toString()
-                                println("###########################################################################type type ${type}")
-
-
                             }
+                        }else{
+                            binding.nextButton.visibility = View.GONE
                         }
                     }
                 }
@@ -71,6 +68,9 @@ class ContentFragment : Fragment() {
             if(type == "DragAndDrop"){
                 val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment(question,answer)
                 findNavController().navigate(action)
+            }
+            if(type == "WordOrder"){
+
             }
         }
 
