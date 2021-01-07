@@ -39,7 +39,7 @@ class SectionsFragment : Fragment() {
 
         FirebaseDatabase.getInstance().reference
             .child("Planet")
-            .child(args.planetId.toString())
+            .child("-MQGx5xPpOMcFnKbkiXO")
             .child("section")
             .addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -93,7 +93,8 @@ class SectionsFragment : Fragment() {
             holder.bind(sectionItem)
 
             holder.itemView.setOnClickListener {
-                val action = SectionsFragmentDirections.actionSectionsFragmentToContentFragment(position,sectionItem.sectionTitle,args.planetId)
+                val action = SectionsFragmentDirections.
+                actionSectionsFragmentToContentFragment(position,sectionItem.sectionTitle,"-MQGx5xPpOMcFnKbkiXO")
                 findNavController().navigate(action)
             }
 
