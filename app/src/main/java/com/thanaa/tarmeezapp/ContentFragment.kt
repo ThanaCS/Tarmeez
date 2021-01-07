@@ -5,7 +5,9 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.database.DataSnapshot
@@ -13,12 +15,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.thanaa.tarmeezapp.databinding.FragmentContentBinding
+import org.jetbrains.anko.support.v4.toast
 
 
 class ContentFragment : Fragment() {
 
     val args by navArgs<ContentFragmentArgs>()
     lateinit var question : String
+    lateinit var options : String
     lateinit var answer : String
     lateinit var type : String
 
@@ -49,12 +53,19 @@ class ContentFragment : Fragment() {
                         binding.contentTitleTextView.text =title
                         binding.contentDescriptionTextView.text = Html.fromHtml(description)
 
+                        println("########################################################################### ${it}")
+                        print("")
+
                         if(it.hasChild("quiz")){
                             binding.nextButton.visibility = View.VISIBLE
                             it.child("quiz").children.forEach {data ->
                                 answer = data.child("answer").value.toString()
                                 question = data.child("question").value.toString()
+                                options = data.child("options").value.toString()
                                 type = data.child("quizType").value.toString()
+                                println("###########################################################################type type ${type}")
+
+
                             }
                         }else{
                             binding.nextButton.visibility = View.GONE
@@ -71,6 +82,13 @@ class ContentFragment : Fragment() {
             }
             if(type == "WordOrder"){
 
+            }
+            if(type == "MOQ"){
+                val action = ContentFragmentDirections.
+                ContentFragmentToMultiOptionQuestion(args.sectionIndex,
+                    args.planetId.toString())
+                Navigation.findNavController(binding.root)
+                    .navigate(action)
             }
         }
 

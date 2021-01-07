@@ -57,7 +57,7 @@
         android:layout_marginLeft="4dp" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/mars"
+        android:id="@+id/relations_conditions_mars"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginTop="216dp"
