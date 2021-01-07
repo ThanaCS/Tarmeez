@@ -13,8 +13,7 @@ import com.thanaa.tarmeezapp.databinding.FragmentGameBinding
 
 
 class GameFragment : Fragment() {
-    private var _binding: FragmentGameBinding? = null
-    private val binding get() = _binding!!
+
     private lateinit var gameView: GameView
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +22,7 @@ class GameFragment : Fragment() {
     ): View{
 
         hideNavigation()
-        _binding = FragmentGameBinding.inflate(inflater, container, false)
+
         var point = Point()
         (context as Activity?)!!.windowManager
             .defaultDisplay.getSize(point)

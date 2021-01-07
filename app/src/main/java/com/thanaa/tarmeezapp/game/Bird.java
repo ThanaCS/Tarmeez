@@ -11,23 +11,23 @@ import static com.thanaa.tarmeezapp.game.GameView.screenRatioX;
 import static com.thanaa.tarmeezapp.game.GameView.screenRatioY;
 
 public class Bird {
-    public int speed = 20;
+    public int speed = 100;
     public boolean wasShot = true;
     int x = 0, y, width, height, birdCounter = 1;
     Bitmap bird1, bird2, bird3, bird4;
 
     Bird (Resources res) {
 
-        bird1 = BitmapFactory.decodeResource(res, R.drawable.rocket);
-        bird2 = BitmapFactory.decodeResource(res, R.drawable.rocket);
-        bird3 = BitmapFactory.decodeResource(res, R.drawable.rocket);
-        bird4 = BitmapFactory.decodeResource(res, R.drawable.rocket);
+        bird1 = BitmapFactory.decodeResource(res, R.drawable.bird1);
+        bird2 = BitmapFactory.decodeResource(res, R.drawable.bird2);
+        bird3 = BitmapFactory.decodeResource(res, R.drawable.bird3);
+        bird4 = BitmapFactory.decodeResource(res, R.drawable.bird4);
 
         width = bird1.getWidth();
         height = bird1.getHeight();
 
-        width /= 6;
-        height /= 6;
+        width /= 8;
+        height /= 3;
 
         width = (int) (width * screenRatioX);
         height = (int) (height * screenRatioY);

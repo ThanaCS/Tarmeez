@@ -16,7 +16,6 @@ import com.thanaa.tarmeezapp.databinding.FragmentMenuGameBinding
 class MenuGameFragment : Fragment() {
     private var _binding:FragmentMenuGameBinding? = null
     private val binding get() = _binding!!
-    private lateinit var gameView: GameView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,10 +24,7 @@ class MenuGameFragment : Fragment() {
 
         hideNavigation()
         _binding = FragmentMenuGameBinding.inflate(inflater, container, false)
-        var point = Point()
-        (context as Activity?)!!.windowManager
-            .defaultDisplay.getSize(point)
-        gameView = GameView(requireContext(), point.x, point.y)
+
         binding.play.setOnClickListener{
             val action = MenuGameFragmentDirections.actionMenuGameFragmentToGameFragment()
             findNavController().navigate(action)
@@ -37,15 +33,6 @@ class MenuGameFragment : Fragment() {
         return binding.root
     }
 
-    override fun onPause() {
-        super.onPause()
-        gameView.pause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        gameView.resume()
-    }
     //hide navigation button
     private fun hideNavigation() {
         val bottomNavigationView = (activity as MainActivity).bottomNavigationView
