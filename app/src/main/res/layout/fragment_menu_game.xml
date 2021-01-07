@@ -1,41 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".game.MenuGameFragment">
-
-<ImageView
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:src ="@drawable/spacebackground"
-    android:scaleType="centerCrop">
-</ImageView>
+    android:background="@drawable/gradiant"
+    android:orientation="vertical"
+    tools:context=".game.MenuGameFragment">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="العب"
-    android:textSize="64sp"
-    android:layout_centerInParent="true"
-    android:textColor="#FFFF"
-    android:id="@+id/play"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/spaceship"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="rocket01.json"
+        app:lottie_loop="true" />
+    <TextView
+        android:id="@+id/textQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="هل انت مستعد لمقاتلة الفضائيين؟"
+        android:textAlignment="center"
+        android:textColor="#FFF"
+        android:textSize="28sp" />
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="24sp"
-    android:textColor="#FFFF"
-    android:text="نقاط"
-    android:id="@+id/highScoreTxt"
-    android:layout_margin="16dp"
-    android:layout_alignParentRight="true"/>
+    <ImageButton
+        android:id="@+id/play"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:textAllCaps="false"
+        android:text="العب"
+        android:paddingBottom="10dp"
+        android:textSize="28sp"
+        android:background="@drawable/bgbtn"
+        android:layout_width="200dp"
+        android:layout_height="70dp" />
 
-<ImageView
-    android:layout_width="36dp"
-    android:layout_height="36dp"
-    android:layout_alignParentBottom="true"
-    android:layout_margin="16dp"
-    android:id="@+id/volumeCtrl"
-    android:src="@drawable/ic_baseline_volume_up_24"/>
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="الرجوع للصفحة الرئيسية"
+        android:textColor="#AD87FF"
+        android:textSize="22sp" />
+
+</LinearLayout>

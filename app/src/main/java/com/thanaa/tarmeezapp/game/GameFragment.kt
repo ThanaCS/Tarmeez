@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.thanaa.tarmeezapp.MainActivity
 import com.thanaa.tarmeezapp.databinding.FragmentGameBinding
@@ -20,6 +21,7 @@ class GameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
+
         hideNavigation()
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         var point = Point()

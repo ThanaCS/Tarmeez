@@ -3,6 +3,7 @@ package com.thanaa.tarmeezapp.game;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 import com.thanaa.tarmeezapp.R;
 
@@ -46,6 +47,10 @@ public class Flight {
 
         flight1 = Bitmap.createScaledBitmap(flight1, width, height, false);
         flight2 = Bitmap.createScaledBitmap(flight2, width, height, false);
+
+        dead = BitmapFactory.decodeResource(res, R.drawable.rocket);
+        dead = Bitmap.createScaledBitmap(dead, width, height, false);
+
         y = screenY / 2;
         x = (int) (64 * screenRatioX);
 
@@ -88,6 +93,16 @@ public class Flight {
 
         return flight2;
     }
+    Rect getCollisionShape () {
+
+        return new Rect(x, y, x + width, y + height);
+    }
+
+    Bitmap getDead () {
+
+        return dead;
+    }
+
 
 
 }
