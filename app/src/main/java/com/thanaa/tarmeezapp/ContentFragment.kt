@@ -77,7 +77,7 @@ class ContentFragment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             if(type == "DragAndDrop"){
-                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment(question,answer)
+                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment2(question, answer, options)
                 findNavController().navigate(action)
             }
             if(type == "WordOrder"){

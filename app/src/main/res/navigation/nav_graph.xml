@@ -70,6 +70,9 @@
         <action
             android:id="@+id/ContentFragmentToMultiOptionQuestion"
             app:destination="@id/multiOptionQuestion" />
+        <action
+            android:id="@+id/action_contentFragment_to_dragAndDropQuizFragment2"
+            app:destination="@id/dragAndDropQuizFragment" />
     </fragment>
     <fragment
         android:id="@+id/multiOptionQuestion"
