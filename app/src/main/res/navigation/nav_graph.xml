@@ -70,6 +70,9 @@
         <action
             android:id="@+id/ContentFragmentToMultiOptionQuestion"
             app:destination="@id/multiOptionQuestion" />
+        <action
+            android:id="@+id/action_contentFragment_to_dragAndDropQuizFragment2"
+            app:destination="@id/dragAndDropQuizFragment" />
     </fragment>
     <fragment
         android:id="@+id/multiOptionQuestion"
@@ -100,4 +103,9 @@
             android:name="options"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/wordsQuizFragment"
+        android:name="com.thanaa.tarmeezapp.WordsQuizFragment"
+        android:label="fragment_words_quiz"
+        tools:layout="@layout/fragment_words_quiz" />
 </navigation>

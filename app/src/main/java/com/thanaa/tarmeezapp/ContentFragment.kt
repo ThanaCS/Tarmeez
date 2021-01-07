@@ -21,7 +21,6 @@ import org.jetbrains.anko.support.v4.toast
 class ContentFragment : Fragment() {
 
     val args by navArgs<ContentFragmentArgs>()
-    private var quizType:String?=null
     lateinit var question : String
     lateinit var options : String
     lateinit var answer : String
@@ -41,38 +40,24 @@ class ContentFragment : Fragment() {
             .child("content")
             .orderByChild(args.contentTitle)
             .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach{
                         val title = it.child("contentTitle").value.toString()
                         val description = it.child("contentDescription").value.toString()
-                        if(it.hasChild("quiz")){
-                            binding.nextButton.visibility = View.VISIBLE
-                            it.child("quiz").children.forEach {data ->
-                                quizType = data.child("quizType").value.toString()
-                            }
-
-                        }else{
-                            binding.nextButton.visibility = View.GONE
-                        }
-
-                        binding.nextButton.setOnClickListener {
-                            if(quizType == "MOQ"){
-                                val action = ContentFragmentDirections.
-                                ContentFragmentToMultiOptionQuestion(args.sectionIndex,
-                                    args.planetId.toString())
-                                Navigation.findNavController(binding.root)
-                                    .navigate(action)
-                            }
-                        }
 
                         binding.contentTitleTextView.text =title
                         binding.contentDescriptionTextView.text = Html.fromHtml(description)
 
-                        println("###########################################" +
-                                "################################ ${it}")
+                        println("########################################################################### ${it}")
                         print("")
 
                         if(it.hasChild("quiz")){
+                            binding.nextButton.visibility = View.VISIBLE
                             it.child("quiz").children.forEach {data ->
                                 answer = data.child("answer").value.toString()
                                 question = data.child("question").value.toString()
@@ -82,20 +67,28 @@ class ContentFragment : Fragment() {
 
 
                             }
+                        }else{
+                            binding.nextButton.visibility = View.GONE
                         }
                     }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-
                 }
 
             })
 
         binding.nextButton.setOnClickListener {
             if(type == "DragAndDrop"){
-                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment(question,answer,options)
+                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment2(question, answer, options)
                 findNavController().navigate(action)
+            }
+            if(type == "WordOrder"){
+
+            }
+            if(type == "MOQ"){
+                val action = ContentFragmentDirections.
+                ContentFragmentToMultiOptionQuestion(args.sectionIndex,
+                    args.planetId.toString())
+                Navigation.findNavController(binding.root)
+                    .navigate(action)
             }
         }
 
