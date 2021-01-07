@@ -93,8 +93,7 @@ class SectionsFragment : Fragment() {
             holder.bind(sectionItem)
 
             holder.itemView.setOnClickListener {
-                val action = SectionsFragmentDirections.
-                actionSectionsFragmentToContentFragment(position,sectionItem.sectionTitle,"-MQGx5xPpOMcFnKbkiXO")
+                val action = SectionsFragmentDirections.actionSectionsFragmentToContentFragment(position,sectionItem.sectionTitle,"-MQGx5xPpOMcFnKbkiXO")
                 findNavController().navigate(action)
             }
 
