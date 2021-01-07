@@ -34,13 +34,13 @@ public class GameView extends SurfaceView implements Runnable {
         super(context);
         this.screenX = screenX;
         this.screenY = screenY;
-//        Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
-//        Point size = new Point();
-//        display.getSize(size);
+        Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
         this.screenX = screenX;
         this.screenY = screenY;
-        screenRatioX = 500f/ screenX;
-        screenRatioY = 300f / screenY;
+        screenRatioX = size.x/ screenX;
+        screenRatioY = size.y / screenY;
 
 
         background1 = new Background(screenX, screenY, getResources());
@@ -55,9 +55,9 @@ public class GameView extends SurfaceView implements Runnable {
         paint = new Paint();
         paint.setTextSize(128);
 
-        birds = new Bird[4];
+        birds = new Bird[2];
 
-        for (int i = 0;i < 4;i++) {
+        for (int i = 0;i < 2;i++) {
 
             Bird bird = new Bird(getResources());
             birds[i] = bird;
@@ -153,9 +153,10 @@ public class GameView extends SurfaceView implements Runnable {
                 if (bird.speed < 10 * screenRatioX)
                     bird.speed = (int) (10 * screenRatioX);
 //
+//                bird.x = screenX;
+//                bird.y = random.nextInt(screenY - bird.height);
                 bird.x = screenX;
-                bird.y = random.nextInt(screenY - bird.height);
-
+                bird.y = random.nextInt(1000);
 //
 //                bird.wasShot = false;
             }

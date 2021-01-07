@@ -22,8 +22,8 @@ public class Bullet {
         width = bullet.getWidth();
         height = bullet.getHeight();
 
-        width /= 4;
-        height /= 4;
+        width /= 3;
+        height /= 8;
 
         width = (int) (width * screenRatioX);
         height = (int) (height * screenRatioY);

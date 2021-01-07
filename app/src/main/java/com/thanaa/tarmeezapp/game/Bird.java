@@ -11,7 +11,7 @@ import static com.thanaa.tarmeezapp.game.GameView.screenRatioX;
 import static com.thanaa.tarmeezapp.game.GameView.screenRatioY;
 
 public class Bird {
-    public int speed = 100;
+    public int speed = 500;
     public boolean wasShot = true;
     int x = 0, y, width, height, birdCounter = 1;
     Bitmap bird1, bird2, bird3, bird4;
@@ -26,8 +26,8 @@ public class Bird {
         width = bird1.getWidth();
         height = bird1.getHeight();
 
-        width /= 8;
-        height /= 3;
+        width /= 15;
+        height /= 15;
 
         width = (int) (width * screenRatioX);
         height = (int) (height * screenRatioY);
