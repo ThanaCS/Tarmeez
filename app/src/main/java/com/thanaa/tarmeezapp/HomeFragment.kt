@@ -35,7 +35,6 @@ class HomeFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach{
                      key = it.key
-//                        println("########################################################################### ${key}")
                     }
                 }
 
@@ -45,7 +44,12 @@ class HomeFragment : Fragment() {
 
 
         binding.variablesEarth.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToSectionsFragment(key)
+            val action = HomeFragmentDirections.actionHomeFragmentToSectionsFragment("-MQGx5xPpOMcFnKbkiXO")
+            findNavController().navigate(action)
+        }
+
+        binding.relationsConditionsMars.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToSectionsFragment("-MQNm_koTjLrLtWvswhW")
             findNavController().navigate(action)
         }
 

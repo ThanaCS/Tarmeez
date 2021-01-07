@@ -8,13 +8,13 @@
     tools:context=".DragAndDropQuizFragment">
 
     <TextView
+        android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:gravity="center"
-        android:text="قم بسحب كل مستطيل مع ما يناسبه"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -19,9 +19,10 @@ import java.util.*
 
 class DragAndDropQuizFragment : Fragment() {
     private val args by navArgs<DragAndDropQuizFragmentArgs>()
+
     private lateinit var binding : FragmentDragAndDropQuizBinding
     private lateinit var questionButton: Button
-    lateinit var answerButton: Button
+    private lateinit var answerButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,14 +30,16 @@ class DragAndDropQuizFragment : Fragment() {
     ): View? {
         binding = FragmentDragAndDropQuizBinding.inflate(inflater, container, false)
 
-        val text = "22,'ك',\"ازرق\",8.4"
-        val answer = "String=\"ازرق\",Double=8.4,Char='ك',Int=22"
+        binding.question.text = args.question
+
+//        val text = "22,'ك',\"ازرق\",8.4"
+//        val answer = "String=\"ازرق\",Double=8.4,Char='ك',Int=22"
 
         val map = args.answer.split(",").associate {
             val (left, right) = it.split("=")
             right to left
         }
-        val list = args.question.split(",")
+        val list = args.options.split(",")
 
         for (i in list.indices){
             questionButton = Button(requireContext())
@@ -45,9 +48,7 @@ class DragAndDropQuizFragment : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT)
             questionButton.text = list[i]
             binding.questionLinearLayout.addView(questionButton)
-            val rnd = Random()
-            val color: Int = Color.argb(200, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-            questionButton.setBackgroundColor(color)
+            questionButton.setBackgroundColor(resources.getColor(R.color.pink_1))
             questionButton.setOnLongClickListener {
                 setDragListener(map,list[i])
                 val clipText = "أحسنت ياصغيري"
@@ -69,12 +70,10 @@ class DragAndDropQuizFragment : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT)
             answerButton.text = i.value
-            val rnd = Random()
-            val color: Int = Color.argb(200, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-            answerButton.setBackgroundColor(color)
+            answerButton.setBackgroundColor(resources.getColor(R.color.cyan))
+
             binding.answerLinearLayout.addView(answerButton)
         }
-
 
 
         return binding.root
@@ -87,7 +86,6 @@ class DragAndDropQuizFragment : Fragment() {
                 view.setOnDragListener(dragListener)
             }else{
                 view.setOnDragListener(wrongDragListener)
-
             }
         }
     }
@@ -110,6 +108,7 @@ class DragAndDropQuizFragment : Fragment() {
                 val item = event.clipData.getItemAt(0)
                 val dragData = item.text
                 Toast.makeText(requireContext(), dragData, Toast.LENGTH_LONG).show()
+                view.setBackgroundColor(resources.getColor(R.color.pink))
                 view.invalidate()
                 val v = event.localState as View
                 val owner =  v.parent as ViewGroup
