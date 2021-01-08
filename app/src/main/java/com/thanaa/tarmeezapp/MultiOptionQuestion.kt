@@ -1,6 +1,7 @@
 package com.thanaa.tarmeezapp
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.thanaa.tarmeezapp.databinding.FragmentMultiOptionQuestionBinding
-import org.jetbrains.anko.support.v4.toast
 
 
 class MultiOptionQuestion : Fragment() {
@@ -34,14 +34,12 @@ class MultiOptionQuestion : Fragment() {
     private var questions:ArrayList<String> = ArrayList()
     private var options:ArrayList<String> = ArrayList()
     private var answers:ArrayList<String> = ArrayList()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    private lateinit var mediaPlayer: MediaPlayer
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
 
-        val binding  = FragmentMultiOptionQuestionBinding.inflate(
-            inflater,
-            container, false
-        )
+        val binding  = FragmentMultiOptionQuestionBinding.inflate(inflater, container,
+            false)
         questionNumberTextView = binding.questionNumber
         questionTextView = binding.question
         radioGroup = binding.answer
@@ -73,8 +71,7 @@ class MultiOptionQuestion : Fragment() {
                         size, currentIndex + 1
                     )
                     questionTextView.text = questions[currentIndex]
-                    toast(answers[currentIndex])
-
+               
                     val answerOptions = options[currentIndex].split(",")
                     optionOneRadioButton.text = answerOptions[0]
                     optionTwoRadioButton.text = answerOptions[1]
@@ -85,7 +82,7 @@ class MultiOptionQuestion : Fragment() {
                             .checkedRadioButtonId)
                         val answer = selectedAnswer.text
                         if (answer.trim() == answers[currentIndex].trim()) {
-                            toast("correct")
+                            controlSound(R.raw.correct_sound_effect)
                             disableOrEnableRGButton(radioGroup, false)
                             selectedAnswer.background = resources
                                 .getDrawable(R.drawable.correct_style)
@@ -139,4 +136,9 @@ class MultiOptionQuestion : Fragment() {
         }
     }
 
+    private fun controlSound(soundId:Int){
+        mediaPlayer = MediaPlayer.create(requireContext(), soundId)
+        mediaPlayer.start()
+
+    }
 }
