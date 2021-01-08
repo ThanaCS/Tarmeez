@@ -11,7 +11,7 @@ import static com.thanaa.tarmeezapp.game.GameView.screenRatioX;
 import static com.thanaa.tarmeezapp.game.GameView.screenRatioY;
 
 public class Bird {
-    public int speed = 500;
+    public int speed = 20;
     public boolean wasShot = true;
     int x = 0, y, width, height, birdCounter = 1;
     Bitmap bird1, bird2, bird3, bird4;

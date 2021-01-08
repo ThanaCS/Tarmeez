@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradiant"
+    android:background="@drawable/backgroungame"
     android:orientation="vertical"
     tools:context=".game.MenuGameFragment">
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:text="هل انت مستعد لمقاتلة الفضائيين؟"
+        android:text="هل انت مستعد لمحاربة الفضائيين؟"
         android:textAlignment="center"
         android:textColor="#FFF"
         android:textSize="28sp" />
@@ -40,14 +40,5 @@
         android:layout_width="200dp"
         android:layout_height="70dp" />
 
-    <TextView
-        android:id="@+id/textBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="الرجوع للصفحة الرئيسية"
-        android:textColor="#AD87FF"
-        android:textSize="22sp" />
 
 </LinearLayout>

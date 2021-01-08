@@ -3,9 +3,14 @@ package com.thanaa.tarmeezapp.game;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -13,6 +18,8 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 
 import androidx.annotation.Dimension;
+
+import com.thanaa.tarmeezapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +35,8 @@ public class GameView extends SurfaceView implements Runnable {
     private Random random;
     private List<Bullet> bullets;
     private Bird[] birds;
+    private SoundPool soundPool;
+    private int sound;
     private Paint paint;
 
     public GameView(Context context, int screenX, int screenY) {
@@ -41,7 +50,21 @@ public class GameView extends SurfaceView implements Runnable {
         this.screenY = screenY;
         screenRatioX = size.x/ screenX;
         screenRatioY = size.y / screenY;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .build();
+
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+
+        } else
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+
+        sound = soundPool.load(context, R.raw.shoot, 1);
 
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
@@ -53,8 +76,8 @@ public class GameView extends SurfaceView implements Runnable {
         background2.x = screenX;
 
         paint = new Paint();
-        paint.setTextSize(128);
-
+        paint.setTextSize(100);
+        paint.setColor(Color.WHITE);
         birds = new Bird[2];
 
         for (int i = 0;i < 2;i++) {
@@ -147,7 +170,7 @@ public class GameView extends SurfaceView implements Runnable {
                     return;
                 }
 
-                int bound = (int) (30 * screenRatioX);
+                int bound = (int) (15 * screenRatioX);
                 bird.speed = random.nextInt(bound);
 
                 if (bird.speed < 10 * screenRatioX)
@@ -246,7 +269,7 @@ public class GameView extends SurfaceView implements Runnable {
 
 
     public void newBullet() {
-
+        soundPool.play(sound, 1, 1, 0, 0, 1);
         Bullet bullet = new Bullet(getResources());
         bullet.x = flight.x + flight.width;
         bullet.y = flight.y + (flight.height / 2);

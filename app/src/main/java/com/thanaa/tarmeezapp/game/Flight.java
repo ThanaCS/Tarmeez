@@ -22,22 +22,22 @@ public class Flight {
 
         this.gameView = gameView;
 
-        flight1 = BitmapFactory.decodeResource(res, R.drawable.rocket);
-        flight2 = BitmapFactory.decodeResource(res, R.drawable.rocket);
+        flight1 = BitmapFactory.decodeResource(res, R.drawable.astrountcat);
+        flight2 = BitmapFactory.decodeResource(res, R.drawable.astrountcat);
 
         width = flight1.getWidth();
         height = flight1.getHeight();
 
-        width /= 3;
-        height /= 7;
+        width /= 8;
+        height /= 8;
 
         width = (int) (width * screenRatioX);
         height = (int) (height * screenRatioY);
-        shoot1 = BitmapFactory.decodeResource(res, R.drawable.shoot1);
-        shoot2 = BitmapFactory.decodeResource(res, R.drawable.shoot2);
-        shoot3 = BitmapFactory.decodeResource(res, R.drawable.shoot3);
-        shoot4 = BitmapFactory.decodeResource(res, R.drawable.shoot4);
-        shoot5 = BitmapFactory.decodeResource(res, R.drawable.shoot5);
+        shoot1 = BitmapFactory.decodeResource(res, R.drawable.astrountcat);
+        shoot2 = BitmapFactory.decodeResource(res, R.drawable.astrountcat);
+        shoot3 = BitmapFactory.decodeResource(res, R.drawable.astrountcat);
+        shoot4 = BitmapFactory.decodeResource(res, R.drawable.astrountcat);
+        shoot5 = BitmapFactory.decodeResource(res, R.drawable.astrountcat);
 
         shoot1 = Bitmap.createScaledBitmap(shoot1, width, height, false);
         shoot2 = Bitmap.createScaledBitmap(shoot2, width, height, false);
@@ -48,7 +48,7 @@ public class Flight {
         flight1 = Bitmap.createScaledBitmap(flight1, width, height, false);
         flight2 = Bitmap.createScaledBitmap(flight2, width, height, false);
 
-        dead = BitmapFactory.decodeResource(res, R.drawable.rocket);
+        dead = BitmapFactory.decodeResource(res, R.drawable.dead);
         dead = Bitmap.createScaledBitmap(dead, width, height, false);
 
         y = screenY / 2;

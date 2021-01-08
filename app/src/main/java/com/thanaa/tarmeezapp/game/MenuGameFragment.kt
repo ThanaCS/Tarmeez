@@ -22,7 +22,7 @@ class MenuGameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View{
 
-        hideNavigation()
+
         _binding = FragmentMenuGameBinding.inflate(inflater, container, false)
 
         binding.play.setOnClickListener{
@@ -33,13 +33,4 @@ class MenuGameFragment : Fragment() {
         return binding.root
     }
 
-    //hide navigation button
-    private fun hideNavigation() {
-        val bottomNavigationView = (activity as MainActivity).bottomNavigationView
-        val fab = (activity as MainActivity).fab
-        val bottomAppBar = (activity as MainActivity).bottomAppBar
-        bottomNavigationView.visibility = View.GONE
-        bottomAppBar.visibility = View.GONE
-        fab.visibility = View.GONE
-    }
 }
