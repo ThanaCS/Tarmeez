@@ -24,11 +24,11 @@
         android:layout_marginTop="40dp"
         android:textSize="14sp"
         android:background="@drawable/edittext_style"
-        android:inputType="textEmailAddress"
-        android:hint="@string/enter_email"
         android:singleLine="true"
+        android:gravity="right"
         android:nextFocusDown="@id/user_password"
-        android:drawableEnd="@drawable/ic_baseline_email_24" />
+        android:drawableEnd="@drawable/ic_baseline_email_24"
+        tools:ignore="RtlHardcoded" />
     <EditText
         android:id="@+id/user_password"
         android:layout_width="250dp"
@@ -41,7 +41,6 @@
         android:background="@drawable/edittext_style"
         android:inputType="textPassword"
         android:gravity="right"
-        android:hint="@string/enter_password"
         android:drawableEnd="@drawable/ic_baseline_lock_24"
         android:nextFocusDown="@id/password_confirmation"
         android:singleLine="true"
@@ -61,19 +60,8 @@
         android:hint="@string/password_confirmation"
         android:drawableEnd="@drawable/ic_baseline_lock_24"
         android:singleLine="true"
+        android:nextFocusDown="@id/register"
         tools:ignore="RtlHardcoded" />
-    <TextView
-        android:id="@+id/error_message"
-        android:textColor="@color/red"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:textSize="13sp"
-        android:layout_marginTop="160dp"
-        android:visibility="gone"
-        android:text="@string/error_message"
-        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/register"
