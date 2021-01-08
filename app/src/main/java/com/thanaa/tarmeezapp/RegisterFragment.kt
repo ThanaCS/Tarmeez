@@ -1,6 +1,5 @@
 package com.thanaa.tarmeezapp
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Patterns
 import android.view.Gravity
@@ -37,7 +36,7 @@ class RegisterFragment : Fragment() {
         emailEditText.hint = getString(R.string.enter_email, "")
         passwordEditText.hint = getString(R.string.enter_password, "")
         progressDialog = CustomProgressDialog(requireContext())
-        passwordConfirmEditText.se
+
         registerButton.setOnClickListener {
             if(validation()){
                 progressDialog.show()
