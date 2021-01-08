@@ -8,15 +8,13 @@
     android:orientation="vertical"
     tools:context=".game.MenuGameFragment">
 
-    <com.airbnb.lottie.LottieAnimationView
+    <ImageView
         android:id="@+id/spaceship"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="rocket01.json"
-        app:lottie_loop="true" />
+     android:src="@drawable/astrountcat" />
     <TextView
         android:id="@+id/textQuestion"
         android:layout_width="wrap_content"
@@ -26,19 +24,22 @@
         android:text="هل انت مستعد لمحاربة الفضائيين؟"
         android:textAlignment="center"
         android:textColor="#FFF"
-        android:textSize="28sp" />
+        android:textStyle="bold"
+        android:textSize="24sp" />
 
-    <ImageButton
+
+    <TextView
         android:id="@+id/play"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:textAllCaps="false"
-        android:text="العب"
-        android:paddingBottom="10dp"
-        android:textSize="28sp"
-        android:background="@drawable/bgbtn"
-        android:layout_width="200dp"
-        android:layout_height="70dp" />
+        android:textColor="@color/white"
+        android:background="@drawable/game_button"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="ابدأ"/>
 
 
 </LinearLayout>
