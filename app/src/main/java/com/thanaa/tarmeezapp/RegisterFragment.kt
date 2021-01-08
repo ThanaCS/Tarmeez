@@ -11,9 +11,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.thanaa.tarmeezapp.databinding.FragmentRegisterBinding
 
@@ -28,10 +25,9 @@ class RegisterFragment : Fragment() {
     private lateinit var registerButton: Button
     private lateinit var progressDialog:CustomProgressDialog
     private lateinit var alertDialog: AlertDialog
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View{
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         emailEditText = binding.userEmail
         passwordEditText = binding.userPassword
@@ -48,29 +44,28 @@ class RegisterFragment : Fragment() {
                 aAuth = FirebaseAuth.getInstance()
                 aAuth.createUserWithEmailAndPassword(
                     emailEditText.text.toString(),
-                    passwordEditText.text.toString()
-                ).
-                addOnCompleteListener(object : OnCompleteListener<AuthResult> {
-                    override fun onComplete(task: Task<AuthResult>) {
-                        if (task.isSuccessful) {
-                            progressDialog.dismiss()
-                            Navigation.findNavController(binding.root)
-                                .navigate(R.id.RegisterFragmentToHomeFragment)
-                        } else {
-                            progressDialog.dismiss()
-                            alertDialog.show()
-                        }
+                    passwordEditText.text.toString()).
+                addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        progressDialog.dismiss()
+                        Navigation.findNavController(binding.root)
+                            .navigate(R.id.RegisterFragmentToHomeFragment)
+                    } else {
+                        progressDialog.dismiss()
+                        alertDialog.show()
                     }
-                })
+                }
             }
         }
 
         loginTextView.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.RegisterFragmentToLoginFragment)
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.RegisterFragmentToLoginFragment)
         }
         return binding.root
     }
 
+    //input validation function
     private fun validation():Boolean{
         var result = true
         if(emailEditText.text.isBlank()){
@@ -92,14 +87,14 @@ class RegisterFragment : Fragment() {
         if(passwordEditText.text.toString() != passwordConfirmEditText.text.toString()){
             passwordConfirmEditText.error = getString(R.string.un_matched_password)
             result = false
-        }else if(passwordEditText.text.toString().length<6){
+        }else if( passwordEditText.text.toString().length < 6 ){
             passwordConfirmEditText.error = getString(R.string.password_more_than_six)
             result = false
         }
         return result
     }
 
-    private fun isEmailValid(email: CharSequence?): Boolean {
+    private fun isEmailValid(email: CharSequence): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }
