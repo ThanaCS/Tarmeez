@@ -51,7 +51,7 @@ class ContentFragment : Fragment() {
                         val description = it.child("contentDescription").value.toString()
 
                         binding.contentTitleTextView.text =title
-                        binding.contentDescriptionTextView.text = Html.fromHtml(description)
+                        binding.contentDescriptionTextView.text = Html.fromHtml(description,0)
 
                         println("########################################################################### ${it}")
                         print("")
@@ -81,7 +81,8 @@ class ContentFragment : Fragment() {
                 findNavController().navigate(action)
             }
             if(type == "WordOrder"){
-
+                val action = ContentFragmentDirections.actionContentFragmentToWordsQuizFragment(question, answer, options)
+                findNavController().navigate(action)
             }
             if(type == "MOQ"){
                 val action = ContentFragmentDirections.
