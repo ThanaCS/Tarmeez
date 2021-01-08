@@ -135,4 +135,13 @@
             android:id="@+id/action_menuGameFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.thanaa.tarmeezapp.GalleryFragment"
+        android:label="fragment_gallery"
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment_to_menuGameFragment"
+            app:destination="@id/menuGameFragment" />
+    </fragment>
 </navigation>
