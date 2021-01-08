@@ -1,51 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".WordsQuizFragment">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:src="@drawable/question_image"/>
+    <com.airbnb.lottie.LottieAnimationView
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="question_test.json"
+        app:lottie_loop="true"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_marginEnd="2dp" />
 
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="150dp"
+        android:background="@drawable/shadow_layout"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="210dp">
+
+        <TextView
+            android:id="@+id/question_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/answer_linear_layout"
+            android:divider="@drawable/empty_tall_divider"
+            android:orientation="horizontal"
+            android:layout_marginTop="20sp"
+            android:gravity="center"
+            android:showDividers="middle">
+
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/question_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="200dp"
         android:divider="@drawable/empty_tall_divider"
-        android:showDividers="middle"
         android:gravity="center"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/answer_linear_layout"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:divider="@drawable/empty_tall_divider"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:background="#7E7D7D"
-        android:showDividers="middle"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:showDividers="middle" />
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/ok_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ok"
-        />
-
-</LinearLayout>
+    <ImageView
+        android:id="@+id/done_button"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="500dp"
+        android:src="@drawable/done_button"
+        android:visibility="visible" />
+</RelativeLayout>

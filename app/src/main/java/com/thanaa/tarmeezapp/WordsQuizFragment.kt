@@ -1,59 +1,83 @@
 package com.thanaa.tarmeezapp
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.forEach
+import androidx.navigation.fragment.navArgs
+import com.thanaa.tarmeezapp.databinding.FragmentDragAndDropQuizBinding
+import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [WordsQuizFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WordsQuizFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val args by navArgs<WordsQuizFragmentArgs>()
+    private lateinit var questionTextView: TextView
+    private val listOfButton = mutableListOf<TextView>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_words_quiz, container, false)
+        val binding = FragmentWordsQuizBinding.inflate(inflater, container, false)
+
+        val list = args.options.split(",")
+
+        binding.questionTextView.text = args.question
+
+        for (i in list.indices){
+            questionTextView = TextView(requireContext())
+            questionTextView.layoutParams = ViewGroup.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT)
+            questionTextView.layoutParams.width = 150
+            questionTextView.layoutParams.height = 120
+            questionTextView.gravity = Gravity.CENTER
+            questionTextView.text = list[i]
+            questionTextView.setTextColor(Color.WHITE)
+            questionTextView.textSize = 18F
+            binding.questionLinearLayout.addView(questionTextView)
+            questionTextView.background = resources.getDrawable(R.drawable.word_layout)
+            listOfButton.add(i,questionTextView)
+        }
+
+        for (i in listOfButton.indices){
+            listOfButton[i].setOnClickListener {
+                val owner =  listOfButton[i].parent as ViewGroup
+                if(listOfButton[i].parent == binding.questionLinearLayout){
+                    owner.removeView(listOfButton[i])
+                    binding.answerLinearLayout.addView(listOfButton[i])
+                }else{
+                    owner.removeView(listOfButton[i])
+                    binding.questionLinearLayout.addView(listOfButton[i])
+                }
+
+            }
+        }
+
+        binding.doneButton.setOnClickListener {
+            var sentence = ""
+            binding.answerLinearLayout.forEach {
+                val view = it as TextView
+                sentence += ","+view.text
+            }
+            if(sentence.equals(args.answer)){
+                Toast.makeText(requireContext(),"correct", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(requireContext(),"wrong", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WordsQuizFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WordsQuizFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }
