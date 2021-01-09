@@ -1,6 +1,5 @@
 package com.thanaa.tarmeezapp
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns

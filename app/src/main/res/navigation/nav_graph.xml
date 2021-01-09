@@ -143,4 +143,28 @@
             android:id="@+id/WordsQuizFragmentToSectionsFragment"
             app:destination="@id/sectionsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.thanaa.tarmeezapp.game.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" />
+    <fragment
+        android:id="@+id/menuGameFragment"
+        android:name="com.thanaa.tarmeezapp.game.MenuGameFragment"
+        android:label="fragment_menu_game"
+        tools:layout="@layout/fragment_menu_game" >
+        <action
+            android:id="@+id/action_menuGameFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.thanaa.tarmeezapp.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.thanaa.tarmeezapp.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
