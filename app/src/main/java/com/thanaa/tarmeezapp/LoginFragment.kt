@@ -1,6 +1,7 @@
 package com.thanaa.tarmeezapp
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
 import androidx.fragment.app.Fragment
@@ -10,9 +11,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.Navigation
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.thanaa.tarmeezapp.databinding.FragmentLoginBinding
 
@@ -25,11 +23,9 @@ class LoginFragment : Fragment() {
     private lateinit var newAccountTextView: TextView
     private lateinit var progressDialog:CustomProgressDialog
     private lateinit var alertDialog: AlertDialog
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View{
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?):View{
         hideNavigation()
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         emailEditText = binding.userEmail
@@ -40,7 +36,8 @@ class LoginFragment : Fragment() {
         alertDialog.setMessage(getString(R.string.error_message))
 
         newAccountTextView.setOnClickListener {
-            Navigation.findNavController(_binding!!.root).navigate(R.id.LoginFragmentToRegisterFragment)
+            Navigation.findNavController(_binding!!.root)
+                .navigate(R.id.LoginFragmentToRegisterFragment)
         }
 
         binding.login.setOnClickListener {
@@ -49,18 +46,24 @@ class LoginFragment : Fragment() {
                 aAuth = FirebaseAuth.getInstance()
                 aAuth.signInWithEmailAndPassword(emailEditText.text.toString(),
                     passwordEditText.text.toString()).
-                addOnCompleteListener(object :OnCompleteListener<AuthResult>{
-                    override fun onComplete(task: Task<AuthResult>) {
-                        if(task.isSuccessful){
-                            progressDialog.dismiss()
-                            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_homeFragment)
-                        }else{
-
-                            progressDialog.dismiss()
-                            alertDialog.show()
+                addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        progressDialog.dismiss()
+                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                        if (sharedPref != null) {
+                            with (sharedPref.edit()) {
+                                putString("email", emailEditText.text.toString())
+                                apply()
+                            }
                         }
+                        Navigation.findNavController(binding.root)
+                            .navigate(R.id.action_loginFragment_to_homeFragment)
+                    } else {
+
+                        progressDialog.dismiss()
+                        alertDialog.show()
                     }
-                })
+                }
             }
         }
         return binding.root
@@ -94,7 +97,7 @@ class LoginFragment : Fragment() {
         }
         return result
     }
-    private fun isEmailValid(email: CharSequence?): Boolean {
+    private fun isEmailValid(email: CharSequence): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }
