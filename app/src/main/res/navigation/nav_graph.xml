@@ -141,4 +141,14 @@
             android:id="@+id/action_menuGameFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.thanaa.tarmeezapp.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.thanaa.tarmeezapp.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
