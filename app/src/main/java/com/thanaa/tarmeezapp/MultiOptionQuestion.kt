@@ -78,8 +78,13 @@ class MultiOptionQuestion : Fragment() {
                                 .getDrawable(R.drawable.correct_style)
                         }else{
                             disableOrEnableRGButton(radioGroup, false)
+                            controlSound(R.raw.incorrect_sound_effect)
                             selectedAnswer.background = resources
                                 .getDrawable(R.drawable.incorrect_style)
+                            moveToSectionsButton.text = "مراجعة المحتوى"
+                            moveToSectionsButton.setOnClickListener {
+                                Navigation.findNavController(binding.root).popBackStack()
+                            }
                         }
                     }
 
