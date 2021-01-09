@@ -35,7 +35,7 @@
             android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100"
+            tools:text="0"
             android:textSize="15sp"
             android:textColor="@color/dark_blue"
             android:textStyle="bold" />

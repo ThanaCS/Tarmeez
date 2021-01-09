@@ -1,6 +1,7 @@
 package com.thanaa.tarmeezapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Html
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.thanaa.tarmeezapp.databinding.FragmentMultiOptionQuestionBinding
+import org.jetbrains.anko.support.v4.toast
 
 
 class MultiOptionQuestion : Fragment() {
@@ -25,6 +27,7 @@ class MultiOptionQuestion : Fragment() {
     private lateinit var optionTwoRadioButton: RadioButton
     private lateinit var optionThreeRadioButton: RadioButton
     private lateinit var moveToSectionsButton:TextView
+    private lateinit var scoresTextView:TextView
     private var currentIndex =0
     private val args:MultiOptionQuestionArgs by navArgs()
     private var questions:ArrayList<String> = ArrayList()
@@ -42,7 +45,8 @@ class MultiOptionQuestion : Fragment() {
         optionTwoRadioButton =   binding.optionTwo
         optionThreeRadioButton =   binding.optionThree
         moveToSectionsButton = binding.moveToSections
-
+        scoresTextView = binding.score
+        setScores()
         FirebaseDatabase.getInstance().reference
             .child("Planet")
             .child(args.planetId)
@@ -73,6 +77,7 @@ class MultiOptionQuestion : Fragment() {
                         val answer = selectedAnswer.text
                         if (answer.trim() == answers[currentIndex].trim()) {
                             controlSound(R.raw.correct_sound_effect)
+                            updateScores()
                             disableOrEnableRGButton(radioGroup, false)
                             selectedAnswer.background = resources
                                 .getDrawable(R.drawable.correct_style)
@@ -111,5 +116,52 @@ class MultiOptionQuestion : Fragment() {
         mediaPlayer = MediaPlayer.create(requireContext(), soundId)
         mediaPlayer.start()
 
+    }
+
+    private fun updateScores(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val email = sharedPref?.getString("email","email")
+        if (email != null){
+            FirebaseDatabase.getInstance().reference
+                .child("User").orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val score = it.child("score").value.toString().toInt()
+                            val userId = it.child("userId").value.toString()
+                            val updatedScores = score + 20
+                            FirebaseDatabase.getInstance().reference.child("User")
+                                .child(userId)
+                                .child("score").setValue(updatedScores)
+                            FirebaseDatabase.getInstance().reference
+                            scoresTextView.text = updatedScores.toString()
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+        }
+    }
+
+    private fun setScores(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val email = sharedPref?.getString("email","email")
+        if (email != null){
+            FirebaseDatabase.getInstance().reference
+                .child("User").orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val score = it.child("score").value.toString()
+                            scoresTextView.text = score
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+        }
     }
 }

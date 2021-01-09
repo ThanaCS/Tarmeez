@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+import android.content.Context
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -14,6 +15,10 @@ import androidx.core.os.bundleOf
 import androidx.core.view.forEach
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.thanaa.tarmeezapp.databinding.FragmentDragAndDropQuizBinding
 import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
 import org.jetbrains.anko.support.v4.toast
@@ -27,12 +32,15 @@ class WordsQuizFragment : Fragment() {
     private val listOfButton = mutableListOf<TextView>()
     private var countNumOfWords = 0
     private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var scoresTextView:TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentWordsQuizBinding.inflate(inflater, container, false)
         moveToSection = binding.moveToSections
+        scoresTextView = binding.score
+        setScores()
         moveToSection.setOnClickListener {
             val action = WordsQuizFragmentDirections.
             WordsQuizFragmentToSectionsFragment(args.planetId)
@@ -73,6 +81,7 @@ class WordsQuizFragment : Fragment() {
                         }
                         if(sentence.equals(args.answer)){
                             controlSound(R.raw.correct_sound_effect)
+                            updateScores()
                         }else{
                             controlSound(R.raw.incorrect_sound_effect)
                             for(j in listOfButton.indices){
@@ -100,6 +109,53 @@ class WordsQuizFragment : Fragment() {
     private fun controlSound(soundId:Int) {
         mediaPlayer = MediaPlayer.create(requireContext(), soundId)
         mediaPlayer.start()
+    }
+
+    private fun updateScores(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val email = sharedPref?.getString("email","email")
+        if (email != null){
+            FirebaseDatabase.getInstance().reference
+                .child("User").orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val score = it.child("score").value.toString().toInt()
+                            val userId = it.child("userId").value.toString()
+                            val updatedScores = score + 20
+                            FirebaseDatabase.getInstance().reference.child("User")
+                                .child(userId)
+                                .child("score").setValue(updatedScores)
+                            FirebaseDatabase.getInstance().reference
+                            scoresTextView.text = updatedScores.toString()
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+        }
+    }
+
+    private fun setScores(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val email = sharedPref?.getString("email","email")
+        if (email != null){
+            FirebaseDatabase.getInstance().reference
+                .child("User").orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val score = it.child("score").value.toString()
+                            scoresTextView.text = score
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+        }
     }
 
     }
