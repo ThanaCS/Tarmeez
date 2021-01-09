@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.homeFragment)
         }
         fab.setOnClickListener {
+            navController.navigate(R.id.profileFragment)
+        }
+        fab.setOnClickListener {
             navController.navigate(R.id.settingsFragment)
         }
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
