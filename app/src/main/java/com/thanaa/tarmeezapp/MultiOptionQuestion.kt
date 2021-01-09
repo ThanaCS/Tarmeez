@@ -23,7 +23,6 @@ import org.jetbrains.anko.support.v4.toast
 
 
 class MultiOptionQuestion : Fragment() {
-    private lateinit var questionNumberTextView:TextView
     private lateinit var questionTextView:TextView
     private lateinit var radioGroup: RadioGroup
     private lateinit var optionOneRadioButton: RadioButton
@@ -66,11 +65,6 @@ class MultiOptionQuestion : Fragment() {
                         options.add(it.child("options").value.toString())
                         answers.add(it.child("answer").value.toString())
                     }
-                    val size = questions.size
-                    questionNumberTextView.text = getString(
-                        R.string.questions_number,
-                        size, currentIndex + 1
-                    )
                     questionTextView.text = Html.fromHtml(questions[currentIndex],0)
                     toast(answers[currentIndex])
 

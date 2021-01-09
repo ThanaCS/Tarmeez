@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -38,7 +39,7 @@ class SectionsFragment : Fragment() {
         sectionsList.clear()
 
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
 
         FirebaseDatabase.getInstance().reference
             .child("Planet")
@@ -53,8 +54,11 @@ class SectionsFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach{
                         val title = it.child("sectionTitle").value.toString()
-                        val section = Section(title,"")
-                        sectionsList.add(section)
+                        val flag = it.child("flag").value.toString()
+                        if(flag == "1"){
+                            val section = Section(title,"")
+                            sectionsList.add(section)
+                        }
                         println("########################################################################### ${it.child("sectionTitle").value}")
 
                     }
@@ -93,12 +97,11 @@ class SectionsFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val sectionItem = sectionsList[position]
-            holder.bind(sectionItem)
-
-            holder.itemView.setOnClickListener {
-                val action = SectionsFragmentDirections.actionSectionsFragmentToContentFragment(position,sectionItem.sectionTitle,args.planetId)
-                findNavController().navigate(action)
-            }
+                holder.bind(sectionItem)
+                holder.itemView.setOnClickListener {
+                    val action = SectionsFragmentDirections.actionSectionsFragmentToContentFragment(position,sectionItem.sectionTitle,args.planetId)
+                    findNavController().navigate(action)
+                }
 
         }
 

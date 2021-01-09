@@ -120,6 +120,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/variables"
         app:lottie_autoPlay="true"
+        android:visibility="invisible"
         app:lottie_fileName="Mars.json"
         app:lottie_loop="true" />
 
