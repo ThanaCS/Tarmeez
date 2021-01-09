@@ -26,9 +26,11 @@ class MenuGameFragment : Fragment() {
         _binding = FragmentMenuGameBinding.inflate(inflater, container, false)
 
         binding.play.setOnClickListener{
+            binding.progressBar.visibility = View.VISIBLE
             val action = MenuGameFragmentDirections.actionMenuGameFragmentToGameFragment()
             findNavController().navigate(action)
         }
+
         return binding.root
     }
 
