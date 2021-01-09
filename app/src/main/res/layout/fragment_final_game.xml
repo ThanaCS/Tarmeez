@@ -68,11 +68,11 @@
 
     <ImageView
         android:id="@+id/done_button"
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginLeft="300dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="450dp"
         android:layout_marginTop="500dp"
-        android:src="@drawable/done_button"
+        android:src="@drawable/run"
         android:visibility="visible" />
 </RelativeLayout>
