@@ -7,10 +7,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -22,14 +19,12 @@ import com.thanaa.tarmeezapp.databinding.FragmentMultiOptionQuestionBinding
 
 
 class MultiOptionQuestion : Fragment() {
-    private lateinit var questionNumberTextView:TextView
     private lateinit var questionTextView:TextView
     private lateinit var radioGroup: RadioGroup
     private lateinit var optionOneRadioButton: RadioButton
     private lateinit var optionTwoRadioButton: RadioButton
     private lateinit var optionThreeRadioButton: RadioButton
-    private lateinit var nextButton: ImageView
-    private lateinit var doneButton:ImageView
+    private lateinit var moveToSectionsButton:TextView
     private var currentIndex =0
     private val args:MultiOptionQuestionArgs by navArgs()
     private var questions:ArrayList<String> = ArrayList()
@@ -43,11 +38,10 @@ class MultiOptionQuestion : Fragment() {
             false)
         questionTextView = binding.question
         radioGroup = binding.answer
-        nextButton = binding.nextButton
-        doneButton = binding.doneButton
         optionOneRadioButton =   binding.optionOne
         optionTwoRadioButton =   binding.optionTwo
         optionThreeRadioButton =   binding.optionThree
+        moveToSectionsButton = binding.moveToSections
 
         FirebaseDatabase.getInstance().reference
             .child("Planet")
@@ -89,16 +83,13 @@ class MultiOptionQuestion : Fragment() {
                         }
                     }
 
-                    nextButton.setOnClickListener {
-                        moveToNext()
+                    moveToSectionsButton.setOnClickListener {
+                        val action = MultiOptionQuestionDirections.
+                        MultiOptionQuestionToSectionsFragment(args.planetId)
+                        Navigation.findNavController(binding.root).
+                        navigate(action)
                     }
-                    doneButton.setOnClickListener {
-                        Navigation.findNavController(binding.root).popBackStack()
-                    }
-                    checkIfUserFinish()
-
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
@@ -110,27 +101,6 @@ class MultiOptionQuestion : Fragment() {
         }
     }
 
-    fun moveToNext(){
-        currentIndex += 1
-        if(currentIndex < questions.size){
-            questionTextView.text = questions[currentIndex]
-            val answerOptions = options[currentIndex].split(",")
-            optionOneRadioButton.text = answerOptions[0]
-            optionTwoRadioButton.text = answerOptions[1]
-            optionThreeRadioButton.text = answerOptions[2]
-            checkIfUserFinish()
-        }
-    }
-
-    fun checkIfUserFinish(){
-        if (currentIndex + 1 == questions.size) {
-            nextButton.visibility = View.GONE
-            doneButton.visibility = View.VISIBLE
-        } else {
-            nextButton.visibility = View.VISIBLE
-            doneButton.visibility = View.GONE
-        }
-    }
 
     private fun controlSound(soundId:Int){
         mediaPlayer = MediaPlayer.create(requireContext(), soundId)
