@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroungame"
-    android:orientation="vertical"
     tools:context=".game.MenuGameFragment">
 
     <ImageView
@@ -13,33 +12,57 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-     android:src="@drawable/astrountcat" />
+        android:layout_marginTop="60dp"
+        android:src="@drawable/astrountcat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/textQuestion"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="44dp"
         android:text="هل انت مستعد لمحاربة الفضائيين؟"
         android:textAlignment="center"
         android:textColor="#FFF"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:textSize="24sp" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spaceship" />
 
     <TextView
         android:id="@+id/play"
         android:layout_width="150dp"
         android:layout_height="65dp"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:textColor="@color/white"
+        android:layout_marginTop="36dp"
         android:background="@drawable/game_button"
+        android:gravity="center"
+        android:text="ابدأ"
+        android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:text="ابدأ"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
-
-</LinearLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/progressBar"
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/play"
+        app:layout_constraintVertical_bias="0.659"
+        app:lottie_autoPlay="true"
+        android:visibility="invisible"
+        app:lottie_fileName="progressBar.json"
+        app:lottie_loop="true" />
+</androidx.constraintlayout.widget.ConstraintLayout>
