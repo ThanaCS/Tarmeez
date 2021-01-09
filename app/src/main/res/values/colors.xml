@@ -21,4 +21,5 @@
     <color name="lawn_green">#7CFC00</color>
     <color name="colorPurple">#332FA2</color>
     <color name="gold">#dda421</color>
+    <color name="lightBackground">#F8F8FF</color>
 </resources>

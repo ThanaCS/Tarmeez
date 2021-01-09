@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/galleryFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -124,8 +124,7 @@
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.thanaa.tarmeezapp.game.GameFragment"
-        android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game"/>
     <fragment
         android:id="@+id/menuGameFragment"
         android:name="com.thanaa.tarmeezapp.game.MenuGameFragment"
@@ -142,6 +141,15 @@
         tools:layout="@layout/fragment_gallery" >
         <action
             android:id="@+id/action_galleryFragment_to_menuGameFragment"
+            app:destination="@id/menuGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/endGameFraagment"
+        android:name="com.thanaa.tarmeezapp.EndGameFragment"
+        android:label="fragment_end_game"
+        tools:layout="@layout/fragment_end_game">
+        <action
+            android:id="@+id/action_endGameFragment2_to_menuGameFragment"
             app:destination="@id/menuGameFragment" />
     </fragment>
 </navigation>

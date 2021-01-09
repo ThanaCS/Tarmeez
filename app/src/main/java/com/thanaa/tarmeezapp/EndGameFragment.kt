@@ -6,26 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.thanaa.tarmeezapp.databinding.FragmentGalleryBinding
-import com.thanaa.tarmeezapp.databinding.FragmentMenuGameBinding
+import com.thanaa.tarmeezapp.databinding.FragmentEndGameBinding
+import com.thanaa.tarmeezapp.game.MenuGameFragmentDirections
 
-
-class GalleryFragment : Fragment() {
-    private var _binding: FragmentGalleryBinding? = null
+class EndGameFragment : Fragment() {
+    private var _binding: FragmentEndGameBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
+    ): View {
 
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
+        _binding = FragmentEndGameBinding.inflate(inflater, container, false)
 
-        binding.alienImage.setOnClickListener{
-            val action = GalleryFragmentDirections.actionGalleryFragmentToMenuGameFragment()
+        binding.restrt.setOnClickListener {
+            val action = EndGameFragmentDirections.actionEndGameFragment2ToMenuGameFragment()
             findNavController().navigate(action)
         }
-
         return binding.root
     }
+
+
 }
