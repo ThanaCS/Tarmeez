@@ -23,6 +23,7 @@ import org.jetbrains.anko.support.v4.toast
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var aAuth: FirebaseAuth
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
@@ -31,9 +32,15 @@ class RegisterFragment : Fragment() {
     private lateinit var registerButton: Button
     private lateinit var progressDialog:CustomProgressDialog
 
+    private lateinit var preferencesProvider: PreferencesProvider
+    val KEY_USER = "User"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View{
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+
+        preferencesProvider = PreferencesProvider(requireContext())
+
         emailEditText = binding.userEmail
         passwordEditText = binding.userPassword
         passwordConfirmEditText = binding.passwordConfirmation
@@ -57,16 +64,18 @@ class RegisterFragment : Fragment() {
                         val ref = FirebaseDatabase.getInstance().getReference("User")
                         val userId = ref.push().key
                         if (userId != null) {
-                            val user = User(userId,email.split("@")[0],"Undefined","Undefined",email)
+                            val user = User(userId,email.split("@")[0],"عمرك","جنسك",email)
                             ref.child(userId).setValue(user)
+                            preferencesProvider.putUser(KEY_USER, user)
                         }
-                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-                        if (sharedPref != null) {
-                            with (sharedPref.edit()) {
-                                putString("email", email)
-                                apply()
-                            }
-                        }
+//                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+//                        if (sharedPref != null) {
+//                            with (sharedPref.edit()) {
+//                                putString("email", email)
+//                                apply()
+//                            }
+//                        }
+
                         Navigation.findNavController(binding.root)
                             .navigate(R.id.RegisterFragmentToHomeFragment)
                     } else {
