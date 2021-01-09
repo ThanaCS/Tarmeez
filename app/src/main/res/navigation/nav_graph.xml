@@ -74,14 +74,14 @@
             app:argType="string"
             app:nullable="true" />
         <action
-            android:id="@+id/ContentFragmentToMultiOptionQuestion"
-            app:destination="@id/multiOptionQuestion" />
-        <action
             android:id="@+id/action_contentFragment_to_dragAndDropQuizFragment2"
             app:destination="@id/dragAndDropQuizFragment" />
         <action
             android:id="@+id/action_contentFragment_to_wordsQuizFragment"
             app:destination="@id/wordsQuizFragment" />
+        <action
+            android:id="@+id/ContentFragmentToMultiOptionQuestion"
+            app:destination="@id/multiOptionQuestion" />
     </fragment>
     <fragment
         android:id="@+id/multiOptionQuestion"
@@ -94,8 +94,12 @@
 
         <argument
             android:name="planetId"
-            android:id="@+id/action_contentFragment_to_dragAndDropQuizFragment"
-            app:destination="@id/dragAndDropQuizFragment" />
+            app:argType="string"
+            android:id="@+id/action_contentFragment_to_multiOptionQuestionFragment"
+            app:destination="@id/multiOptionQuestion" />
+        <action
+            android:id="@+id/MultiOptionQuestionToSectionsFragment"
+            app:destination="@id/sectionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/dragAndDropQuizFragment"
@@ -111,6 +115,12 @@
         <argument
             android:name="options"
             app:argType="string" />
+        <argument
+            android:name="planetId"
+            app:argType="string" />
+        <action
+            android:id="@+id/DragAndDropQuizFragmentToSectionsFragment"
+            app:destination="@id/sectionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/wordsQuizFragment"
@@ -126,6 +136,12 @@
         <argument
             android:name="options"
             app:argType="string" />
+        <argument
+            android:name="planetId"
+            app:argType="string" />
+        <action
+            android:id="@+id/WordsQuizFragmentToSectionsFragment"
+            app:destination="@id/sectionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"

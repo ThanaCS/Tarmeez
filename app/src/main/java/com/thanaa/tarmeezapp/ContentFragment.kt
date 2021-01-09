@@ -77,11 +77,15 @@ class ContentFragment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             if(type == "DragAndDrop"){
-                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment2(question, answer, options)
+                val action = ContentFragmentDirections
+                    .actionContentFragmentToDragAndDropQuizFragment2(question, answer, options,
+                        args.planetId.toString())
                 findNavController().navigate(action)
             }
             if(type == "WordOrder"){
-                val action = ContentFragmentDirections.actionContentFragmentToWordsQuizFragment(question, answer, options)
+                val action = ContentFragmentDirections.
+                actionContentFragmentToWordsQuizFragment(question, answer,
+                    options, args.planetId.toString())
                 findNavController().navigate(action)
             }
             if(type == "MOQ"){
