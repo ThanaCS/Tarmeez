@@ -67,7 +67,6 @@ class MultiOptionQuestion : Fragment() {
                     }
 
                     questionTextView.text = Html.fromHtml(questions[currentIndex],0)
-                    toast(answers[currentIndex])
 
                     val answerOptions = options[currentIndex].split(",")
                     optionOneRadioButton.text = answerOptions[0]
