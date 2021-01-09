@@ -19,4 +19,6 @@
     <color name="dark_gray">#3f4540</color>
     <color name="dark_purple">#572a81</color>
     <color name="lawn_green">#7CFC00</color>
+    <color name="colorPurple">#332FA2</color>
+    <color name="gold">#dda421</color>
 </resources>

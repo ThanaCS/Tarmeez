@@ -127,4 +127,18 @@
             android:name="options"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.thanaa.tarmeezapp.game.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" />
+    <fragment
+        android:id="@+id/menuGameFragment"
+        android:name="com.thanaa.tarmeezapp.game.MenuGameFragment"
+        android:label="fragment_menu_game"
+        tools:layout="@layout/fragment_menu_game" >
+        <action
+            android:id="@+id/action_menuGameFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
 </navigation>

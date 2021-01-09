@@ -82,10 +82,10 @@ class HomeFragment : Fragment() {
             angle = 45
             emissionRate = 120f
         }
+
     }
 
 
-    
 
     override fun onDestroyView() {
         super.onDestroyView()
