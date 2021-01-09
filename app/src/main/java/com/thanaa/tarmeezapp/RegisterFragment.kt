@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
@@ -56,7 +57,7 @@ class RegisterFragment : Fragment() {
                         val ref = FirebaseDatabase.getInstance().getReference("User")
                         val userId = ref.push().key
                         if (userId != null) {
-                            val user = User(userId,email.split("@")[0],"Undefined","Undefined",email,"0","0")
+                            val user = User(userId,email.split("@")[0],"Undefined","Undefined",email,"","")
                             ref.child(userId).setValue(user)
                         }
                         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
