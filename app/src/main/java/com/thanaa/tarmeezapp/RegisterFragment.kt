@@ -13,6 +13,7 @@ import androidx.core.view.updateMarginsRelative
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.thanaa.tarmeezapp.data.User

@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.thanaa.tarmeezapp.databinding.FragmentMultiOptionQuestionBinding
-import org.jetbrains.anko.support.v4.toast
 
 
 class MultiOptionQuestion : Fragment() {
@@ -66,13 +65,8 @@ class MultiOptionQuestion : Fragment() {
                         options.add(it.child("options").value.toString())
                         answers.add(it.child("answer").value.toString())
                     }
-                    val size = questions.size
-                    questionNumberTextView.text = getString(
-                        R.string.questions_number,
-                        size, currentIndex + 1
-                    )
+
                     questionTextView.text = Html.fromHtml(questions[currentIndex],0)
-                    toast(answers[currentIndex])
 
                     val answerOptions = options[currentIndex].split(",")
                     optionOneRadioButton.text = answerOptions[0]
