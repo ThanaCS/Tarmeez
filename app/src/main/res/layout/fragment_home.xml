@@ -1,15 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background01"
+    android:background="@drawable/gradiant"
     tools:context=".HomeFragment">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradiant">
+    <com.github.matteobattilana.weather.WeatherView
+        android:id="@+id/weatherAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        tools:ignore="MissingConstraints">
+    </com.github.matteobattilana.weather.WeatherView>
+
+
+    <TextView
+        android:id="@+id/conditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="76dp"
+        android:gravity="center"
+        android:text="الجمـل\nالشرطية"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@+id/relations_conditions_mars"
+        app:layout_constraintTop_toBottomOf="@+id/variables_earth" />
+
+    <TextView
+        android:id="@+id/variables"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="المتغيرات"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/variables_earth"
+        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/variables_earth" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginRight="164dp"
+        android:src="@drawable/line2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/variables" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/line1"
+        app:layout_constraintBottom_toTopOf="@+id/moon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relations_conditions_mars" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
@@ -29,77 +96,108 @@
         app:layout_constraintEnd_toStartOf="@+id/profileImage"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/variables_earth"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="earth.json"
-        app:lottie_loop="true"
-        android:layout_marginLeft="32dp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/neptune"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="364dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/functions"
         app:lottie_autoPlay="true"
         app:lottie_fileName="neptune.json"
-        app:lottie_loop="true"
-        android:layout_marginLeft="4dp" />
+        app:lottie_loop="true" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/relations_conditions_mars"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="2dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/variables"
         app:lottie_autoPlay="true"
         app:lottie_fileName="Mars.json"
-        app:lottie_loop="true"
-        android:layout_marginRight="2dp" />
+        app:lottie_loop="true" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/saturn"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="72dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/moon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conditions"
         app:lottie_autoPlay="true"
         app:lottie_fileName="moon.json"
-        app:lottie_loop="true"
-        android:layout_marginRight="16dp" />
+        app:lottie_loop="true" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/line2"
+        app:layout_constraintBottom_toTopOf="@+id/neptune"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moon" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/variables_earth"
+        android:layout_width="200dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="earth.json"
+        app:lottie_loop="true" />
 
     <TextView
-        android:id="@+id/variables"
+        android:id="@+id/functions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="100dp"
+        android:text="الــدوال"
         android:textColor="@color/white"
-        android:textSize="24sp"
-        android:text="المتغيرات"
+        android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/earth"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="60dp" />
-     <com.github.matteobattilana.weather.WeatherView
-        android:id="@+id/weatherAnimation"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.github.matteobattilana.weather.WeatherView>
+        app:layout_constraintEnd_toStartOf="@+id/moon"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relations_conditions_mars" />
+
+    <TextView
+        android:id="@+id/arrays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="100dp"
+        android:text=" المصفوفات"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toEndOf="@+id/neptune"
+        app:layout_constraintTop_toBottomOf="@+id/moon" />
+
+    <TextView
+        android:id="@+id/ending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neptune" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
