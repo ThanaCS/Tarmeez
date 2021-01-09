@@ -7,7 +7,7 @@
     <string name="forget_password">هل نسيت كلمة المرور؟</string>
     <string name="login">تسجيل الدخول</string>
     <string name="error_message">  خطأ في البيانات المدخلة %s </string>
-    <string name="new_account">إنشاء حسا ب جديد</string>
+    <string name="new_account">إنشاء حساب جديد</string>
     <string name="password_confirmation">أدخل تأكيد كلمة المرور</string>
     <string name="has_account">لديك حساب بالفعل؟</string>
     <string name="create_account">إنشاء حساب</string>
@@ -19,4 +19,5 @@
     <string name="invalid_email">البريد الالكتروني غير صالح</string>
     <string name="questions_number">سؤال %d/%d</string>
     <string name="quiz_button">اختبر معلوماتك</string>
+    <string name="forgot_password">استعادة كلمة المرور</string>
 </resources>

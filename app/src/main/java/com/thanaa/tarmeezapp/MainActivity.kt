@@ -28,15 +28,15 @@ class MainActivity : AppCompatActivity() {
         val navController: NavController =
             Navigation.findNavController(this, R.id.fragment_container)
         bottomNavigationView.background = null
+
         fab.setOnClickListener {
             navController.navigate(R.id.homeFragment)
         }
+
         fab.setOnClickListener {
             navController.navigate(R.id.profileFragment)
         }
-        fab.setOnClickListener {
-            navController.navigate(R.id.settingsFragment)
-        }
+
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
         findNavController(R.id.fragment_container)
 

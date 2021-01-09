@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
@@ -12,17 +13,20 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.updateMarginsRelative
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.thanaa.tarmeezapp.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
+
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private lateinit var aAuth:FirebaseAuth
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var newAccountTextView: TextView
+    private lateinit var forgotPassword: TextView
     private lateinit var progressDialog:CustomProgressDialog
     private lateinit var loginButton: Button
 
@@ -37,10 +41,39 @@ class LoginFragment : Fragment() {
         passwordEditText.hint = getString(R.string.enter_password, " ")
         progressDialog = CustomProgressDialog(requireContext())
         loginButton = binding.login
+        forgotPassword = binding.forgotPassword
+
+        aAuth = FirebaseAuth.getInstance()
 
         newAccountTextView.setOnClickListener {
             Navigation.findNavController(_binding!!.root)
                 .navigate(R.id.LoginFragmentToRegisterFragment)
+        }
+
+        forgotPassword.setOnClickListener {
+//            val builder = AlertDialog.Builder(requireContext())
+//            val view = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
+//            val userName = view.findViewById<EditText>(R.id.reset_password)
+//            builder.setView(view)
+//            builder.setPositiveButton("استعادة كلمة المرور", {_, _->
+//                val email = userName.text.toString().trim()
+//
+//                aAuth!!.sendPasswordResetEmail(email)
+//                    .addOnCompleteListener { task ->
+//                        if (task.isSuccessful) {
+//                            Toast.makeText(requireContext(), "تم إرسال البريد الإلكتروني", Toast.LENGTH_SHORT).show()
+//                        } else {
+//                            Toast.makeText(requireContext(), "فضلاً أدخل البريد الإلكتروني", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//            })
+//
+//            builder.setNegativeButton("إغلاق", {_, _->})
+//            builder.show()
+
+
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+
         }
 
       loginButton.setOnFocusChangeListener { _, _ ->
@@ -92,6 +125,7 @@ class LoginFragment : Fragment() {
         }
         return binding.root
     }
+
     //hide navigation button
     private fun hideNavigation() {
         val bottomNavigationView = (activity as MainActivity).bottomNavigationView
