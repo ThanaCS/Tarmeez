@@ -12,8 +12,7 @@
         app:lottie_loop="true"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp" />
+        android:layout_marginEnd="2dp" />
 
     <EditText
         android:id="@+id/user_email"
@@ -21,29 +20,27 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:layout_marginTop="80dp"
-        android:drawableRight="@drawable/ic_baseline_email_24"
-        android:textSize="14sp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/edittext_style"
         android:inputType="textEmailAddress"
-        android:hint="@string/enter_email"
+        android:gravity="right"
+        android:drawableEnd="@drawable/ic_baseline_email_24"
+        android:textSize="14sp"
         android:singleLine="true"
         android:nextFocusDown="@id/user_password"
-        android:drawableEnd="@drawable/ic_baseline_email_24" />
+        tools:ignore="RtlHardcoded" />
     <EditText
         android:id="@+id/user_password"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="14sp"
-        android:layout_marginTop="130dp"
-        android:drawableRight="@drawable/ic_baseline_lock_24"
+        android:layout_marginTop="100dp"
         android:background="@drawable/edittext_style"
         android:inputType="textPassword"
         android:gravity="right"
-        android:hint="@string/enter_password"
         android:drawableEnd="@drawable/ic_baseline_lock_24"
+        android:textSize="14sp"
         android:singleLine="true"
         android:nextFocusDown="@id/login"
         tools:ignore="RtlHardcoded" />
@@ -52,21 +49,19 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="170dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="15sp"
         android:background="@drawable/button_style"
         android:text="@string/login"/>
-
     <TextView
         android:textColor="@color/pink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="11sp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="220dp"
         android:text="@string/forget_password"
         tools:ignore="SmallSp" />
 
@@ -77,8 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="11sp"
-        android:layout_marginTop="255dp"
+        android:layout_marginTop="240dp"
         android:text="@string/new_account"
         tools:ignore="SmallSp" />
 </FrameLayout>

@@ -3,34 +3,47 @@ package com.thanaa.tarmeezapp
 import android.content.ClipData
 import android.content.ClipDescription
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.DragEvent
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.forEach
+import androidx.core.view.marginEnd
+import androidx.core.view.setMargins
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.thanaa.tarmeezapp.databinding.FragmentDragAndDropQuizBinding
+import com.thanaa.tarmeezapp.databinding.FragmentDragAndDropTestBinding
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.textColor
 import java.util.*
 
 class DragAndDropQuizFragment : Fragment() {
     private val args by navArgs<DragAndDropQuizFragmentArgs>()
 
-    private lateinit var binding : FragmentDragAndDropQuizBinding
+    private lateinit var binding : FragmentDragAndDropTestBinding
     private lateinit var questionButton: Button
     private lateinit var answerButton: Button
-
+    private lateinit var moveToSection:TextView
+    private lateinit var mediaPlayer: MediaPlayer
+    private var numOfQuestions = 0
+    private var numOfAnswers =  0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDragAndDropQuizBinding.inflate(inflater, container, false)
-
+        binding = FragmentDragAndDropTestBinding.inflate(inflater, container, false)
         binding.question.text = args.question
+        moveToSection = binding.moveToSections
+        moveToSection.setOnClickListener {
+            val action = DragAndDropQuizFragmentDirections.
+            DragAndDropQuizFragmentToSectionsFragment(args.planetId)
+            Navigation.findNavController(binding.root).navigate(action)
+        }
 
 //        val text = "22,'ك',\"ازرق\",8.4"
 //        val answer = "String=\"ازرق\",Double=8.4,Char='ك',Int=22"
@@ -45,15 +58,18 @@ class DragAndDropQuizFragment : Fragment() {
             right to left
         }
         val list = args.options.split(",")
-
+        numOfQuestions = list.size
         for (i in list.indices){
             questionButton = Button(requireContext())
             questionButton.layoutParams = ViewGroup.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT)
+                200,
+                100)
             questionButton.text = list[i]
             binding.questionLinearLayout.addView(questionButton)
+            questionButton.textColor = resources.getColor(R.color.white)
+            questionButton.background = resources.getDrawable(R.drawable.yellow_button_style)
             questionButton.setBackgroundColor(resources.getColor(R.color.pink_1))
+            questionButton.setPadding(0,0,0,5)
             questionButton.setOnLongClickListener {
                 setDragListener(map,list[i])
                 val clipText = "أحسنت ياصغيري"
@@ -72,11 +88,11 @@ class DragAndDropQuizFragment : Fragment() {
         for (i in map){
             answerButton = Button(requireContext())
             answerButton.layoutParams = ViewGroup.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT)
+                200, 100)
             answerButton.text = i.value
+            answerButton.textColor = resources.getColor(R.color.white)
             answerButton.setBackgroundColor(resources.getColor(R.color.cyan))
-
+            answerButton.setPadding(0,0,0,5)
             binding.answerLinearLayout.addView(answerButton)
         }
 
@@ -110,15 +126,24 @@ class DragAndDropQuizFragment : Fragment() {
                 true
             }
             DragEvent.ACTION_DROP -> {
-                val item = event.clipData.getItemAt(0)
-                val dragData = item.text
-                Toast.makeText(requireContext(), dragData, Toast.LENGTH_LONG).show()
-                view.setBackgroundColor(resources.getColor(R.color.pink))
+                view.setBackgroundColor(resources.getColor(R.color.dark_green))
+                view.setPadding(0,0,0,5)
                 view.invalidate()
                 val v = event.localState as View
                 val owner =  v.parent as ViewGroup
                 owner.removeView(v)
                 v.visibility = View.VISIBLE
+                numOfAnswers += 1
+                if(numOfQuestions== numOfAnswers){
+                    binding.questionLinearLayout.visibility = View.GONE
+                    val layoutParams= LinearLayout
+                        .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT)
+                    layoutParams.setMargins(0, 0, 0, 0)
+                    layoutParams.gravity = Gravity.CENTER
+                    binding.answerLinearLayout.layoutParams = layoutParams
+                    controlSound(R.raw.correct_sound_effect)
+                }
                 true
 
             }
@@ -135,5 +160,10 @@ class DragAndDropQuizFragment : Fragment() {
 
     private val wrongDragListener = View.OnDragListener { view, event ->
         false
+    }
+
+    private fun controlSound(soundId:Int) {
+        mediaPlayer = MediaPlayer.create(requireContext(), soundId)
+        mediaPlayer.start()
     }
 }

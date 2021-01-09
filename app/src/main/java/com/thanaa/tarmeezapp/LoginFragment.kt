@@ -1,6 +1,9 @@
 package com.thanaa.tarmeezapp
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> remotes/origin/Design
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
