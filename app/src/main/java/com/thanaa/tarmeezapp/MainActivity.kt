@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             navController.navigate(R.id.homeFragment)
         }
+        fab.setOnClickListener {
+            navController.navigate(R.id.profileFragment)
+        }
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
         findNavController(R.id.fragment_container)
 

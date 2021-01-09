@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_sectionsFragment"
             app:destination="@id/sectionsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -121,4 +124,9 @@
             android:name="options"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.thanaa.tarmeezapp.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
