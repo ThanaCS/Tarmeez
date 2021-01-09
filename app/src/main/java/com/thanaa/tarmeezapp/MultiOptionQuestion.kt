@@ -40,7 +40,6 @@ class MultiOptionQuestion : Fragment() {
 
         val binding  = FragmentMultiOptionQuestionBinding.inflate(inflater, container,
             false)
-        questionNumberTextView = binding.questionNumber
         questionTextView = binding.question
         radioGroup = binding.answer
         nextButton = binding.nextButton
@@ -65,13 +64,8 @@ class MultiOptionQuestion : Fragment() {
                         options.add(it.child("options").value.toString())
                         answers.add(it.child("answer").value.toString())
                     }
-                    val size = questions.size
-                    questionNumberTextView.text = getString(
-                        R.string.questions_number,
-                        size, currentIndex + 1
-                    )
                     questionTextView.text = questions[currentIndex]
-               
+
                     val answerOptions = options[currentIndex].split(",")
                     optionOneRadioButton.text = answerOptions[0]
                     optionTwoRadioButton.text = answerOptions[1]

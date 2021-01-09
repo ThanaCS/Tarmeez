@@ -13,7 +13,7 @@
         android:src="@drawable/question_image"/>
     <com.airbnb.lottie.LottieAnimationView
         app:lottie_autoPlay="true"
-        app:lottie_fileName="question_test.json"
+        app:lottie_fileName="updated_question.json"
         app:lottie_loop="true"
         android:layout_width="match_parent"
         android:layout_height="360dp"
@@ -28,16 +28,6 @@
         android:orientation="vertical"
         android:background="@drawable/shadow_layout"
         android:layout_marginTop="210dp">
-
-        <TextView
-            android:id="@+id/question_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:gravity="center"
-            tools:text= "سؤال 1/2"/>
 
         <TextView
             android:id="@+id/question"
@@ -59,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
+                android:paddingBottom="20dp"
                 tools:ignore="UselessParent">
 
                 <RadioButton

@@ -12,8 +12,7 @@
         app:lottie_loop="true"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp" />
+        android:layout_marginEnd="2dp" />
 
     <EditText
         android:id="@+id/user_email"
@@ -51,16 +50,14 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="14sp"
         android:layout_marginTop="133dp"
-        android:drawableRight="@drawable/ic_baseline_lock_24"
         android:background="@drawable/edittext_style"
         android:inputType="textPassword"
         android:gravity="right"
         android:hint="@string/password_confirmation"
-        android:drawableEnd="@drawable/ic_baseline_lock_24"
         android:singleLine="true"
-        android:nextFocusDown="@id/register"
+        android:drawableEnd="@drawable/ic_baseline_lock_24"
+        android:textSize="14sp"
         tools:ignore="RtlHardcoded" />
 
     <Button
