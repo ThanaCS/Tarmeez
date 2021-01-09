@@ -11,7 +11,7 @@
         app:lottie_fileName="questions_image.json"
         app:lottie_loop="true"
         android:layout_width="match_parent"
-        android:layout_height="360dp" />
+        android:layout_height="350dp" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         android:layout_marginLeft="10dp"
         android:orientation="vertical"
         android:background="@drawable/shadow_layout"
-        android:layout_marginTop="210dp">
+        android:layout_marginTop="170dp">
 
         <TextView
             android:id="@+id/question"
@@ -64,50 +64,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="vertical">
-            <RadioGroup
-                android:id="@+id/answer"
-                android:layout_width="match_parent"
-                android:gravity="center"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/question_linear_layout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
-                tools:ignore="UselessParent">
+                android:divider="@drawable/empty_tall_divider"
+                android:orientation="vertical"
+                android:layout_marginEnd="40dp"
+                android:showDividers="middle"
+                android:gravity="center">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/answer_linear_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/empty_tall_divider"
+                android:orientation="vertical"
+                android:layout_marginStart="40dp"
+                android:showDividers="middle"
+                android:gravity="center">
+            </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/option_one"
-                    android:layout_width="250dp"
-                    android:layout_height="40dp"
-                    tools:text="var"
-                    android:background="@drawable/answer_style"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9" />
-                <RadioButton
-                    android:id="@+id/option_two"
-                    android:layout_width="250dp"
-                    android:layout_height="40dp"
-                    tools:text="var"
-                    android:background="@drawable/answer_style"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="10dp"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9" />
-                <RadioButton
-                    android:id="@+id/option_three"
-                    android:layout_width="250dp"
-                    android:layout_height="40dp"
-                    tools:text="var"
-                    android:background="@drawable/answer_style"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="10dp"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9" />
-            </RadioGroup>
         </LinearLayout>
-
     </LinearLayout>
 
     <TextView
