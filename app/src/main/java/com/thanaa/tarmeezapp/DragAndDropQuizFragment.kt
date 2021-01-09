@@ -35,8 +35,13 @@ class DragAndDropQuizFragment : Fragment() {
 //        val text = "22,'ك',\"ازرق\",8.4"
 //        val answer = "String=\"ازرق\",Double=8.4,Char='ك',Int=22"
 
+//        val text = "==,>,!="
+//        val answer = "  7                            5  *>,  9                            9  *==, "ساره"               "لمياء" *!="
+
+//        7,_______,5*9,_______,9*"ساره",_______,"لمياء"
+
         val map = args.answer.split(",").associate {
-            val (left, right) = it.split("=")
+            val (left, right) = it.split("*")
             right to left
         }
         val list = args.options.split(",")

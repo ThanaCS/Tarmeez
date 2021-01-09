@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
@@ -55,6 +56,13 @@ class LoginFragment : Fragment() {
                 addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         progressDialog.dismiss()
+                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                        if (sharedPref != null) {
+                            with (sharedPref.edit()) {
+                                putString("email", emailEditText.text.toString())
+                                apply()
+                            }
+                        }
                         Navigation.findNavController(binding.root)
                             .navigate(R.id.action_loginFragment_to_homeFragment)
                     } else {

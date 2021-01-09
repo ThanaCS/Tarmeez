@@ -3,6 +3,7 @@ package com.thanaa.tarmeezapp
 import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +65,9 @@ class MultiOptionQuestion : Fragment() {
                         options.add(it.child("options").value.toString())
                         answers.add(it.child("answer").value.toString())
                     }
-                    questionTextView.text = questions[currentIndex]
+
+                    questionTextView.text = Html.fromHtml(questions[currentIndex],0)
+                    toast(answers[currentIndex])
 
                     val answerOptions = options[currentIndex].split(",")
                     optionOneRadioButton.text = answerOptions[0]

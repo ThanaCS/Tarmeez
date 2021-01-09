@@ -13,7 +13,10 @@ import androidx.core.view.updateMarginsRelative
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.thanaa.tarmeezapp.data.User
 import com.thanaa.tarmeezapp.databinding.FragmentRegisterBinding
 import org.jetbrains.anko.support.v4.toast
 
@@ -50,6 +53,20 @@ class RegisterFragment : Fragment() {
                 addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         progressDialog.dismiss()
+                        val email = emailEditText.text.toString()
+                        val ref = FirebaseDatabase.getInstance().getReference("User")
+                        val userId = ref.push().key
+                        if (userId != null) {
+                            val user = User(userId,email.split("@")[0],"Undefined","Undefined",email)
+                            ref.child(userId).setValue(user)
+                        }
+                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                        if (sharedPref != null) {
+                            with (sharedPref.edit()) {
+                                putString("email", email)
+                                apply()
+                            }
+                        }
                         Navigation.findNavController(binding.root)
                             .navigate(R.id.RegisterFragmentToHomeFragment)
                     } else {
