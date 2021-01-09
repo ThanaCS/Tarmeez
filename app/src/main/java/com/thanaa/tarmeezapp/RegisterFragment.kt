@@ -1,22 +1,24 @@
 package com.thanaa.tarmeezapp
 
-import android.app.AlertDialog
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import androidx.core.view.updateMarginsRelative
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.thanaa.tarmeezapp.data.User
 import com.thanaa.tarmeezapp.databinding.FragmentRegisterBinding
+import org.jetbrains.anko.support.v4.toast
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -28,7 +30,6 @@ class RegisterFragment : Fragment() {
     private lateinit var loginTextView: TextView
     private lateinit var registerButton: Button
     private lateinit var progressDialog:CustomProgressDialog
-    private lateinit var alertDialog: AlertDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View{
@@ -38,9 +39,9 @@ class RegisterFragment : Fragment() {
         passwordConfirmEditText = binding.passwordConfirmation
         registerButton = binding.register
         loginTextView = binding.hasAccount
+        emailEditText.hint = getString(R.string.enter_email, "")
+        passwordEditText.hint = getString(R.string.enter_password, "")
         progressDialog = CustomProgressDialog(requireContext())
-        alertDialog = AlertDialog.Builder(requireContext()).create()
-        alertDialog.setMessage(getString(R.string.already_exist))
 
         registerButton.setOnClickListener {
             if(validation()){
@@ -70,11 +71,36 @@ class RegisterFragment : Fragment() {
                             .navigate(R.id.RegisterFragmentToHomeFragment)
                     } else {
                         progressDialog.dismiss()
-                        alertDialog.show()
+                        progressDialog.dismiss()
+                        val snackBar = Snackbar.make(binding.root,
+                            getString(R.string.already_exist, " "), 3000)
+                        val snackBarText: TextView = snackBar.view.
+                        findViewById(com.google.android.material.R.id.snackbar_text)
+                        snackBarText.textSize = 16f
+                        val layoutParams = FrameLayout.LayoutParams(LinearLayout
+                            .LayoutParams.WRAP_CONTENT, LinearLayout.
+                        LayoutParams.WRAP_CONTENT, Gravity.RIGHT )
+                        layoutParams.updateMarginsRelative(0, 1800,
+                            0, 0)
+                        snackBarText.setCompoundDrawablesWithIntrinsicBounds(
+                            0, 0,
+                            R.drawable.ic_baseline_error_outline_24, 0)
+                        snackBar.view.setPadding(400, 0, 0, 0)
+                        layoutParams.gravity = Gravity.CENTER
+                        snackBar.view.layoutParams = layoutParams
+                        snackBar.setBackgroundTint(resources.getColor(R.color.dark_gray))
+                        snackBar.setActionTextColor(resources.getColor(R.color.white))
+                        snackBar.show()
                     }
                 }
             }
         }
+
+        binding.register.setOnFocusChangeListener { view, b ->
+            //hideKeyBoard()
+            toast("hi")
+        }
+        passwordConfirmEditText.nextFocusDownId = R.id.register
 
         loginTextView.setOnClickListener {
             Navigation.findNavController(binding.root)
@@ -114,5 +140,19 @@ class RegisterFragment : Fragment() {
 
     private fun isEmailValid(email: CharSequence): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun hideKeyBoard() {
+        activity?.let {
+            val inputManager =
+                it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val view = it.currentFocus
+            if (view != null) {
+                inputManager.hideSoftInputFromWindow(
+                    view.windowToken,
+                    InputMethodManager.HIDE_NOT_ALWAYS
+                )
+            }
+        }
     }
 }
