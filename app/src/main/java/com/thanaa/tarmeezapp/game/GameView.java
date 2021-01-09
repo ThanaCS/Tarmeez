@@ -233,7 +233,7 @@ public class GameView extends SurfaceView implements Runnable {
                 isPlaying = false;
                 canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
                 canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
-                canvas.drawText("انتهت اللعبة", screenX / 2f, screenY / 2f, paint);
+                canvas.drawText("انتهت اللعبة", (canvas.getWidth()/2)-200, canvas.getHeight()-100, paint);
                 getHolder().unlockCanvasAndPost(canvas);
                 waitBeforeExiting();
                 return;

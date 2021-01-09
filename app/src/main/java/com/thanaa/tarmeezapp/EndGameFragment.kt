@@ -28,8 +28,17 @@ class EndGameFragment : Fragment() {
             val action = EndGameFragmentDirections.actionEndGameFragment2ToMenuGameFragment()
             findNavController().navigate(action)
         }
+        showNavigation()
 
         return binding.root
+    }
+    private fun showNavigation() {
+        val bottomNavigationView = (activity as MainActivity).bottomNavigationView
+        val fab = (activity as MainActivity).fab
+        val bottomAppBar = (activity as MainActivity).bottomAppBar
+        bottomNavigationView.visibility = View.VISIBLE
+        bottomAppBar.visibility = View.VISIBLE
+        fab.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {
