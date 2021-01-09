@@ -12,12 +12,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.forEach
 import androidx.navigation.fragment.navArgs
+import com.thanaa.tarmeezapp.databinding.FragmentFinalGameBinding
 import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
+import org.jetbrains.anko.wrapContent
 
+class FinalGameFragment : Fragment() {
 
-class WordsQuizFragment : Fragment() {
-
-    private val args by navArgs<WordsQuizFragmentArgs>()
     private lateinit var questionTextView: TextView
     private val listOfButton = mutableListOf<TextView>()
 
@@ -25,40 +25,43 @@ class WordsQuizFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentWordsQuizBinding.inflate(inflater, container, false)
+        val binding = FragmentFinalGameBinding.inflate(inflater, container, false)
 
-        val list = args.options.split(",")
+        val options = "},if(alien.isClose()),{,score++,shoot()"
+        val answer = ",if(alien.isClose()),{,shoot(),score++,}"
+        val list = options.split(",")
 
-        binding.questionTextView.text = args.question
+        binding.questionTextView.text = "برمج اللعبة:"
 
-        for (i in list.indices) {
+        for (i in list.indices){
             questionTextView = TextView(requireContext())
             questionTextView.layoutParams = ViewGroup.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            questionTextView.layoutParams.width = 150
-            questionTextView.layoutParams.height = 120
+                LinearLayout.LayoutParams.WRAP_CONTENT)
+            val layoutParams = ViewGroup.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT)
+            questionTextView.setPadding(20,20, 20, 20)
+            questionTextView.layoutParams = layoutParams
             questionTextView.gravity = Gravity.CENTER
             questionTextView.text = list[i]
             questionTextView.setTextColor(Color.WHITE)
             questionTextView.textSize = 18F
             binding.questionLinearLayout.addView(questionTextView)
             questionTextView.background = resources.getDrawable(R.drawable.word_layout)
-            listOfButton.add(i, questionTextView)
+            listOfButton.add(i,questionTextView)
         }
 
-        for (i in listOfButton.indices) {
+        for (i in listOfButton.indices){
             listOfButton[i].setOnClickListener {
-                val owner = listOfButton[i].parent as ViewGroup
-                if (listOfButton[i].parent == binding.questionLinearLayout) {
+                val owner =  listOfButton[i].parent as ViewGroup
+                if(listOfButton[i].parent == binding.questionLinearLayout){
                     owner.removeView(listOfButton[i])
                     binding.answerLinearLayout.addView(listOfButton[i])
-                } else {
+                }else{
                     owner.removeView(listOfButton[i])
                     binding.questionLinearLayout.addView(listOfButton[i])
                 }
-
             }
         }
 
@@ -66,12 +69,12 @@ class WordsQuizFragment : Fragment() {
             var sentence = ""
             binding.answerLinearLayout.forEach {
                 val view = it as TextView
-                sentence += "," + view.text
+                sentence += ","+view.text
             }
-            if (sentence.equals(args.answer)) {
-                Toast.makeText(requireContext(), "correct", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "wrong", Toast.LENGTH_SHORT).show()
+            if(sentence.equals(answer)){
+                Toast.makeText(requireContext(),"correct", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(requireContext(),"wrong", Toast.LENGTH_SHORT).show()
 
             }
         }
