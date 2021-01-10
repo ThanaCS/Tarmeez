@@ -53,9 +53,6 @@ class ContentFragment : Fragment() {
                         binding.contentTitleTextView.text =title
                         binding.contentDescriptionTextView.text = Html.fromHtml(description,0)
 
-                        println("########################################################################### ${it}")
-                        print("")
-
                         if(it.hasChild("quiz")){
                             binding.nextButton.visibility = View.VISIBLE
                             it.child("quiz").children.forEach {data ->
@@ -63,8 +60,6 @@ class ContentFragment : Fragment() {
                                 question = data.child("question").value.toString()
                                 options = data.child("options").value.toString()
                                 type = data.child("quizType").value.toString()
-                                println("###########################################################################type type ${type}")
-
 
                             }
                         }else{

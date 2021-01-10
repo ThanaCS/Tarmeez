@@ -5,19 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.thanaa.tarmeezapp.data.Planet
 import com.thanaa.tarmeezapp.data.Section
-import com.thanaa.tarmeezapp.databinding.FragmentHomeBinding
 import com.thanaa.tarmeezapp.databinding.FragmentSectionsBinding
 import com.thanaa.tarmeezapp.databinding.ItemRowBinding
 
@@ -59,8 +55,6 @@ class SectionsFragment : Fragment() {
                             val section = Section(title,"")
                             sectionsList.add(section)
                         }
-                        println("########################################################################### ${it.child("sectionTitle").value}")
-
                     }
                     adapter.setData(sectionsList)
                 }

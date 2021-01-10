@@ -1,9 +1,5 @@
 package com.thanaa.tarmeezapp
 
-<<<<<<< HEAD
-
-=======
->>>>>>> remotes/origin/Design
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
@@ -34,6 +30,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?):View{
         hideNavigation()
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        aAuth = FirebaseAuth.getInstance()
         emailEditText = binding.userEmail
         passwordEditText = binding.userPassword
         newAccountTextView = binding.newAccount
@@ -53,7 +50,6 @@ class LoginFragment : Fragment() {
       loginButton.setOnClickListener {
             if (validation()){
                 progressDialog.show()
-                aAuth = FirebaseAuth.getInstance()
                 aAuth.signInWithEmailAndPassword(emailEditText.text.toString(),
                     passwordEditText.text.toString()).
                 addOnCompleteListener { task ->
@@ -127,6 +123,15 @@ class LoginFragment : Fragment() {
     }
     private fun isEmailValid(email: CharSequence): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val user = aAuth.currentUser
+        if(user != null ){
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_loginFragment_to_homeFragment)
+        }
     }
 
     private fun hideKeyBoard() {

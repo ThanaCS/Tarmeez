@@ -10,14 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.core.view.forEach
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.thanaa.tarmeezapp.databinding.FragmentDragAndDropQuizBinding
 import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
-import org.jetbrains.anko.support.v4.toast
-import java.util.*
+
 
 class WordsQuizFragment : Fragment() {
 
