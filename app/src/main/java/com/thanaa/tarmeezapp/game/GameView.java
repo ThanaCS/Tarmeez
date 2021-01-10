@@ -2,7 +2,6 @@ package com.thanaa.tarmeezapp.game;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,24 +9,13 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
-import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-import android.view.WindowManager;
-import android.widget.ImageButton;
-
-import androidx.annotation.Dimension;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
-import com.thanaa.tarmeezapp.EndGameFragment;
-import com.thanaa.tarmeezapp.MainActivity;
 import com.thanaa.tarmeezapp.R;
 
 import java.util.ArrayList;
@@ -38,7 +26,6 @@ public class GameView extends SurfaceView implements Runnable {
     private Thread thread;
     private boolean isPlaying, isGameOver = false;
     private int screenX, screenY, score = 0;
-    private MediaPlayer mediaPlayer;
     public static float screenRatioX, screenRatioY;
     private Background background1, background2;
     private Flight flight;
@@ -46,13 +33,11 @@ public class GameView extends SurfaceView implements Runnable {
     private List<Bullet> bullets;
     private Bird[] birds;
     private SoundPool soundPool;
-    private GameFragment fragment;
     private int sound;
     private Paint paint;
 
-    public GameView(GameFragment fragment, int screenX, int screenY) {
-        super(fragment.getContext());
-        this.fragment = fragment;
+    public GameView(Context context, int screenX, int screenY) {
+        super(context);
         this.screenX = screenX;
         this.screenY = screenY;
         Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
@@ -76,7 +61,7 @@ public class GameView extends SurfaceView implements Runnable {
         } else
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 
-        sound = soundPool.load(fragment.getContext(), R.raw.shoot, 1);
+        //sound = soundPool.load(fragment.getContext(), R.raw.shoot, 1);
 
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
@@ -111,8 +96,6 @@ public class GameView extends SurfaceView implements Runnable {
             update();
             draw();
             sleep();
-
-
 
         }
 
@@ -181,7 +164,6 @@ public class GameView extends SurfaceView implements Runnable {
 
                 if (!bird.wasShot) {
                     isGameOver = true;
-
                     return;
                 }
 
@@ -190,10 +172,13 @@ public class GameView extends SurfaceView implements Runnable {
 
                 if (bird.speed < 10 * screenRatioX)
                     bird.speed = (int) (10 * screenRatioX);
-
+//
+//                bird.x = screenX;
+//                bird.y = random.nextInt(screenY - bird.height);
                 bird.x = screenX;
                 bird.y = random.nextInt(1000);
-
+//
+//                bird.wasShot = false;
             }
 
             if (Rect.intersects(bird.getCollisionShape(), flight.getCollisionShape())) {
@@ -204,6 +189,8 @@ public class GameView extends SurfaceView implements Runnable {
         }
 
         }
+
+
 
     private void sleep() {
 
@@ -234,7 +221,7 @@ public class GameView extends SurfaceView implements Runnable {
                 canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
                 canvas.drawText("انتهت اللعبة", (canvas.getWidth()/2)-200, canvas.getHeight()-200, paint);
                 getHolder().unlockCanvasAndPost(canvas);
-                waitBeforeExiting();
+                //waitBeforeExiting();
                 return;
             }
             for (Bird bird : birds)
@@ -288,16 +275,14 @@ public class GameView extends SurfaceView implements Runnable {
         bullets.add(bullet);
     }
 
-    private void waitBeforeExiting() {
-        try {
-        Thread.sleep(2500);
-            NavController navController = Navigation.findNavController(fragment.getActivity(), R.id.fragment_container);
-            navController.navigate(R.id.endGameFraagment);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-
+//    private void waitBeforeExiting() {
+//        try {
+//        Thread.sleep(2500);
+//            NavController navController = Navigation.findNavController(fragment.getActivity(), R.id.fragment_container);
+//            navController.navigate(R.id.endGameFraagment);
+//
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

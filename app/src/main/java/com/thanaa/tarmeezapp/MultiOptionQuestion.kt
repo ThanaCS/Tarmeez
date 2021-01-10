@@ -1,15 +1,15 @@
 package com.thanaa.tarmeezapp
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -22,36 +22,32 @@ import org.jetbrains.anko.support.v4.toast
 
 
 class MultiOptionQuestion : Fragment() {
-    private lateinit var questionNumberTextView:TextView
     private lateinit var questionTextView:TextView
     private lateinit var radioGroup: RadioGroup
     private lateinit var optionOneRadioButton: RadioButton
     private lateinit var optionTwoRadioButton: RadioButton
     private lateinit var optionThreeRadioButton: RadioButton
-    private lateinit var nextButton: ImageView
-    private lateinit var doneButton:ImageView
+    private lateinit var moveToSectionsButton:TextView
+    private lateinit var scoresTextView:TextView
     private var currentIndex =0
     private val args:MultiOptionQuestionArgs by navArgs()
     private var questions:ArrayList<String> = ArrayList()
     private var options:ArrayList<String> = ArrayList()
     private var answers:ArrayList<String> = ArrayList()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    private lateinit var mediaPlayer: MediaPlayer
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
 
-        val binding  = FragmentMultiOptionQuestionBinding.inflate(
-            inflater,
-            container, false
-        )
-        questionNumberTextView = binding.questionNumber
+        val binding  = FragmentMultiOptionQuestionBinding.inflate(inflater, container,
+            false)
         questionTextView = binding.question
         radioGroup = binding.answer
-        nextButton = binding.nextButton
-        doneButton = binding.doneButton
         optionOneRadioButton =   binding.optionOne
         optionTwoRadioButton =   binding.optionTwo
         optionThreeRadioButton =   binding.optionThree
-
+        moveToSectionsButton = binding.moveToSections
+        scoresTextView = binding.score
+        setScores()
         FirebaseDatabase.getInstance().reference
             .child("Planet")
             .child(args.planetId)
@@ -68,13 +64,8 @@ class MultiOptionQuestion : Fragment() {
                         options.add(it.child("options").value.toString())
                         answers.add(it.child("answer").value.toString())
                     }
-                    val size = questions.size
-                    questionNumberTextView.text = getString(
-                        R.string.questions_number,
-                        size, currentIndex + 1
-                    )
+
                     questionTextView.text = Html.fromHtml(questions[currentIndex],0)
-                    toast(answers[currentIndex])
 
                     val answerOptions = options[currentIndex].split(",")
                     optionOneRadioButton.text = answerOptions[0]
@@ -86,27 +77,30 @@ class MultiOptionQuestion : Fragment() {
                             .checkedRadioButtonId)
                         val answer = selectedAnswer.text
                         if (answer.trim() == answers[currentIndex].trim()) {
-                            toast("correct")
+                            controlSound(R.raw.correct_sound_effect)
+                            updateScores()
                             disableOrEnableRGButton(radioGroup, false)
                             selectedAnswer.background = resources
                                 .getDrawable(R.drawable.correct_style)
                         }else{
                             disableOrEnableRGButton(radioGroup, false)
+                            controlSound(R.raw.incorrect_sound_effect)
                             selectedAnswer.background = resources
                                 .getDrawable(R.drawable.incorrect_style)
+                            moveToSectionsButton.text = "مراجعة المحتوى"
+                            moveToSectionsButton.setOnClickListener {
+                                Navigation.findNavController(binding.root).popBackStack()
+                            }
                         }
                     }
 
-                    nextButton.setOnClickListener {
-                        moveToNext()
+                    moveToSectionsButton.setOnClickListener {
+                        val action = MultiOptionQuestionDirections.
+                        MultiOptionQuestionToSectionsFragment(args.planetId)
+                        Navigation.findNavController(binding.root).
+                        navigate(action)
                     }
-                    doneButton.setOnClickListener {
-                        Navigation.findNavController(binding.root).popBackStack()
-                    }
-                    checkIfUserFinish()
-
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
@@ -118,26 +112,57 @@ class MultiOptionQuestion : Fragment() {
         }
     }
 
-    fun moveToNext(){
-        currentIndex += 1
-        if(currentIndex < questions.size){
-            questionTextView.text = questions[currentIndex]
-            val answerOptions = options[currentIndex].split(",")
-            optionOneRadioButton.text = answerOptions[0]
-            optionTwoRadioButton.text = answerOptions[1]
-            optionThreeRadioButton.text = answerOptions[2]
-            checkIfUserFinish()
+
+    private fun controlSound(soundId:Int){
+        mediaPlayer = MediaPlayer.create(requireContext(), soundId)
+        mediaPlayer.start()
+
+    }
+
+    private fun updateScores(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val email = sharedPref?.getString("email","email")
+        if (email != null){
+            FirebaseDatabase.getInstance().reference
+                .child("User").orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val score = it.child("score").value.toString().toInt()
+                            val userId = it.child("userId").value.toString()
+                            val updatedScores = score + 20
+                            FirebaseDatabase.getInstance().reference.child("User")
+                                .child(userId)
+                                .child("score").setValue(updatedScores)
+                            FirebaseDatabase.getInstance().reference
+                            scoresTextView.text = updatedScores.toString()
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
         }
     }
 
-    fun checkIfUserFinish(){
-        if (currentIndex + 1 == questions.size) {
-            nextButton.visibility = View.GONE
-            doneButton.visibility = View.VISIBLE
-        } else {
-            nextButton.visibility = View.VISIBLE
-            doneButton.visibility = View.GONE
+    private fun setScores(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val email = sharedPref?.getString("email","email")
+        if (email != null){
+            FirebaseDatabase.getInstance().reference
+                .child("User").orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val score = it.child("score").value.toString()
+                            scoresTextView.text = score
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
         }
     }
-
 }

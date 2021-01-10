@@ -9,10 +9,6 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.thanaa.tarmeezapp.data.Content
-import com.thanaa.tarmeezapp.data.Planet
-import com.thanaa.tarmeezapp.data.Quiz
-import com.thanaa.tarmeezapp.data.Section
 
 class MainActivity : AppCompatActivity() {
     lateinit var fab: FloatingActionButton
@@ -28,9 +24,15 @@ class MainActivity : AppCompatActivity() {
         val navController: NavController =
             Navigation.findNavController(this, R.id.fragment_container)
         bottomNavigationView.background = null
+
         fab.setOnClickListener {
             navController.navigate(R.id.homeFragment)
         }
+
+        fab.setOnClickListener {
+            navController.navigate(R.id.profileFragment)
+        }
+
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
         findNavController(R.id.fragment_container)
 

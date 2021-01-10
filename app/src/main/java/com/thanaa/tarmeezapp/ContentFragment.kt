@@ -53,9 +53,6 @@ class ContentFragment : Fragment() {
                         binding.contentTitleTextView.text =title
                         binding.contentDescriptionTextView.text = Html.fromHtml(description,0)
 
-                        println("########################################################################### ${it}")
-                        print("")
-
                         if(it.hasChild("quiz")){
                             binding.nextButton.visibility = View.VISIBLE
                             it.child("quiz").children.forEach {data ->
@@ -63,8 +60,6 @@ class ContentFragment : Fragment() {
                                 question = data.child("question").value.toString()
                                 options = data.child("options").value.toString()
                                 type = data.child("quizType").value.toString()
-                                println("###########################################################################type type ${type}")
-
 
                             }
                         }else{
@@ -77,11 +72,15 @@ class ContentFragment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             if(type == "DragAndDrop"){
-                val action = ContentFragmentDirections.actionContentFragmentToDragAndDropQuizFragment2(question, answer, options)
+                val action = ContentFragmentDirections
+                    .actionContentFragmentToDragAndDropQuizFragment2(question, answer, options,
+                        args.planetId.toString())
                 findNavController().navigate(action)
             }
             if(type == "WordOrder"){
-                val action = ContentFragmentDirections.actionContentFragmentToWordsQuizFragment(question, answer, options)
+                val action = ContentFragmentDirections.
+                actionContentFragmentToWordsQuizFragment(question, answer,
+                    options, args.planetId.toString())
                 findNavController().navigate(action)
             }
             if(type == "MOQ"){
@@ -93,7 +92,17 @@ class ContentFragment : Fragment() {
             }
         }
 
+        showNavigation()
         return binding.root
+    }
+
+    private fun showNavigation() {
+        val bottomNavigationView = (activity as MainActivity).bottomNavigationView
+        val fab = (activity as MainActivity).fab
+        val bottomAppBar = (activity as MainActivity).bottomAppBar
+        bottomNavigationView.visibility = View.VISIBLE
+        bottomAppBar.visibility = View.VISIBLE
+        fab.visibility = View.VISIBLE
     }
 
 }

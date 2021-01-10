@@ -12,8 +12,7 @@
         app:lottie_loop="true"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp" />
+        android:layout_marginEnd="2dp" />
 
     <EditText
         android:id="@+id/user_email"
@@ -21,15 +20,14 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:layout_marginTop="50dp"
-        android:drawableRight="@drawable/ic_baseline_email_24"
+        android:layout_marginTop="40dp"
         android:textSize="14sp"
         android:background="@drawable/edittext_style"
-        android:inputType="textEmailAddress"
-        android:hint="@string/enter_email"
         android:singleLine="true"
+        android:gravity="right"
         android:nextFocusDown="@id/user_password"
-        android:drawableEnd="@drawable/ic_baseline_email_24" />
+        android:drawableEnd="@drawable/ic_baseline_email_24"
+        tools:ignore="RtlHardcoded" />
     <EditText
         android:id="@+id/user_password"
         android:layout_width="250dp"
@@ -37,13 +35,13 @@
         android:layout_gravity="center"
         android:padding="10dp"
         android:textSize="14sp"
-        android:layout_marginTop="97dp"
+        android:layout_marginTop="87dp"
         android:drawableRight="@drawable/ic_baseline_lock_24"
         android:background="@drawable/edittext_style"
         android:inputType="textPassword"
         android:gravity="right"
-        android:hint="@string/enter_password"
         android:drawableEnd="@drawable/ic_baseline_lock_24"
+        android:nextFocusDown="@id/password_confirmation"
         android:singleLine="true"
         tools:ignore="RtlHardcoded" />
     <EditText
@@ -52,36 +50,25 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="14sp"
-        android:layout_marginTop="143dp"
-        android:drawableRight="@drawable/ic_baseline_lock_24"
+        android:layout_marginTop="133dp"
         android:background="@drawable/edittext_style"
         android:inputType="textPassword"
         android:gravity="right"
         android:hint="@string/password_confirmation"
-        android:drawableEnd="@drawable/ic_baseline_lock_24"
         android:singleLine="true"
+        android:drawableEnd="@drawable/ic_baseline_lock_24"
+        android:textSize="14sp"
         tools:ignore="RtlHardcoded" />
-    <TextView
-        android:id="@+id/error_message"
-        android:textColor="@color/red"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:textSize="13sp"
-        android:layout_marginTop="160dp"
-        android:visibility="gone"
-        android:text="@string/error_message"
-        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="195dp"
+        android:layout_marginTop="190dp"
         android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="15sp"
         android:background="@drawable/button_style"
         android:text="@string/create_account"/>
     <TextView
@@ -91,9 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="11sp"
         android:layout_marginTop="235dp"
         android:text="@string/has_account"
         tools:ignore="SmallSp" />
-
 </FrameLayout>

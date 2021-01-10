@@ -8,19 +8,6 @@
     <item
         android:id="@+id/galleryFragment"
         android:icon="@drawable/ic_dashboard"
-        android:title="Games" />
-    <item
-        android:id="@+id/placeholder"
-        android:title="      " />
-
-    <item
-        android:id="@+id/placeholder2"
-        android:icon="@drawable/ic_assistant"
-        android:title="holder" />
-
-    <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_settings"
-        android:title="Settings" />
+        android:title="Dashboard" />
 
 </menu>

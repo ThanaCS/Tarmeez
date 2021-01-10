@@ -4,20 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".WordsQuizFragment">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
-        android:visibility="gone"
-        android:src="@drawable/question_image"/>
+    tools:context=".MultiOptionQuestion">
+
     <com.airbnb.lottie.LottieAnimationView
         app:lottie_autoPlay="true"
         app:lottie_fileName="questions_image.json"
         app:lottie_loop="true"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:layout_marginEnd="2dp" />
+        android:layout_height="350dp" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,58 +35,61 @@
             android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="100"
+            android:text="100"
             android:textSize="15sp"
             android:textColor="@color/dark_blue"
             android:textStyle="bold" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="500dp"
-        android:layout_height="150dp"
-        android:background="@drawable/shadow_layout"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:padding="15dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="210dp">
+        android:orientation="vertical"
+        android:background="@drawable/shadow_layout"
+        android:layout_marginTop="170dp">
 
         <TextView
-            android:id="@+id/question_text_view"
+            android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="18sp"
+            android:layout_marginTop="17dp"
             android:textColor="@color/white"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            tools:text= "قيمتها تكون ثابته ولا تستطيع تغييرها؟"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/answer_linear_layout"
-            android:divider="@drawable/empty_tall_divider"
-            android:orientation="horizontal"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:showDividers="middle">
+            android:paddingBottom="20dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/question_linear_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/empty_tall_divider"
+                android:orientation="vertical"
+                android:layout_marginEnd="40dp"
+                android:showDividers="middle"
+                android:gravity="center">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/answer_linear_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/empty_tall_divider"
+                android:orientation="vertical"
+                android:layout_marginStart="40dp"
+                android:showDividers="middle"
+                android:gravity="center">
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/question_linear_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="200dp"
-        android:divider="@drawable/empty_tall_divider"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:showDividers="middle" />
 
     <TextView
         android:id="@+id/move_to_sections"

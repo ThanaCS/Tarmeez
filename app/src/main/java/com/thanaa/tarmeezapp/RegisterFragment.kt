@@ -1,21 +1,25 @@
 package com.thanaa.tarmeezapp
 
-import android.app.AlertDialog
+
+import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import androidx.core.view.updateMarginsRelative
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.thanaa.tarmeezapp.data.User
 import com.thanaa.tarmeezapp.databinding.FragmentRegisterBinding
+import org.jetbrains.anko.support.v4.toast
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -27,20 +31,24 @@ class RegisterFragment : Fragment() {
     private lateinit var loginTextView: TextView
     private lateinit var registerButton: Button
     private lateinit var progressDialog:CustomProgressDialog
-    private lateinit var alertDialog: AlertDialog
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    private lateinit var preferencesProvider: PreferencesProvider
+    val KEY_USER = "User"
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View{
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+
+        preferencesProvider = PreferencesProvider(requireContext())
+
         emailEditText = binding.userEmail
         passwordEditText = binding.userPassword
         passwordConfirmEditText = binding.passwordConfirmation
         registerButton = binding.register
         loginTextView = binding.hasAccount
+        emailEditText.hint = getString(R.string.enter_email, "")
+        passwordEditText.hint = getString(R.string.enter_password, "")
         progressDialog = CustomProgressDialog(requireContext())
-        alertDialog = AlertDialog.Builder(requireContext()).create()
-        alertDialog.setMessage(getString(R.string.already_exist))
 
         registerButton.setOnClickListener {
             if(validation()){
@@ -48,29 +56,67 @@ class RegisterFragment : Fragment() {
                 aAuth = FirebaseAuth.getInstance()
                 aAuth.createUserWithEmailAndPassword(
                     emailEditText.text.toString(),
-                    passwordEditText.text.toString()
-                ).
-                addOnCompleteListener(object : OnCompleteListener<AuthResult> {
-                    override fun onComplete(task: Task<AuthResult>) {
-                        if (task.isSuccessful) {
-                            progressDialog.dismiss()
-                            Navigation.findNavController(binding.root)
-                                .navigate(R.id.RegisterFragmentToHomeFragment)
-                        } else {
-                            progressDialog.dismiss()
-                            alertDialog.show()
+                    passwordEditText.text.toString()).
+                addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        progressDialog.dismiss()
+                        val email = emailEditText.text.toString()
+                        val ref = FirebaseDatabase.getInstance().getReference("User")
+                        val userId = ref.push().key
+                        if (userId != null) {
+                            val user = User(userId,email.split("@")[0],"عمرك","جنسك",email,0,"")
+                            ref.child(userId).setValue(user)
+                            preferencesProvider.putUser(KEY_USER, user)
                         }
+                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                        if (sharedPref != null) {
+                            with (sharedPref.edit()) {
+                                putString("email", email)
+                                apply()
+                            }
+                        }
+                        Navigation.findNavController(binding.root)
+                            .navigate(R.id.RegisterFragmentToHomeFragment)
+                    } else {
+                        progressDialog.dismiss()
+                        progressDialog.dismiss()
+                        val snackBar = Snackbar.make(binding.root,
+                            getString(R.string.already_exist, " "), 3000)
+                        val snackBarText: TextView = snackBar.view.
+                        findViewById(com.google.android.material.R.id.snackbar_text)
+                        snackBarText.textSize = 16f
+                        val layoutParams = FrameLayout.LayoutParams(LinearLayout
+                            .LayoutParams.WRAP_CONTENT, LinearLayout.
+                        LayoutParams.WRAP_CONTENT, Gravity.RIGHT )
+                        layoutParams.updateMarginsRelative(0, 1800,
+                            0, 0)
+                        snackBarText.setCompoundDrawablesWithIntrinsicBounds(
+                            0, 0,
+                            R.drawable.ic_baseline_error_outline_24, 0)
+                        snackBar.view.setPadding(400, 0, 0, 0)
+                        layoutParams.gravity = Gravity.CENTER
+                        snackBar.view.layoutParams = layoutParams
+                        snackBar.setBackgroundTint(resources.getColor(R.color.dark_gray))
+                        snackBar.setActionTextColor(resources.getColor(R.color.white))
+                        snackBar.show()
                     }
-                })
+                }
             }
         }
 
+        binding.register.setOnFocusChangeListener { view, b ->
+            hideKeyBoard()
+        }
+        passwordConfirmEditText.nextFocusDownId = R.id.register
+
         loginTextView.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.RegisterFragmentToLoginFragment)
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.RegisterFragmentToLoginFragment)
         }
         return binding.root
     }
 
+    //input validation function
     private fun validation():Boolean{
         var result = true
         if(emailEditText.text.isBlank()){
@@ -92,14 +138,28 @@ class RegisterFragment : Fragment() {
         if(passwordEditText.text.toString() != passwordConfirmEditText.text.toString()){
             passwordConfirmEditText.error = getString(R.string.un_matched_password)
             result = false
-        }else if(passwordEditText.text.toString().length<6){
+        }else if( passwordEditText.text.toString().length < 6 ){
             passwordConfirmEditText.error = getString(R.string.password_more_than_six)
             result = false
         }
         return result
     }
 
-    private fun isEmailValid(email: CharSequence?): Boolean {
+    private fun isEmailValid(email: CharSequence): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun hideKeyBoard() {
+        activity?.let {
+            val inputManager =
+                it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val view = it.currentFocus
+            if (view != null) {
+                inputManager.hideSoftInputFromWindow(
+                    view.windowToken,
+                    InputMethodManager.HIDE_NOT_ALWAYS
+                )
+            }
+        }
     }
 }
