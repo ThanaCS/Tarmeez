@@ -97,8 +97,7 @@ class RegisterFragment : Fragment() {
         }
 
         binding.register.setOnFocusChangeListener { view, b ->
-            //hideKeyBoard()
-            toast("hi")
+            hideKeyBoard()
         }
         passwordConfirmEditText.nextFocusDownId = R.id.register
 
