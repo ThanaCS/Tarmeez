@@ -11,14 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.forEach
-import androidx.navigation.fragment.navArgs
 import com.thanaa.tarmeezapp.databinding.FragmentFinalGameBinding
-import com.thanaa.tarmeezapp.databinding.FragmentHomeBinding
-import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
-import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.wrapContent
+
 
 class FinalGameFragment : Fragment() {
     private var _binding: FragmentFinalGameBinding? = null
