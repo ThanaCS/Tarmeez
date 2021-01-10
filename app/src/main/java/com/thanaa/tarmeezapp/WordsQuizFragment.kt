@@ -14,6 +14,10 @@ import android.widget.TextView
 import androidx.core.view.forEach
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
 
 
