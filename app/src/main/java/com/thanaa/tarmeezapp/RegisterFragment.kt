@@ -14,12 +14,10 @@ import androidx.core.view.updateMarginsRelative
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.thanaa.tarmeezapp.data.User
 import com.thanaa.tarmeezapp.databinding.FragmentRegisterBinding
-import org.jetbrains.anko.support.v4.toast
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -67,13 +65,6 @@ class RegisterFragment : Fragment() {
                             val user = User(userId,email.split("@")[0],"عمرك","جنسك",email,0,"")
                             ref.child(userId).setValue(user)
                             preferencesProvider.putUser(KEY_USER, user)
-                        }
-                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-                        if (sharedPref != null) {
-                            with (sharedPref.edit()) {
-                                putString("email", email)
-                                apply()
-                            }
                         }
                         Navigation.findNavController(binding.root)
                             .navigate(R.id.RegisterFragmentToHomeFragment)
