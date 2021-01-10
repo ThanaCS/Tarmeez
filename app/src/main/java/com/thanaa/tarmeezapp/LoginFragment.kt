@@ -51,29 +51,7 @@ class LoginFragment : Fragment() {
         }
 
         forgotPassword.setOnClickListener {
-//            val builder = AlertDialog.Builder(requireContext())
-//            val view = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
-//            val userName = view.findViewById<EditText>(R.id.reset_password)
-//            builder.setView(view)
-//            builder.setPositiveButton("استعادة كلمة المرور", {_, _->
-//                val email = userName.text.toString().trim()
-//
-//                aAuth!!.sendPasswordResetEmail(email)
-//                    .addOnCompleteListener { task ->
-//                        if (task.isSuccessful) {
-//                            Toast.makeText(requireContext(), "تم إرسال البريد الإلكتروني", Toast.LENGTH_SHORT).show()
-//                        } else {
-//                            Toast.makeText(requireContext(), "فضلاً أدخل البريد الإلكتروني", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//            })
-//
-//            builder.setNegativeButton("إغلاق", {_, _->})
-//            builder.show()
-
-
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
-
         }
 
       loginButton.setOnFocusChangeListener { _, _ ->

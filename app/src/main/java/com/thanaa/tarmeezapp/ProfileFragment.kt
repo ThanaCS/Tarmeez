@@ -12,6 +12,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat.setBackgroundTintList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -21,6 +23,7 @@ import com.thanaa.tarmeezapp.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
+    private lateinit var aAuth:FirebaseAuth
     private lateinit var preferencesProvider: PreferencesProvider
     val KEY_USER = "User"
     private lateinit var key: String
@@ -89,6 +92,12 @@ class ProfileFragment : Fragment() {
                 }
 
             })
+
+        binding.logoutIcon.setOnClickListener {
+            aAuth = FirebaseAuth.getInstance()
+            aAuth.signOut()
+            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+        }
 
         binding.editUsername.setOnClickListener {
             binding.usernameEditText.isEnabled = binding.usernameEditText.isEnabled != true
