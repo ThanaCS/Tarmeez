@@ -1,6 +1,8 @@
 package com.thanaa.tarmeezapp
 
+import android.animation.Animator
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -13,19 +15,22 @@ import android.widget.Toast
 import androidx.core.view.forEach
 import androidx.navigation.fragment.navArgs
 import com.thanaa.tarmeezapp.databinding.FragmentFinalGameBinding
+import com.thanaa.tarmeezapp.databinding.FragmentHomeBinding
 import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.wrapContent
 
 class FinalGameFragment : Fragment() {
-
+    private var _binding: FragmentFinalGameBinding? = null
+    private val binding get() = _binding!!
     private lateinit var questionTextView: TextView
     private val listOfButton = mutableListOf<TextView>()
-
+    private lateinit var mediaPlayer: MediaPlayer
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentFinalGameBinding.inflate(inflater, container, false)
+        _binding = FragmentFinalGameBinding.inflate(inflater, container, false)
 
         val options = "},if(alien.isClose()),{,score++,shoot()"
         val answer = ",if(alien.isClose()),{,shoot(),score++,}"
@@ -72,15 +77,41 @@ class FinalGameFragment : Fragment() {
                 sentence += ","+view.text
             }
             if(sentence.equals(answer)){
-                Toast.makeText(requireContext(),"correct", Toast.LENGTH_SHORT).show()
+                controlSound(R.raw.correct_sound_effect)
+                popUpCoin()
             }else{
-                Toast.makeText(requireContext(),"wrong", Toast.LENGTH_SHORT).show()
+                controlSound(R.raw.incorrect_sound_effect)
 
             }
         }
 
         return binding.root
     }
+    private fun controlSound(soundId:Int) {
+        mediaPlayer = MediaPlayer.create(requireContext(), soundId)
+        mediaPlayer.start()
+    }
+    private fun popUpCoin(){
+        binding.popupCoin.visibility = View.VISIBLE
+        binding.popupCoin.playAnimation()
+        binding.popupCoin.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+            }
 
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.popupCoin.visibility = View.GONE
+
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+
+        })
+
+    }
 
 }
