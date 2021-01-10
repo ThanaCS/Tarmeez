@@ -14,6 +14,7 @@ import androidx.core.view.updateMarginsRelative
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.thanaa.tarmeezapp.data.User
@@ -31,9 +32,15 @@ class RegisterFragment : Fragment() {
     private lateinit var registerButton: Button
     private lateinit var progressDialog:CustomProgressDialog
 
+    private lateinit var preferencesProvider: PreferencesProvider
+    val KEY_USER = "User"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View{
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+
+        preferencesProvider = PreferencesProvider(requireContext())
+
         emailEditText = binding.userEmail
         passwordEditText = binding.userPassword
         passwordConfirmEditText = binding.passwordConfirmation
@@ -57,8 +64,9 @@ class RegisterFragment : Fragment() {
                         val ref = FirebaseDatabase.getInstance().getReference("User")
                         val userId = ref.push().key
                         if (userId != null) {
-                            val user = User(userId,email.split("@")[0],"Undefined","Undefined",email,"","")
+                            val user = User(userId,email.split("@")[0],"عمرك","جنسك",email)
                             ref.child(userId).setValue(user)
+                            preferencesProvider.putUser(KEY_USER, user)
                         }
                         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
                         if (sharedPref != null) {

@@ -55,7 +55,9 @@
         android:textSize="15sp"
         android:background="@drawable/button_style"
         android:text="@string/login"/>
+
     <TextView
+        android:id="@+id/forgot_password"
         android:textColor="@color/pink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

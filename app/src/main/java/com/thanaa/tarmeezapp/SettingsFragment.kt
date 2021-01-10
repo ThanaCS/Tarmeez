@@ -2,6 +2,7 @@ package com.thanaa.tarmeezapp
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,43 +55,3 @@ class SettingsFragment : Fragment() {
 
                 })
         }
-
-        binding.editUsername.setOnClickListener {
-            binding.usernameEditText.isEnabled = binding.usernameEditText.isEnabled != true
-        }
-
-        binding.editAge.setOnClickListener {
-            binding.ageEditText.isEnabled = binding.ageEditText.isEnabled != true
-        }
-
-        binding.girlImageView.setOnClickListener {
-            binding.girlImageView.borderWidth = 10
-            binding.boyImageView.borderWidth = 0
-            binding.genderTextView.text = "أنثى"
-        }
-
-        binding.boyImageView.setOnClickListener {
-            binding.girlImageView.borderWidth = 0
-            binding.boyImageView.borderWidth = 10
-            binding.genderTextView.text = "ذكر"
-
-        }
-
-        binding.saveButton.setOnClickListener {
-
-            val hashMap = mutableMapOf<String,Any>()
-            hashMap["age"] = binding.ageEditText.text.toString()
-            hashMap["username"] = binding.usernameEditText.text.toString()
-            hashMap["gender"] = binding.genderTextView.text.toString()
-
-            FirebaseDatabase.getInstance().reference
-                .child("User").child(key).updateChildren(hashMap).addOnSuccessListener {
-                    Toast.makeText(requireContext(),"Success", Toast.LENGTH_SHORT).show()
-                    binding.usernameEditText.isEnabled = false
-                    binding.ageEditText.isEnabled = false
-                }
-        }
-
-        return binding.root
-    }
-}
