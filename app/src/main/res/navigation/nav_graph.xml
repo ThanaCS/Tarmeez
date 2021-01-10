@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_settingsFragment2"
-            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -202,4 +199,10 @@
             android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/finalGameFragment"
+        android:name="com.thanaa.tarmeezapp.FinalGameFragment"
+        android:label="fragment_final_game"
+        tools:layout="@layout/fragment_final_game" />
 </navigation>
