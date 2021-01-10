@@ -26,7 +26,7 @@ class GameFragment : Fragment() {
         var point = Point()
         (context as Activity?)!!.windowManager
             .defaultDisplay.getSize(point)
-        gameView = GameView(requireContext(),point.x,point.y)
+        gameView = GameView(this,point.x,point.y)
 
         return gameView
     }
