@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+import android.animation.Animator
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Context
@@ -87,9 +88,8 @@ class DragAndDropQuizFragment : Fragment() {
             questionButton.text = list[i]
             binding.questionLinearLayout.addView(questionButton)
             questionButton.textColor = resources.getColor(R.color.white)
-            questionButton.textSize = 10F
-            questionButton.background = resources.getDrawable(R.drawable.yellow_button_style)
-            questionButton.setBackgroundColor(resources.getColor(R.color.pink_1))
+            questionButton.textSize = 13F
+            questionButton.background = resources.getDrawable(R.drawable.word_layout)
             questionButton.setPadding(0,0,0,5)
             questionButton.setOnLongClickListener {
                 setDragListener(map,list[i])
@@ -111,9 +111,9 @@ class DragAndDropQuizFragment : Fragment() {
             answerButton.layoutParams = ViewGroup.LayoutParams(
                 200, 100)
             answerButton.text = i.value
-            answerButton.textSize = 10F
+            answerButton.textSize = 13F
             answerButton.textColor = resources.getColor(R.color.white)
-            answerButton.setBackgroundColor(resources.getColor(R.color.cyan))
+            answerButton.background = resources.getDrawable(R.drawable.word_layout2)
             answerButton.setPadding(0,0,0,5)
             binding.answerLinearLayout.addView(answerButton)
         }
@@ -149,7 +149,7 @@ class DragAndDropQuizFragment : Fragment() {
                 true
             }
             DragEvent.ACTION_DROP -> {
-                view.setBackgroundColor(resources.getColor(R.color.dark_green))
+                view.background = resources.getDrawable(R.drawable.word_layout1)
                 view.setPadding(0,0,0,5)
                 view.invalidate()
                 val v = event.localState as View
@@ -167,6 +167,7 @@ class DragAndDropQuizFragment : Fragment() {
                     binding.answerLinearLayout.layoutParams = layoutParams
                     controlSound(R.raw.correct_sound_effect)
                     updateScores()
+                    popUpCoin()
                 }
                 true
 
@@ -248,5 +249,28 @@ class DragAndDropQuizFragment : Fragment() {
         bottomNavigationView.visibility = View.VISIBLE
         bottomAppBar.visibility = View.VISIBLE
         fab.visibility = View.VISIBLE
+    }
+
+    private fun popUpCoin(){
+        binding.popupCoin.visibility = View.VISIBLE
+        binding.popupCoin.playAnimation()
+        binding.popupCoin.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.popupCoin.visibility = View.GONE
+
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+
+        })
+
     }
 }
