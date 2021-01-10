@@ -75,6 +75,7 @@ class DragAndDropQuizFragment : Fragment() {
             questionButton.text = list[i]
             binding.questionLinearLayout.addView(questionButton)
             questionButton.textColor = resources.getColor(R.color.white)
+            questionButton.textSize = 10F
             questionButton.background = resources.getDrawable(R.drawable.yellow_button_style)
             questionButton.setBackgroundColor(resources.getColor(R.color.pink_1))
             questionButton.setPadding(0,0,0,5)
@@ -98,6 +99,7 @@ class DragAndDropQuizFragment : Fragment() {
             answerButton.layoutParams = ViewGroup.LayoutParams(
                 200, 100)
             answerButton.text = i.value
+            answerButton.textSize = 10F
             answerButton.textColor = resources.getColor(R.color.white)
             answerButton.setBackgroundColor(resources.getColor(R.color.cyan))
             answerButton.setPadding(0,0,0,5)
