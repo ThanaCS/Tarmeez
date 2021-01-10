@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -20,26 +21,12 @@ class HomeFragment : Fragment() {
     private var user: FirebaseUser
     private val planetList = mutableListOf<LottieAnimationView>()
 
+    private lateinit var preferencesProvider: PreferencesProvider
+    val KEY_USER = "User"
+
     init {
         aAuth = FirebaseAuth.getInstance()
         user = aAuth.currentUser!!
-        val email = user.email
-        FirebaseDatabase.getInstance().reference
-            .child("User").orderByChild("email").equalTo(email)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach {
-                        val username = it.child("username").value.toString()
-                        binding.username.text = username
-                    }
-
-                }
-
-            })
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,8 +36,20 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        //val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        //val email = sharedPref?.getString("email","email")
+
+        preferencesProvider = PreferencesProvider(requireContext())
+        val user = preferencesProvider.getUser(KEY_USER)
+        binding.username.setText(user.username)
+        binding.score.setText(user.score.toString())
+
+        val gender = user.gender
+
+        if(gender.equals("ذكر")){
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.boy_avatar))
+        }else if(gender.equals("أنثى")){
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.girl_avatar))
+        }
+
         planetList.addAll(listOf(binding.variablesEarth,binding.relationsConditionsMars))
 
         checkFlag()

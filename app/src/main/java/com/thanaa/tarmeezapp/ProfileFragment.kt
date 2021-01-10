@@ -42,6 +42,9 @@ class ProfileFragment : Fragment() {
         email = user.email
 
         binding.emailEditText.setText(email)
+        binding.score.setText(user.score.toString())
+
+        println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ${user.score}")
 
         val gender = user.gender
 

@@ -21,8 +21,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.thanaa.tarmeezapp.data.User
 import com.thanaa.tarmeezapp.databinding.FragmentDragAndDropQuizBinding
-import com.thanaa.tarmeezapp.databinding.FragmentDragAndDropTestBinding
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.textColor
 import java.util.*
@@ -30,7 +30,7 @@ import java.util.*
 class DragAndDropQuizFragment : Fragment() {
     private val args by navArgs<DragAndDropQuizFragmentArgs>()
 
-    private lateinit var binding : FragmentDragAndDropTestBinding
+    private lateinit var binding : FragmentDragAndDropQuizBinding
     private lateinit var questionButton: Button
     private lateinit var answerButton: Button
     private lateinit var moveToSection:TextView
@@ -38,28 +38,40 @@ class DragAndDropQuizFragment : Fragment() {
     private lateinit var scoresTextView:TextView
     private var numOfQuestions = 0
     private var numOfAnswers =  0
+
+    private lateinit var preferencesProvider: PreferencesProvider
+    val KEY_USER = "User"
+
+    private lateinit var user: User
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDragAndDropTestBinding.inflate(inflater, container, false)
+        binding = FragmentDragAndDropQuizBinding.inflate(inflater, container, false)
         binding.question.text = args.question
         moveToSection = binding.moveToSections
         scoresTextView = binding.score
+
+        preferencesProvider = PreferencesProvider(requireContext())
+        user = preferencesProvider.getUser(KEY_USER)
+
+        binding.username.setText(user.username)
+
+        val gender = user.gender
+
+        if(gender.equals("ذكر")){
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.boy_avatar))
+        }else if(gender.equals("أنثى")){
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.girl_avatar))
+        }
+
         setScores()
         moveToSection.setOnClickListener {
             val action = DragAndDropQuizFragmentDirections.
             DragAndDropQuizFragmentToSectionsFragment(args.planetId)
             Navigation.findNavController(binding.root).navigate(action)
         }
-
-//        val text = "22,'ك',\"ازرق\",8.4"
-//        val answer = "String=\"ازرق\",Double=8.4,Char='ك',Int=22"
-
-//        val text = "==,>,!="
-//        val answer = "  7                            5  *>,  9                            9  *==, "ساره"               "لمياء" *!="
-
-//        7,_______,5*9,_______,9*"ساره",_______,"لمياء"
 
         val map = args.answer.split(",").associate {
             val (left, right) = it.split("*")
@@ -190,6 +202,8 @@ class DragAndDropQuizFragment : Fragment() {
                             val score = it.child("score").value.toString().toInt()
                             val userId = it.child("userId").value.toString()
                             val updatedScores = score + 20
+                             user = User(user.userId, user.username, user.age, user.gender, user.email, updatedScores, user.flag)
+                            preferencesProvider.putUser(KEY_USER, user)
                             FirebaseDatabase.getInstance().reference.child("User")
                                 .child(userId)
                                 .child("score").setValue(updatedScores)
@@ -217,6 +231,8 @@ class DragAndDropQuizFragment : Fragment() {
                         snapshot.children.forEach {
                             val score = it.child("score").value.toString()
                             scoresTextView.text = score
+                            user = User(user.userId, user.username, user.age, user.gender, user.email, score.toInt(), user.flag)
+                            preferencesProvider.putUser(KEY_USER, user)
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {

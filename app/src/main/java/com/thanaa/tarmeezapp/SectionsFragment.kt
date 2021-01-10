@@ -25,6 +25,9 @@ class SectionsFragment : Fragment() {
     val sectionsList: MutableList<Section> = mutableListOf()
     var adapter = SectionsAdapter(sections)
 
+    private lateinit var preferencesProvider: PreferencesProvider
+    val KEY_USER = "User"
+
     private val args by navArgs<SectionsFragmentArgs>()
 
     override fun onCreateView(
@@ -33,6 +36,19 @@ class SectionsFragment : Fragment() {
     ): View? {
         _binding = FragmentSectionsBinding.inflate(inflater, container, false)
         sectionsList.clear()
+
+        preferencesProvider = PreferencesProvider(requireContext())
+        val user = preferencesProvider.getUser(KEY_USER)
+        binding.username.setText(user.username)
+        binding.score.setText(user.score.toString())
+
+        val gender = user.gender
+
+        if(gender.equals("ذكر")){
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.boy_avatar))
+        }else if(gender.equals("أنثى")){
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.girl_avatar))
+        }
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
