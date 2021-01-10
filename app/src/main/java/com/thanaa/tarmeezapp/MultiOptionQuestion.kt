@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.media.MediaPlayer
@@ -30,6 +31,7 @@ class MultiOptionQuestion : Fragment() {
     private lateinit var optionThreeRadioButton: RadioButton
     private lateinit var moveToSectionsButton:TextView
     private lateinit var scoresTextView:TextView
+    private lateinit var  binding  : FragmentMultiOptionQuestionBinding
     private var currentIndex =0
     private val args:MultiOptionQuestionArgs by navArgs()
     private var questions:ArrayList<String> = ArrayList()
@@ -43,7 +45,7 @@ class MultiOptionQuestion : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
 
-        val binding  = FragmentMultiOptionQuestionBinding.inflate(inflater, container,
+        binding  = FragmentMultiOptionQuestionBinding.inflate(inflater, container,
             false)
 
         preferencesProvider = PreferencesProvider(requireContext())
@@ -99,6 +101,7 @@ class MultiOptionQuestion : Fragment() {
                         if (answer.trim() == answers[currentIndex].trim()) {
                             controlSound(R.raw.correct_sound_effect)
                             updateScores(user)
+                            popUpCoin()
                             disableOrEnableRGButton(radioGroup, false)
                             selectedAnswer.background = resources
                                 .getDrawable(R.drawable.correct_style)
@@ -189,5 +192,28 @@ class MultiOptionQuestion : Fragment() {
                     }
                 })
         }
+    }
+
+    private fun popUpCoin(){
+        binding.popupCoin.visibility = View.VISIBLE
+        binding.popupCoin.playAnimation()
+        binding.popupCoin.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.popupCoin.visibility = View.GONE
+
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+
+        })
+
     }
 }
