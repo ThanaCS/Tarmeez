@@ -75,14 +75,14 @@
             app:argType="string"
             app:nullable="true" />
         <action
+            android:id="@+id/ContentFragmentToMultiOptionQuestion"
+            app:destination="@id/multiOptionQuestion" />
+        <action
             android:id="@+id/action_contentFragment_to_dragAndDropQuizFragment2"
             app:destination="@id/dragAndDropQuizFragment" />
         <action
             android:id="@+id/action_contentFragment_to_wordsQuizFragment"
             app:destination="@id/wordsQuizFragment" />
-        <action
-            android:id="@+id/ContentFragmentToMultiOptionQuestion"
-            app:destination="@id/multiOptionQuestion" />
     </fragment>
     <fragment
         android:id="@+id/multiOptionQuestion"
@@ -147,8 +147,7 @@
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.thanaa.tarmeezapp.game.GameFragment"
-        android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game"/>
     <fragment
         android:id="@+id/menuGameFragment"
         android:name="com.thanaa.tarmeezapp.game.MenuGameFragment"
@@ -157,6 +156,27 @@
         <action
             android:id="@+id/action_menuGameFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.thanaa.tarmeezapp.GalleryFragment"
+        android:label="fragment_gallery"
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment_to_menuGameFragment"
+            app:destination="@id/menuGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/endGameFraagment"
+        android:name="com.thanaa.tarmeezapp.EndGameFragment"
+        android:label="fragment_end_game"
+        tools:layout="@layout/fragment_end_game">
+        <action
+            android:id="@+id/action_endGameFragment2_to_menuGameFragment"
+            app:destination="@id/menuGameFragment" />
+        <action
+            android:id="@+id/action_endGameFraagment_to_wordsQuizFragment"
+            app:destination="@id/wordsQuizFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

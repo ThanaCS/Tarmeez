@@ -40,6 +40,7 @@ class GameFragment : Fragment() {
         super.onResume()
         gameView.resume()
     }
+
     //hide navigation button
     private fun hideNavigation() {
         val bottomNavigationView = (activity as MainActivity).bottomNavigationView
@@ -49,4 +50,6 @@ class GameFragment : Fragment() {
         bottomAppBar.visibility = View.GONE
         fab.visibility = View.GONE
     }
+
+
 }
