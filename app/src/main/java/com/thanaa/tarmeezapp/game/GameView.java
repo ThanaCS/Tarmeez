@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class GameView extends SurfaceView implements Runnable {
     private Thread thread;
     private boolean isPlaying, isGameOver = false;
@@ -33,11 +34,13 @@ public class GameView extends SurfaceView implements Runnable {
     private List<Bullet> bullets;
     private Bird[] birds;
     private SoundPool soundPool;
+    private GameFragment fragment;
     private int sound;
     private Paint paint;
 
-    public GameView(Context context, int screenX, int screenY) {
-        super(context);
+    public GameView(GameFragment fragment, int screenX, int screenY) {
+        super(fragment.getContext());
+        this.fragment = fragment;
         this.screenX = screenX;
         this.screenY = screenY;
         Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
@@ -61,7 +64,7 @@ public class GameView extends SurfaceView implements Runnable {
         } else
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 
-        //sound = soundPool.load(fragment.getContext(), R.raw.shoot, 1);
+        sound = soundPool.load(fragment.getContext(), R.raw.shoot, 1);
 
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
@@ -164,6 +167,7 @@ public class GameView extends SurfaceView implements Runnable {
 
                 if (!bird.wasShot) {
                     isGameOver = true;
+
                     return;
                 }
 
@@ -188,7 +192,7 @@ public class GameView extends SurfaceView implements Runnable {
             }
         }
 
-        }
+    }
 
 
 
@@ -221,7 +225,7 @@ public class GameView extends SurfaceView implements Runnable {
                 canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
                 canvas.drawText("انتهت اللعبة", (canvas.getWidth()/2)-200, canvas.getHeight()-200, paint);
                 getHolder().unlockCanvasAndPost(canvas);
-                //waitBeforeExiting();
+                waitBeforeExiting();
                 return;
             }
             for (Bird bird : birds)
@@ -275,14 +279,14 @@ public class GameView extends SurfaceView implements Runnable {
         bullets.add(bullet);
     }
 
-//    private void waitBeforeExiting() {
-//        try {
-//        Thread.sleep(2500);
-//            NavController navController = Navigation.findNavController(fragment.getActivity(), R.id.fragment_container);
-//            navController.navigate(R.id.endGameFraagment);
-//
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void waitBeforeExiting() {
+        try {
+            Thread.sleep(2500);
+            NavController navController = Navigation.findNavController(fragment.getActivity(), R.id.fragment_container);
+            navController.navigate(R.id.endGameFraagment);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

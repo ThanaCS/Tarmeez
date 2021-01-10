@@ -82,10 +82,6 @@ class HomeFragment : Fragment() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     private fun showNavigation() {
         val bottomNavigationView = (activity as MainActivity).bottomNavigationView

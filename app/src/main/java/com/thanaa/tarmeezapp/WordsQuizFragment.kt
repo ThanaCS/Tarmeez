@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+import android.animation.Animator
 import android.content.Context
 import android.graphics.Color
 import android.media.MediaPlayer
@@ -21,8 +22,10 @@ import com.google.firebase.database.ValueEventListener
 import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
 
 
-class WordsQuizFragment : Fragment() {
 
+class WordsQuizFragment : Fragment() {
+    private var _binding: FragmentWordsQuizBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<WordsQuizFragmentArgs>()
     private lateinit var questionTextView: TextView
     private lateinit var moveToSection:TextView
@@ -34,7 +37,7 @@ class WordsQuizFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentWordsQuizBinding.inflate(inflater, container, false)
+        _binding = FragmentWordsQuizBinding.inflate(inflater, container, false)
         moveToSection = binding.moveToSections
         scoresTextView = binding.score
         setScores()
@@ -53,7 +56,7 @@ class WordsQuizFragment : Fragment() {
             questionTextView.layoutParams = ViewGroup.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT)
-            questionTextView.layoutParams.width = 170
+            questionTextView.layoutParams.width = 150
             questionTextView.layoutParams.height = 120
             questionTextView.gravity = Gravity.CENTER
             questionTextView.text = list[i]
@@ -80,6 +83,8 @@ class WordsQuizFragment : Fragment() {
                         if(sentence.equals(args.answer)){
                             controlSound(R.raw.correct_sound_effect)
                             updateScores()
+                            popUpCoin()
+
                         }else{
                             controlSound(R.raw.incorrect_sound_effect)
                             for(j in listOfButton.indices){
@@ -164,6 +169,29 @@ class WordsQuizFragment : Fragment() {
         bottomNavigationView.visibility = View.VISIBLE
         bottomAppBar.visibility = View.VISIBLE
         fab.visibility = View.VISIBLE
+    }
+
+    private fun popUpCoin(){
+        binding.popupCoin.visibility = View.VISIBLE
+        binding.popupCoin.playAnimation()
+        binding.popupCoin.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.popupCoin.visibility = View.GONE
+
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+
+        })
+
     }
 
 }
