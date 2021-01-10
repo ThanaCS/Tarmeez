@@ -46,10 +46,10 @@ class ProfileFragment : Fragment() {
         val gender = user.gender
 
         if(gender.equals("ذكر")){
-            binding.avatarContainer.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.cyan)));
+            binding.avatarContainer.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.cyan_2)));
             binding.avatar.setImageDrawable(resources.getDrawable(R.drawable.boy))
         }else if(gender.equals("أنثى")){
-            binding.avatarContainer.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.pink_1)));
+            binding.avatarContainer.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.pink_2)));
             binding.avatar.setImageDrawable(resources.getDrawable(R.drawable.girl))
         }
 
@@ -130,10 +130,10 @@ class ProfileFragment : Fragment() {
             binding.ageEditText.setText(age)
 
             if(gender.equals("ذكر")){
-                binding.avatarContainer.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.cyan)));
+                binding.avatarContainer.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.cyan_2)));
                 binding.avatar.setImageDrawable(resources.getDrawable(R.drawable.boy))
             }else if(gender.equals("أنثى")){
-                binding.avatarContainer.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.pink_1)));
+                binding.avatarContainer.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.pink_2)));
                 binding.avatar.setImageDrawable(resources.getDrawable(R.drawable.girl))
             }
 
@@ -149,11 +149,21 @@ class ProfileFragment : Fragment() {
                     binding.ageEditText.isEnabled = false
                 }
 
-            val userObject = User(key, userName, age, gender, email)
+            val userObject = User(key, userName, age, gender, email,0,"")
             preferencesProvider.putUser(KEY_USER, userObject)
         }
 
+        showNavigation()
         return binding.root
+    }
+
+    private fun showNavigation() {
+        val bottomNavigationView = (activity as MainActivity).bottomNavigationView
+        val fab = (activity as MainActivity).fab
+        val bottomAppBar = (activity as MainActivity).bottomAppBar
+        bottomNavigationView.visibility = View.VISIBLE
+        bottomAppBar.visibility = View.VISIBLE
+        fab.visibility = View.VISIBLE
     }
 
 }

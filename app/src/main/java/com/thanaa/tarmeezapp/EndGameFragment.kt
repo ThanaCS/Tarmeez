@@ -24,12 +24,11 @@ class EndGameFragment : Fragment() {
             val action = EndGameFragmentDirections.actionEndGameFragment2ToMenuGameFragment()
             findNavController().navigate(action)
         }
-        binding.restrt.setOnClickListener {
-            val action = EndGameFragmentDirections.actionEndGameFragment2ToMenuGameFragment()
+        binding.next.setOnClickListener {
+            val action = EndGameFragmentDirections.actionEndGameFraagmentToFinalGameFragment()
             findNavController().navigate(action)
         }
         showNavigation()
-
         return binding.root
     }
     private fun showNavigation() {

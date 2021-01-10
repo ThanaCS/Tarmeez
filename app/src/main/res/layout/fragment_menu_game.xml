@@ -36,13 +36,13 @@
 
     <TextView
         android:id="@+id/play"
-        android:layout_width="150dp"
-        android:layout_height="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="36dp"
-        android:background="@drawable/game_button"
+        android:background="@drawable/play"
         android:gravity="center"
-        android:text="ابدأ"
+
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -53,16 +53,16 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progressBar"
-        android:layout_width="350dp"
-        android:layout_height="450dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/play"
-        app:layout_constraintVertical_bias="0.659"
+        app:layout_constraintVertical_bias="0.762"
         app:lottie_autoPlay="true"
-        android:visibility="invisible"
         app:lottie_fileName="progressBar.json"
         app:lottie_loop="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -177,6 +177,9 @@
         <action
             android:id="@+id/action_endGameFraagment_to_wordsQuizFragment"
             app:destination="@id/wordsQuizFragment" />
+        <action
+            android:id="@+id/action_endGameFraagment_to_finalGameFragment"
+            app:destination="@id/finalGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -196,4 +199,10 @@
             android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/finalGameFragment"
+        android:name="com.thanaa.tarmeezapp.FinalGameFragment"
+        android:label="fragment_final_game"
+        tools:layout="@layout/fragment_final_game" />
 </navigation>

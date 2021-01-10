@@ -45,6 +45,7 @@ class WordsQuizFragment : Fragment() {
                 .navigate(action)
         }
         val list = args.options.split(",")
+
         binding.questionTextView.text = args.question
 
         for (i in list.indices){
@@ -100,6 +101,7 @@ class WordsQuizFragment : Fragment() {
             }
         }
 
+        showNavigation()
         return binding.root
     }
 
@@ -155,4 +157,13 @@ class WordsQuizFragment : Fragment() {
         }
     }
 
+    private fun showNavigation() {
+        val bottomNavigationView = (activity as MainActivity).bottomNavigationView
+        val fab = (activity as MainActivity).fab
+        val bottomAppBar = (activity as MainActivity).bottomAppBar
+        bottomNavigationView.visibility = View.VISIBLE
+        bottomAppBar.visibility = View.VISIBLE
+        fab.visibility = View.VISIBLE
     }
+
+}

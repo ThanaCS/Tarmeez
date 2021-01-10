@@ -64,7 +64,7 @@ class RegisterFragment : Fragment() {
                         val ref = FirebaseDatabase.getInstance().getReference("User")
                         val userId = ref.push().key
                         if (userId != null) {
-                            val user = User(userId,email.split("@")[0],"عمرك","جنسك",email)
+                            val user = User(userId,email.split("@")[0],"عمرك","جنسك",email,0,"")
                             ref.child(userId).setValue(user)
                             preferencesProvider.putUser(KEY_USER, user)
                         }
