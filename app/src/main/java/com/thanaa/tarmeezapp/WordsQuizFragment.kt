@@ -41,6 +41,7 @@ class WordsQuizFragment : Fragment() {
                 .navigate(action)
         }
         val list = args.options.split(",")
+
         binding.questionTextView.text = args.question
 
         for (i in list.indices){
@@ -151,4 +152,4 @@ class WordsQuizFragment : Fragment() {
         }
     }
 
-    }
+}
