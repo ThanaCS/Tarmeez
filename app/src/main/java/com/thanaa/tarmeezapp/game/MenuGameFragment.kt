@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.thanaa.tarmeezapp.MainActivity
 import com.thanaa.tarmeezapp.databinding.FragmentMenuGameBinding
+import com.thanaa.tarmeezapp.game.MenuGameFragmentDirections.actionMenuGameFragmentToGameFragment
 
 
 class MenuGameFragment : Fragment() {
@@ -22,15 +23,19 @@ class MenuGameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View{
 
-
         _binding = FragmentMenuGameBinding.inflate(inflater, container, false)
 
         binding.play.setOnClickListener{
+            binding.progressBar.visibility = View.VISIBLE
             val action = MenuGameFragmentDirections.actionMenuGameFragmentToGameFragment()
             findNavController().navigate(action)
         }
 
         return binding.root
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

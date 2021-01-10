@@ -11,14 +11,11 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
-import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-import android.view.WindowManager;
-
-import androidx.annotation.Dimension;
-
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import com.thanaa.tarmeezapp.R;
 
 import java.util.ArrayList;
@@ -64,7 +61,7 @@ public class GameView extends SurfaceView implements Runnable {
         } else
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 
-//        sound = soundPool.load(context, R.raw.shoot, 1);
+        //sound = soundPool.load(fragment.getContext(), R.raw.shoot, 1);
 
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
@@ -221,8 +218,10 @@ public class GameView extends SurfaceView implements Runnable {
             if (isGameOver) {
                 isPlaying = false;
                 canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
+                canvas.drawBitmap(flight.getDead(), flight.x, flight.y, paint);
+                canvas.drawText("انتهت اللعبة", (canvas.getWidth()/2)-200, canvas.getHeight()-100, paint);
                 getHolder().unlockCanvasAndPost(canvas);
-
+                //waitBeforeExiting();
                 return;
             }
             for (Bird bird : birds)
@@ -276,4 +275,14 @@ public class GameView extends SurfaceView implements Runnable {
         bullets.add(bullet);
     }
 
+//    private void waitBeforeExiting() {
+//        try {
+//        Thread.sleep(2500);
+//            NavController navController = Navigation.findNavController(fragment.getActivity(), R.id.fragment_container);
+//            navController.navigate(R.id.endGameFraagment);
+//
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -9,10 +9,6 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.thanaa.tarmeezapp.data.Content
-import com.thanaa.tarmeezapp.data.Planet
-import com.thanaa.tarmeezapp.data.Quiz
-import com.thanaa.tarmeezapp.data.Section
 
 class MainActivity : AppCompatActivity() {
     lateinit var fab: FloatingActionButton

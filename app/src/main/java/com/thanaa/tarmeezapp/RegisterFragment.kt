@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
@@ -13,7 +14,6 @@ import androidx.core.view.updateMarginsRelative
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.thanaa.tarmeezapp.data.User
@@ -57,7 +57,7 @@ class RegisterFragment : Fragment() {
                         val ref = FirebaseDatabase.getInstance().getReference("User")
                         val userId = ref.push().key
                         if (userId != null) {
-                            val user = User(userId,email.split("@")[0],"Undefined","Undefined",email)
+                            val user = User(userId,email.split("@")[0],"Undefined","Undefined",email,"","")
                             ref.child(userId).setValue(user)
                         }
                         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
