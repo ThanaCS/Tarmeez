@@ -143,8 +143,7 @@ class MultiOptionQuestion : Fragment() {
     }
 
     private fun updateScores(user: User){
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val email = sharedPref?.getString("email","email")
+        val email = user.email
         if (email != null){
             FirebaseDatabase.getInstance().reference
                 .child("User").orderByChild("email").equalTo(email)
@@ -173,8 +172,7 @@ class MultiOptionQuestion : Fragment() {
     }
 
     private fun setScores(user: User){
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val email = sharedPref?.getString("email","email")
+        val email = user.email
         if (email != null){
             FirebaseDatabase.getInstance().reference
                 .child("User").orderByChild("email").equalTo(email)

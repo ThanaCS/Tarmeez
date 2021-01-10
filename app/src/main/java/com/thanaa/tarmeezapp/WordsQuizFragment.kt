@@ -137,8 +137,7 @@ class WordsQuizFragment : Fragment() {
     }
 
     private fun updateScores(){
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val email = sharedPref?.getString("email","email")
+        val email = user.email
         if (email != null){
             FirebaseDatabase.getInstance().reference
                 .child("User").orderByChild("email").equalTo(email)
@@ -167,8 +166,7 @@ class WordsQuizFragment : Fragment() {
     }
 
     private fun setScores(){
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val email = sharedPref?.getString("email","email")
+        val email = user.email
         if (email != null){
             FirebaseDatabase.getInstance().reference
                 .child("User").orderByChild("email").equalTo(email)
