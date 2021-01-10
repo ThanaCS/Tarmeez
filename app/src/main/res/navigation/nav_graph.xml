@@ -152,9 +152,6 @@
             android:id="@+id/action_endGameFragment2_to_menuGameFragment"
             app:destination="@id/menuGameFragment" />
         <action
-            android:id="@+id/action_endGameFraagment_to_wordsQuizFragment"
-            app:destination="@id/wordsQuizFragment" />
-        <action
             android:id="@+id/action_endGameFraagment_to_finalGameFragment"
             app:destination="@id/finalGameFragment" />
     </fragment>

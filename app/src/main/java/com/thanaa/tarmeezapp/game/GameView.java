@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.util.DisplayMetrics;
@@ -37,6 +38,7 @@ public class GameView extends SurfaceView implements Runnable {
     private Thread thread;
     private boolean isPlaying, isGameOver = false;
     private int screenX, screenY, score = 0;
+    private MediaPlayer mediaPlayer;
     public static float screenRatioX, screenRatioY;
     private Background background1, background2;
     private Flight flight;
@@ -109,6 +111,8 @@ public class GameView extends SurfaceView implements Runnable {
             update();
             draw();
             sleep();
+
+
 
         }
 
@@ -186,13 +190,10 @@ public class GameView extends SurfaceView implements Runnable {
 
                 if (bird.speed < 10 * screenRatioX)
                     bird.speed = (int) (10 * screenRatioX);
-//
-//                bird.x = screenX;
-//                bird.y = random.nextInt(screenY - bird.height);
+
                 bird.x = screenX;
                 bird.y = random.nextInt(1000);
-//
-//                bird.wasShot = false;
+
             }
 
             if (Rect.intersects(bird.getCollisionShape(), flight.getCollisionShape())) {
@@ -203,8 +204,6 @@ public class GameView extends SurfaceView implements Runnable {
         }
 
         }
-
-
 
     private void sleep() {
 
@@ -299,4 +298,6 @@ public class GameView extends SurfaceView implements Runnable {
             e.printStackTrace();
         }
     }
+
+
 }
