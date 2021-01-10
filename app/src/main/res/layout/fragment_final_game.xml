@@ -77,4 +77,15 @@
         android:layout_marginLeft="300dp"
         android:src="@drawable/run"
         android:visibility="visible" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/popupCoin"
+        app:lottie_autoPlay="false"
+        app:lottie_fileName="popupCoin.json"
+        app:lottie_loop="false"
+        android:visibility="invisible"
+        android:layout_marginTop="160dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </RelativeLayout>

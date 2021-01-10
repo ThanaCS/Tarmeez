@@ -1,6 +1,5 @@
 package com.thanaa.tarmeezapp
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
@@ -16,6 +15,11 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.thanaa.tarmeezapp.data.User
 import com.thanaa.tarmeezapp.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -29,11 +33,15 @@ class LoginFragment : Fragment() {
     private lateinit var forgotPassword: TextView
     private lateinit var progressDialog:CustomProgressDialog
     private lateinit var loginButton: Button
+    private lateinit var preferencesProvider: PreferencesProvider
+    val KEY_USER = "User"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?):View{
         hideNavigation()
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        preferencesProvider = PreferencesProvider(requireContext())
+
         aAuth = FirebaseAuth.getInstance()
         emailEditText = binding.userEmail
         passwordEditText = binding.userPassword
@@ -66,13 +74,8 @@ class LoginFragment : Fragment() {
                 addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         progressDialog.dismiss()
-                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-                        if (sharedPref != null) {
-                            with (sharedPref.edit()) {
-                                putString("email", emailEditText.text.toString())
-                                apply()
-                            }
-                        }
+                        val email = emailEditText.text.toString()
+                        saveData(email)
                         Navigation.findNavController(binding.root)
                             .navigate(R.id.action_loginFragment_to_homeFragment)
                     } else {
@@ -158,5 +161,32 @@ class LoginFragment : Fragment() {
                 )
             }
         }
+    }
+
+    private fun saveData(email: String ){
+        FirebaseDatabase.getInstance().reference
+            .child("User").orderByChild("email").equalTo(email)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        val userId = it.child("userId").value.toString()
+                        val username: String = it.child("username").value.toString()
+                        val age: String = it.child("age").value.toString()
+                        val gender: String = it.child("gender").value.toString()
+                        val score: Int= it.child("score").value.toString().toInt()
+                        val flag: String= it.child("flag").value.toString()
+
+                        val user = User(userId,username,age,gender,email,score,flag)
+                        preferencesProvider.putUser(KEY_USER, user )
+
+                    }
+
+                }
+
+            })
     }
 }
