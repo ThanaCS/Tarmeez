@@ -21,6 +21,7 @@ public class Bird {
         bird1 = BitmapFactory.decodeResource(res, R.drawable.bird1);
         bird2 = BitmapFactory.decodeResource(res, R.drawable.bird2);
         bird3 = BitmapFactory.decodeResource(res, R.drawable.bird3);
+
         bird4 = BitmapFactory.decodeResource(res, R.drawable.bird4);
 
         width = bird1.getWidth();
