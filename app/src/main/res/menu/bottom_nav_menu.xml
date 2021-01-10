@@ -8,6 +8,6 @@
     <item
         android:id="@+id/galleryFragment"
         android:icon="@drawable/ic_dashboard"
-        android:title="Dashboard" />
+        android:title="Games" />
 
 </menu>

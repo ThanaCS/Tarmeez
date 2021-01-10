@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.thanaa.tarmeezapp.data.User
 import com.thanaa.tarmeezapp.databinding.FragmentWordsQuizBinding
 
 
@@ -30,6 +31,12 @@ class WordsQuizFragment : Fragment() {
     private var countNumOfWords = 0
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var scoresTextView:TextView
+
+    private lateinit var preferencesProvider: PreferencesProvider
+    val KEY_USER = "User"
+
+    private lateinit var user: User
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +44,20 @@ class WordsQuizFragment : Fragment() {
         val binding = FragmentWordsQuizBinding.inflate(inflater, container, false)
         moveToSection = binding.moveToSections
         scoresTextView = binding.score
+
+        preferencesProvider = PreferencesProvider(requireContext())
+        user = preferencesProvider.getUser(KEY_USER)
+
+        binding.username.setText(user.username)
+
+        val gender = user.gender
+
+        if(gender.equals("ذكر")){
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.boy_avatar))
+        }else if(gender.equals("أنثى")){
+            binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.girl_avatar))
+        }
+
         setScores()
         moveToSection.setOnClickListener {
             val action = WordsQuizFragmentDirections.
@@ -122,6 +143,8 @@ class WordsQuizFragment : Fragment() {
                             val score = it.child("score").value.toString().toInt()
                             val userId = it.child("userId").value.toString()
                             val updatedScores = score + 20
+                            user = User(user.userId, user.username, user.age, user.gender, user.email, updatedScores, user.flag)
+                            preferencesProvider.putUser(KEY_USER, user)
                             FirebaseDatabase.getInstance().reference.child("User")
                                 .child(userId)
                                 .child("score").setValue(updatedScores)
@@ -149,6 +172,8 @@ class WordsQuizFragment : Fragment() {
                         snapshot.children.forEach {
                             val score = it.child("score").value.toString()
                             scoresTextView.text = score
+                            user = User(user.userId, user.username, user.age, user.gender, user.email, score.toInt(), user.flag)
+                            preferencesProvider.putUser(KEY_USER, user)
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {
