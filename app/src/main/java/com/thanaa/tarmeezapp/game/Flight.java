@@ -14,7 +14,7 @@ public class Flight {
     int toShoot = 0;
     boolean isGoingUp = false;
     int x, y, width, height, wingCounter = 0, shootCounter = 1;
-    Bitmap flight1, flight2, shoot1, shoot2, shoot3, shoot4, shoot5, dead;
+    Bitmap flight1, flight2, shoot1, shoot2, shoot3, shoot4, shoot5, dead, restart,next;
     private GameView gameView;
 
     Flight (GameView gameView, int screenY, Resources res) {
@@ -50,6 +50,12 @@ public class Flight {
 
         dead = BitmapFactory.decodeResource(res, R.drawable.dead);
         dead = Bitmap.createScaledBitmap(dead, width, height, false);
+
+        restart = BitmapFactory.decodeResource(res, R.drawable.restart);
+        restart = Bitmap.createScaledBitmap(restart, width, height, false);
+
+        next = BitmapFactory.decodeResource(res, R.drawable.next);
+        next = Bitmap.createScaledBitmap(next, width, height, false);
 
         y = screenY / 2;
         x = (int) (64 * screenRatioX);
@@ -103,6 +109,13 @@ public class Flight {
         return dead;
     }
 
+    Bitmap getRestart () {
 
+        return restart;
+    }
+    Bitmap getNext () {
+
+        return next;
+    }
 
 }

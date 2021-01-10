@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
     <item
-        android:id="@+id/dashboardFragment"
+        android:id="@+id/galleryFragment"
         android:icon="@drawable/ic_dashboard"
         android:title="Dashboard" />
 

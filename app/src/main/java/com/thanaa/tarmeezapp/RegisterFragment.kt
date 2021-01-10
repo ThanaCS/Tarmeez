@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
@@ -23,7 +24,6 @@ import org.jetbrains.anko.support.v4.toast
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var aAuth: FirebaseAuth
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
@@ -68,14 +68,13 @@ class RegisterFragment : Fragment() {
                             ref.child(userId).setValue(user)
                             preferencesProvider.putUser(KEY_USER, user)
                         }
-//                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-//                        if (sharedPref != null) {
-//                            with (sharedPref.edit()) {
-//                                putString("email", email)
-//                                apply()
-//                            }
-//                        }
-
+                        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                        if (sharedPref != null) {
+                            with (sharedPref.edit()) {
+                                putString("email", email)
+                                apply()
+                            }
+                        }
                         Navigation.findNavController(binding.root)
                             .navigate(R.id.RegisterFragmentToHomeFragment)
                     } else {
@@ -106,8 +105,7 @@ class RegisterFragment : Fragment() {
         }
 
         binding.register.setOnFocusChangeListener { view, b ->
-            //hideKeyBoard()
-            toast("hi")
+            hideKeyBoard()
         }
         passwordConfirmEditText.nextFocusDownId = R.id.register
 

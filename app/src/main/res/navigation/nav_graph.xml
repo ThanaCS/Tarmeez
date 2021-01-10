@@ -21,7 +21,8 @@
         android:id="@+id/loginFragment"
         android:name="com.thanaa.tarmeezapp.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login"
+        app:startDestination="@id/LoginFragmentToRegisterFragment">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -94,8 +95,12 @@
 
         <argument
             android:name="planetId"
-            android:id="@+id/action_contentFragment_to_dragAndDropQuizFragment"
-            app:destination="@id/dragAndDropQuizFragment" />
+            app:argType="string"
+            android:id="@+id/action_contentFragment_to_multiOptionQuestionFragment"
+            app:destination="@id/multiOptionQuestion" />
+        <action
+            android:id="@+id/MultiOptionQuestionToSectionsFragment"
+            app:destination="@id/sectionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/dragAndDropQuizFragment"
@@ -111,6 +116,12 @@
         <argument
             android:name="options"
             app:argType="string" />
+        <argument
+            android:name="planetId"
+            app:argType="string" />
+        <action
+            android:id="@+id/DragAndDropQuizFragmentToSectionsFragment"
+            app:destination="@id/sectionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/wordsQuizFragment"
@@ -126,12 +137,17 @@
         <argument
             android:name="options"
             app:argType="string" />
+        <argument
+            android:name="planetId"
+            app:argType="string" />
+        <action
+            android:id="@+id/WordsQuizFragmentToSectionsFragment"
+            app:destination="@id/sectionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.thanaa.tarmeezapp.game.GameFragment"
-        android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game"/>
     <fragment
         android:id="@+id/menuGameFragment"
         android:name="com.thanaa.tarmeezapp.game.MenuGameFragment"
@@ -140,6 +156,27 @@
         <action
             android:id="@+id/action_menuGameFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.thanaa.tarmeezapp.GalleryFragment"
+        android:label="fragment_gallery"
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment_to_menuGameFragment"
+            app:destination="@id/menuGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/endGameFraagment"
+        android:name="com.thanaa.tarmeezapp.EndGameFragment"
+        android:label="fragment_end_game"
+        tools:layout="@layout/fragment_end_game">
+        <action
+            android:id="@+id/action_endGameFragment2_to_menuGameFragment"
+            app:destination="@id/menuGameFragment" />
+        <action
+            android:id="@+id/action_endGameFraagment_to_wordsQuizFragment"
+            app:destination="@id/wordsQuizFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

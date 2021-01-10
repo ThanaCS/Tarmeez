@@ -19,5 +19,6 @@
     <string name="invalid_email">البريد الالكتروني غير صالح</string>
     <string name="questions_number">سؤال %d/%d</string>
     <string name="quiz_button">اختبر معلوماتك</string>
+    <string name="back_to_sections">العودة إلى الاقسام</string>
     <string name="forgot_password">استعادة كلمة المرور</string>
 </resources>
