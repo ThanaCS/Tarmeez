@@ -3,9 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_gray"
     tools:context=".MatchingGameFragment">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/profile_picture" />
+        <com.airbnb.lottie.LottieAnimationView
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="coin.json"
+            app:lottie_loop="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
 
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="100"
+            android:textSize="15sp"
+            android:textColor="@color/dark_blue"
+            android:textStyle="bold" />
+    </LinearLayout>
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,12 +48,14 @@
                 android:id="@+id/bu1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
                 android:background="@drawable/matching_image_question" />
 
             <ImageView
                 android:id="@+id/bu2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
                 android:background="@drawable/matching_image_question" />
 
             <ImageView
@@ -43,19 +73,25 @@
                 android:id="@+id/bu4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/matching_image_question" />
 
             <ImageView
                 android:id="@+id/bu5"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/matching_image_question" />
 
             <ImageView
                 android:id="@+id/bu6"
                 android:layout_width="wrap_content"
-                android:background="@drawable/matching_image_question"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/matching_image_question" />
         </TableRow>
     </TableLayout>
 </FrameLayout>
