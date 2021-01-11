@@ -28,4 +28,5 @@
     <color name="pink_1">#ba88b2</color>
     <color name="lightBackground">#F8F8FF</color>
     <color name="dark_green">#88baa2</color>
+    <color name="light_gray">#DCDCDC</color>
 </resources>
