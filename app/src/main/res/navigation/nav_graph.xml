@@ -209,5 +209,9 @@
         android:id="@+id/matchingGameFragment"
         android:name="com.thanaa.tarmeezapp.MatchingGameFragment"
         android:label="fragment_matching_game"
-        tools:layout="@layout/fragment_matching_game" />
+        tools:layout="@layout/fragment_matching_game" >
+        <action
+            android:id="@+id/MatchingGameFragmentToFinalGameFragment"
+            app:destination="@id/finalGameFragment" />
+    </fragment>
 </navigation>

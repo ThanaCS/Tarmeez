@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -40,6 +41,14 @@ class MatchingGameFragment : Fragment() {
         setScores()
         setRandomTagsToTheButtons()
         setImageButtonsOnClickListener()
+        binding.retry.setOnClickListener {
+            retryGame()
+        }
+
+        binding.moveToFinalGame.setOnClickListener {
+            Navigation.findNavController(binding.root).
+            navigate(R.id.MatchingGameFragmentToFinalGameFragment)
+        }
         return binding.root
     }
 
@@ -129,12 +138,13 @@ class MatchingGameFragment : Fragment() {
     private fun checkIfButtonsMatch(){
         if(binding.root.findViewById<ImageView>(results[0]).tag.toString() ==
             binding.root.findViewById<ImageView>(results[1]).tag.toString()){
-            updateScores()
             results = ArrayList()
             numOfButtons = 0
             numOfMatching ++
             if(numOfMatching == 3){
                 controlSound(R.raw.correct_sound_effect)
+                numOfMatching = 0
+                updateScores()
             }
         }else{
             handler.postDelayed({
@@ -237,5 +247,37 @@ class MatchingGameFragment : Fragment() {
                     }
                 })
         }
+    }
+
+    fun retryGame(){
+        binding.bu1.apply {
+            setImageDrawable(resources.getDrawable(R.drawable.matching_image_question))
+            isEnabled = true
+        }
+        binding.bu2.apply {
+            setImageDrawable(resources.getDrawable(R.drawable.matching_image_question))
+            isEnabled = true
+        }
+        binding.bu3.apply {
+            setImageDrawable(resources.getDrawable(R.drawable.matching_image_question))
+            isEnabled = true
+        }
+
+        binding.bu4.apply {
+            setImageDrawable(resources.getDrawable(R.drawable.matching_image_question))
+            isEnabled = true
+        }
+
+        binding.bu5.apply {
+            setImageDrawable(resources.getDrawable(R.drawable.matching_image_question))
+            isEnabled = true
+        }
+
+        binding.bu6.apply {
+            setImageDrawable(resources.getDrawable(R.drawable.matching_image_question))
+            isEnabled = true
+        }
+        setRandomTagsToTheButtons()
+        setImageButtonsOnClickListener()
     }
 }
