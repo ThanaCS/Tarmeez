@@ -47,6 +47,11 @@ class GalleryFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+        binding.cardImage.setOnClickListener{
+            val action = GalleryFragmentDirections.actionGalleryFragmentToMatchingGameFragment()
+            findNavController().navigate(action)
+        }
+
         showNavigation()
         return binding.root
     }
