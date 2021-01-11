@@ -2,14 +2,15 @@ package com.thanaa.tarmeezapp.game
 
 import android.app.Activity
 import android.graphics.Point
+import android.os.Build
 import android.os.Bundle
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.thanaa.tarmeezapp.MainActivity
-import com.thanaa.tarmeezapp.databinding.FragmentGameBinding
+import org.jetbrains.anko.displayManager
 
 
 class GameFragment : Fragment() {
@@ -27,6 +28,8 @@ class GameFragment : Fragment() {
         (context as Activity?)!!.windowManager
             .defaultDisplay.getSize(point)
         gameView = GameView(this,point.x,point.y)
+
+
 
         return gameView
     }
