@@ -165,9 +165,6 @@
         <action
             android:id="@+id/action_galleryFragment_to_menuGameFragment"
             app:destination="@id/menuGameFragment" />
-        <action
-            android:id="@+id/action_galleryFragment_to_puzzleFragment"
-            app:destination="@id/puzzleFragment" />
     </fragment>
     <fragment
         android:id="@+id/endGameFraagment"
@@ -177,6 +174,9 @@
         <action
             android:id="@+id/action_endGameFragment2_to_menuGameFragment"
             app:destination="@id/menuGameFragment" />
+        <action
+            android:id="@+id/action_endGameFraagment_to_wordsQuizFragment"
+            app:destination="@id/wordsQuizFragment" />
         <action
             android:id="@+id/action_endGameFraagment_to_finalGameFragment"
             app:destination="@id/finalGameFragment" />
@@ -206,8 +206,12 @@
         android:label="fragment_final_game"
         tools:layout="@layout/fragment_final_game" />
     <fragment
-        android:id="@+id/puzzleFragment"
-        android:name="com.thanaa.tarmeezapp.PuzzleFragment"
-        android:label="fragment_puzzle"
-        tools:layout="@layout/fragment_puzzle" />
+        android:id="@+id/matchingGameFragment"
+        android:name="com.thanaa.tarmeezapp.MatchingGameFragment"
+        android:label="fragment_matching_game"
+        tools:layout="@layout/fragment_matching_game" >
+        <action
+            android:id="@+id/MatchingGameFragmentToFinalGameFragment"
+            app:destination="@id/finalGameFragment" />
+    </fragment>
 </navigation>
