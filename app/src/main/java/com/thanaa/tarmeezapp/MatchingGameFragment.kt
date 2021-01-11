@@ -1,5 +1,6 @@
 package com.thanaa.tarmeezapp
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -7,7 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.thanaa.tarmeezapp.databinding.FragmentMatchingGameBinding
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
@@ -17,6 +23,7 @@ import kotlin.collections.ArrayList
 class MatchingGameFragment : Fragment() {
     private var _binding: FragmentMatchingGameBinding? = null
     private val binding get() = _binding!!
+    private lateinit var scoresTextView:TextView
     private var numOfButtons = 0
     private var results:ArrayList<Int> = ArrayList()
     val handler: Handler = Handler()
@@ -29,6 +36,8 @@ class MatchingGameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View{
         _binding = FragmentMatchingGameBinding.inflate(inflater, container, false)
+        scoresTextView = binding.score
+        setScores()
         setRandomTagsToTheButtons()
         setImageButtonsOnClickListener()
         return binding.root
@@ -120,7 +129,7 @@ class MatchingGameFragment : Fragment() {
     private fun checkIfButtonsMatch(){
         if(binding.root.findViewById<ImageView>(results[0]).tag.toString() ==
             binding.root.findViewById<ImageView>(results[1]).tag.toString()){
-            toast("متطابقة")
+            updateScores()
             results = ArrayList()
             numOfButtons = 0
             numOfMatching ++
@@ -128,7 +137,6 @@ class MatchingGameFragment : Fragment() {
                 controlSound(R.raw.correct_sound_effect)
             }
         }else{
-            toast("غير متطابقة")
             handler.postDelayed({
                 binding.root.findViewById<ImageView>(results[0]).apply {
                     setImageDrawable(resources.getDrawable(R.drawable.matching_image_question))
@@ -182,5 +190,52 @@ class MatchingGameFragment : Fragment() {
         binding.bu4.tag = tags[3]
         binding.bu5.tag = tags[4]
         binding.bu6.tag = tags[5]
+    }
+
+    private fun setScores(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val email = sharedPref?.getString("email","email")
+        if (email != null){
+            FirebaseDatabase.getInstance().reference
+                .child("User").orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val score = it.child("score").value.toString()
+                            scoresTextView.text = score
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+        }
+    }
+
+    private fun updateScores(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val email = sharedPref?.getString("email","email")
+        if (email != null){
+            FirebaseDatabase.getInstance().reference
+                .child("User").orderByChild("email").equalTo(email)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val score = it.child("score").value.toString().toInt()
+                            val userId = it.child("userId").value.toString()
+                            val updatedScores = score + 20
+                            FirebaseDatabase.getInstance().reference.child("User")
+                                .child(userId)
+                                .child("score").setValue(updatedScores)
+                            FirebaseDatabase.getInstance().reference
+                            scoresTextView.text = updatedScores.toString()
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+        }
     }
 }
