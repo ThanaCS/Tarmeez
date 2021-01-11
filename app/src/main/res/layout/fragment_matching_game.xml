@@ -95,20 +95,32 @@
         </TableRow>
     </TableLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="500dp">
+
         <ImageView
             android:id="@+id/retry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/restart"/>
+            android:layout_marginStart="32dp"
+            android:src="@drawable/restartblue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.476" />
+
         <ImageView
             android:id="@+id/move_to_final_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/next"/>
-    </LinearLayout>
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.476" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
