@@ -76,6 +76,12 @@ class FinalGameFragment : Fragment() {
                 popUpCoin()
             }else{
                 controlSound(R.raw.incorrect_sound_effect)
+                for(j in listOfButton.indices){
+                    if(listOfButton[j].parent == binding.answerLinearLayout){
+                        binding.answerLinearLayout.removeView(listOfButton[j])
+                        binding.questionLinearLayout.addView(listOfButton[j])
+                    }
+                }
 
             }
         }
