@@ -137,54 +137,49 @@ class WordsQuizFragment : Fragment() {
     }
 
     private fun updateScores(){
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val email = sharedPref?.getString("email","email")
-        if (email != null){
-            FirebaseDatabase.getInstance().reference
-                .child("User").orderByChild("email").equalTo(email)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        snapshot.children.forEach {
-                            val score = it.child("score").value.toString().toInt()
-                            val userId = it.child("userId").value.toString()
-                            val updatedScores = score + 20
-                            user = User(user.userId, user.username, user.age, user.gender, user.email, updatedScores, user.flag)
-                            preferencesProvider.putUser(KEY_USER, user)
-                            FirebaseDatabase.getInstance().reference.child("User")
-                                .child(userId)
-                                .child("score").setValue(updatedScores)
-                            FirebaseDatabase.getInstance().reference
-                            scoresTextView.text = updatedScores.toString()
-                        }
-
+        val user = preferencesProvider.getUser(KEY_USER)
+        val email = user.email
+        FirebaseDatabase.getInstance().reference
+            .child("User").orderByChild("email").equalTo(email)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        val score = it.child("score").value.toString().toInt()
+                        val userId = it.child("userId").value.toString()
+                        val updatedScores = score + 20
+                        preferencesProvider.putUser(KEY_USER, user)
+                        FirebaseDatabase.getInstance().reference.child("User")
+                            .child(userId)
+                            .child("score").setValue(updatedScores)
+                        FirebaseDatabase.getInstance().reference
+                        scoresTextView.text = updatedScores.toString()
+                        user.score = updatedScores
+                        preferencesProvider.putUser(KEY_USER, user)
                     }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                })
-        }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 
     private fun setScores(){
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val email = sharedPref?.getString("email","email")
-        if (email != null){
-            FirebaseDatabase.getInstance().reference
-                .child("User").orderByChild("email").equalTo(email)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        snapshot.children.forEach {
-                            val score = it.child("score").value.toString()
-                            scoresTextView.text = score
-                            user = User(user.userId, user.username, user.age, user.gender, user.email, score.toInt(), user.flag)
-                            preferencesProvider.putUser(KEY_USER, user)
-                        }
+        val user = preferencesProvider.getUser(KEY_USER)
+        val email = user.email
+        FirebaseDatabase.getInstance().reference
+            .child("User").orderByChild("email").equalTo(email)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        val score = it.child("score").value.toString()
+                        scoresTextView.text = score
                     }
-                    override fun onCancelled(error: DatabaseError) {
-                    }
-                })
-        }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
     }
 
     private fun showNavigation() {

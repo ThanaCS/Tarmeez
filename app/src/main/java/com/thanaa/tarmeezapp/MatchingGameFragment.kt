@@ -33,6 +33,7 @@ class MatchingGameFragment : Fragment() {
     private val tags = listOf("heart", "astronaut", "rocket", "heart", "astronaut", "rocket")
     private lateinit var preferencesProvider: PreferencesProvider
     val KEY_USER = "User"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -245,7 +246,6 @@ class MatchingGameFragment : Fragment() {
                         FirebaseDatabase.getInstance().reference.child("User")
                             .child(userId)
                             .child("score").setValue(updatedScores)
-
                         scoresTextView.text = updatedScores.toString()
                         user.score = updatedScores
                         preferencesProvider.putUser(KEY_USER, user)
