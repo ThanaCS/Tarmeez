@@ -76,8 +76,6 @@ class LoginFragment : Fragment() {
                         progressDialog.dismiss()
                         val email = emailEditText.text.toString()
                         saveData(email)
-                        Navigation.findNavController(binding.root)
-                            .navigate(R.id.action_loginFragment_to_homeFragment)
                     } else {
                         progressDialog.dismiss()
                         val snackBar = Snackbar.make(binding.root,
@@ -184,6 +182,8 @@ class LoginFragment : Fragment() {
                         preferencesProvider.putUser(KEY_USER, user )
 
                     }
+                    Navigation.findNavController(binding.root)
+                        .navigate(R.id.action_loginFragment_to_homeFragment)
 
                 }
 
