@@ -88,7 +88,7 @@ class DragAndDropQuizFragment : Fragment() {
             binding.questionLinearLayout.addView(questionButton)
             questionButton.textColor = resources.getColor(R.color.white)
             questionButton.textSize = 10F
-            questionButton.background = resources.getDrawable(R.drawable.word_layout)
+            questionButton.background = resources.getDrawable(R.drawable.light_pink)
             questionButton.setPadding(0,0,0,5)
             questionButton.setOnLongClickListener {
                 setDragListener(map,list[i])
