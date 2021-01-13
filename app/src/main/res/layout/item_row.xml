@@ -39,7 +39,7 @@
             android:id="@+id/section_title"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:paddingTop="16dp"
+            android:paddingTop="50dp"
             android:text="العلاقات الشرطية والمقارنات"
             android:gravity="center_vertical|center_horizontal"
             android:textSize="20sp"

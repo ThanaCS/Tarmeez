@@ -211,7 +211,7 @@
                         android:id="@+id/email_edit_text"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:enabled="true"
+                        android:enabled="false"
                         android:gravity="center"
                         android:padding="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
