@@ -119,5 +119,4 @@
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_row" />
 
-
 </androidx.constraintlayout.motion.widget.MotionLayout>
