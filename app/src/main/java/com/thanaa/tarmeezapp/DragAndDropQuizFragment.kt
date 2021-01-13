@@ -39,7 +39,6 @@ class DragAndDropQuizFragment : Fragment() {
     private lateinit var scoresTextView:TextView
     private var numOfQuestions = 0
     private var numOfAnswers =  0
-
     private lateinit var preferencesProvider: PreferencesProvider
     val KEY_USER = "User"
 
@@ -102,10 +101,7 @@ class DragAndDropQuizFragment : Fragment() {
                 it.visibility = View.INVISIBLE
                 true
             }
-
         }
-
-
         for (i in map){
             answerButton = Button(requireContext())
             answerButton.layoutParams = ViewGroup.LayoutParams(200, 100)
@@ -116,7 +112,6 @@ class DragAndDropQuizFragment : Fragment() {
             answerButton.setPadding(0,0,0,5)
             binding.answerLinearLayout.addView(answerButton)
         }
-
 
         showNavigation()
         return binding.root
