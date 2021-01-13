@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -59,8 +60,8 @@ class MatchingGameFragment : Fragment() {
         }
 
         binding.moveToFinalGame.setOnClickListener {
-            Navigation.findNavController(binding.root).
-            navigate(R.id.MatchingGameFragmentToFinalGameFragment)
+                val action = MatchingGameFragmentDirections.MatchingGameFragmentToFinalGameFragment("-MQvmYQdHm4ecmXPigbm")
+                findNavController().navigate(action)
         }
         return binding.root
     }
