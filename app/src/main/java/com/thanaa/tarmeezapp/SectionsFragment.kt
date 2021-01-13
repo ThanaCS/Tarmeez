@@ -35,6 +35,7 @@ class SectionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSectionsBinding.inflate(inflater, container, false)
+
         sectionsList.clear()
 
         preferencesProvider = PreferencesProvider(requireContext())
@@ -44,14 +45,14 @@ class SectionsFragment : Fragment() {
 
         val gender = user.gender
 
-        if(gender.equals("ذكر")){
+        if (gender.equals("ذكر")) {
             binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.boy_avatar))
-        }else if(gender.equals("أنثى")){
+        } else if (gender.equals("أنثى")) {
             binding.profileImage.setImageDrawable(resources.getDrawable(R.drawable.girl_avatar))
         }
 
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         FirebaseDatabase.getInstance().reference
             .child("Planet")
@@ -60,20 +61,28 @@ class SectionsFragment : Fragment() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach{
+
+                    snapshot.children.forEach {
+
                         val title = it.child("sectionTitle").value.toString()
                         val flag = it.child("flag").value.toString()
-                        if(flag == "1"){
-                            val section = Section(title,"")
+                        if (flag == "1") {
+                            val section = Section(title, "")
                             sectionsList.add(section)
                         }
+
                     }
+
+
                     adapter.setData(sectionsList)
+
+
                 }
+
 
             })
 
@@ -91,7 +100,8 @@ class SectionsFragment : Fragment() {
     inner class SectionsAdapter(private var sectionsList: List<Section>) :
         RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
-        inner class ViewHolder(val itemRowBinding: ItemRowBinding) : RecyclerView.ViewHolder(itemRowBinding.root) {
+        inner class ViewHolder(val itemRowBinding: ItemRowBinding) :
+            RecyclerView.ViewHolder(itemRowBinding.root) {
 
             fun bind(section: Section) {
                 itemRowBinding.sectionTitle.text = section.sectionTitle
@@ -99,7 +109,7 @@ class SectionsFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val binding : ItemRowBinding = ItemRowBinding.inflate(layoutInflater, parent, false)
+            val binding: ItemRowBinding = ItemRowBinding.inflate(layoutInflater, parent, false)
 
             return ViewHolder(binding)
         }
@@ -108,15 +118,19 @@ class SectionsFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val sectionItem = sectionsList[position]
-                holder.bind(sectionItem)
-                holder.itemView.setOnClickListener {
-                    val action = SectionsFragmentDirections.actionSectionsFragmentToContentFragment(position,sectionItem.sectionTitle,args.planetId)
-                    findNavController().navigate(action)
-                }
+            holder.bind(sectionItem)
+            holder.itemView.setOnClickListener {
+                val action = SectionsFragmentDirections.actionSectionsFragmentToContentFragment(
+                    position,
+                    sectionItem.sectionTitle,
+                    args.planetId
+                )
+                findNavController().navigate(action)
+            }
 
         }
 
-        fun setData(sections: List<Section>){
+        fun setData(sections: List<Section>) {
             this.sectionsList = sections
             notifyDataSetChanged()
         }
