@@ -25,7 +25,7 @@ class EndGameFragment : Fragment() {
             findNavController().navigate(action)
         }
         binding.next.setOnClickListener {
-            val action = EndGameFragmentDirections.actionEndGameFraagmentToFinalGameFragment()
+            val action = EndGameFragmentDirections.actionEndGameFraagmentToFinalGameFragment("-MQcsbQzoRZAJLGQuq0J")
             findNavController().navigate(action)
         }
         showNavigation()

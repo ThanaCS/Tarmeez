@@ -204,7 +204,9 @@
         android:id="@+id/finalGameFragment"
         android:name="com.thanaa.tarmeezapp.FinalGameFragment"
         android:label="fragment_final_game"
-        tools:layout="@layout/fragment_final_game" />
+        tools:layout="@layout/fragment_final_game" >
+        <argument android:name="gameId" />
+    </fragment>
     <fragment
         android:id="@+id/matchingGameFragment"
         android:name="com.thanaa.tarmeezapp.MatchingGameFragment"
